@@ -15,3 +15,9 @@ F:\yourflow\Dicas decast\DiecastDecals_07_05_2021\DiecastDecals\MyApp.Entity\bin
 F:\yourflow\Dicas decast\DiecastDecals_07_05_2021\DiecastDecals\MyApp.Entity\obj\Debug\MyApp.Entity.csproj.CoreCompileInputs.cache
 F:\yourflow\Dicas decast\DiecastDecals_07_05_2021\DiecastDecals\MyApp.Entity\obj\Debug\MyApp.Entity.dll
 F:\yourflow\Dicas decast\DiecastDecals_07_05_2021\DiecastDecals\MyApp.Entity\obj\Debug\MyApp.Entity.pdb
+F:\Work\diecast\MyApp.Entity\bin\Debug\MyApp.Entity.dll
+F:\Work\diecast\MyApp.Entity\bin\Debug\MyApp.Entity.pdb
+F:\Work\diecast\MyApp.Entity\obj\Debug\MyApp.Entity.csproj.AssemblyReference.cache
+F:\Work\diecast\MyApp.Entity\obj\Debug\MyApp.Entity.csproj.CoreCompileInputs.cache
+F:\Work\diecast\MyApp.Entity\obj\Debug\MyApp.Entity.dll
+F:\Work\diecast\MyApp.Entity\obj\Debug\MyApp.Entity.pdb

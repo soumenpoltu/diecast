@@ -53,3 +53,24 @@ F:\yourflow\Dicas decast\DiecastDecals_07_05_2021\DiecastDecals\MyApp.db\obj\Deb
 F:\yourflow\Dicas decast\DiecastDecals_07_05_2021\DiecastDecals\MyApp.db\obj\Debug\MyApp.db.csproj.CopyComplete
 F:\yourflow\Dicas decast\DiecastDecals_07_05_2021\DiecastDecals\MyApp.db\obj\Debug\MyApp.db.dll
 F:\yourflow\Dicas decast\DiecastDecals_07_05_2021\DiecastDecals\MyApp.db\obj\Debug\MyApp.db.pdb
+F:\Work\diecast\MyApp.db\bin\Debug\MyApp.db.dll
+F:\Work\diecast\MyApp.db\bin\Debug\MyApp.db.pdb
+F:\Work\diecast\MyApp.db\bin\Debug\MyApp.Entity.dll
+F:\Work\diecast\MyApp.db\bin\Debug\Newtonsoft.Json.dll
+F:\Work\diecast\MyApp.db\bin\Debug\PayPal.dll
+F:\Work\diecast\MyApp.db\bin\Debug\System.Configuration.ConfigurationManager.dll
+F:\Work\diecast\MyApp.db\bin\Debug\System.Security.AccessControl.dll
+F:\Work\diecast\MyApp.db\bin\Debug\System.Security.Permissions.dll
+F:\Work\diecast\MyApp.db\bin\Debug\System.Security.Principal.Windows.dll
+F:\Work\diecast\MyApp.db\bin\Debug\MyApp.Entity.pdb
+F:\Work\diecast\MyApp.db\bin\Debug\Newtonsoft.Json.xml
+F:\Work\diecast\MyApp.db\bin\Debug\PayPal.xml
+F:\Work\diecast\MyApp.db\bin\Debug\System.Configuration.ConfigurationManager.xml
+F:\Work\diecast\MyApp.db\bin\Debug\System.Security.AccessControl.xml
+F:\Work\diecast\MyApp.db\bin\Debug\System.Security.Permissions.xml
+F:\Work\diecast\MyApp.db\bin\Debug\System.Security.Principal.Windows.xml
+F:\Work\diecast\MyApp.db\obj\Debug\MyApp.db.csproj.AssemblyReference.cache
+F:\Work\diecast\MyApp.db\obj\Debug\MyApp.db.csproj.CoreCompileInputs.cache
+F:\Work\diecast\MyApp.db\obj\Debug\MyApp.db.csproj.CopyComplete
+F:\Work\diecast\MyApp.db\obj\Debug\MyApp.db.dll
+F:\Work\diecast\MyApp.db\obj\Debug\MyApp.db.pdb
