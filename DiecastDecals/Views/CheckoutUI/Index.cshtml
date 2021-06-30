@@ -1,0 +1,473 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section title{
+
+    Diecast Decals - No 1. Decals In Here
+}
+
+@section script{
+    <script src="~/Content/main-assets/js/vendor/jquery-1.12.4.min.js"></script>
+}
+
+<div class="container-fluid searchouter">
+    <div class="searchfrm">
+        <form>
+            <input type="text" name="" placeholder="Enter your search here...">
+            <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+        </form>
+    </div>
+</div>
+
+<div class="container-fluid margin-top-60 padding-top-60 padding-bottom-60 cart">
+
+    <div class="col-lg-8 col-md-12 offset-lg-2 offset-md-0">
+        <div class="row">
+            <div class="col-lg-12">
+                <h4 class="cart-title">CHECKOUT</h4>
+                <div class="checkout-content row">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="card active sauget-accordion">
+                                <div class="card-header" role="tab" id="headingOne">
+                                    <h4 class="card-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            <span>1</span> Checkout Method
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseOne" class="collapse show" data-parent="#accordion" aria-labelledby="headingOne">
+                                    <div class="card-body content-info">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="checkout-reg">
+                                                    <div class="checkReg commonChack">
+                                                        <div class="checkTitle">
+                                                            <h6 class="ct-design">CHECKOUT AS A GUEST OR REGISTER</h6>
+                                                        </div>
+                                                        <p>Register with us forfuture convenience</p>
+                                                        <input type="radio"><label>Checkout as Guest</label><br>
+                                                        <input type="radio"><label>Register</label><br><br>
+                                                    </div>
+                                                    <div class="regSaveTime commonChack">
+                                                        <h6>REGISTER AND SAVE TIME!</h6>
+                                                        <p>Register with us for future convenience:</p>
+                                                        <ul>
+                                                            <li>Fast and easy checkout</li>
+                                                            <li>Easy access to your history and status</li>
+                                                        </ul>
+                                                    </div>
+                                                    <a class="checkPageBtn pull-right" href="#">CONTINUE</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="checkout-login">
+                                                    <div class="checkTitle">
+                                                        <h6 class="ct-design">Login</h6>
+                                                    </div>
+                                                    <p class="alrdyReg">ALREADY REGISTERED?</p>
+                                                    <p class="plxLogin">Please log in below:</p>
+                                                    <div class="loginFrom">
+                                                        <p class="plxLoginP"><span>*</span> Email Address</p>
+                                                        <input type="text"><br>
+                                                        <p class="plxLoginP"><span>*</span>  Password</p>
+                                                        <input type="text">
+                                                        <p class="rqudField">* Required Fields</p>
+                                                        <a href="#" class="plxLogin">Forgot your password ?</a>
+                                                    </div>
+                                                    <a class="checkPageBtn pull-right" href="#">Login</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card sauget-accordion">
+                                <div class="card-header" role="tab" id="headingTwo">
+                                    <h4 class="card-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                            <span>2</span> Billing Information
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseTwo" class="collapse" data-parent="#accordion" aria-labelledby="headingTwo">
+                                    <div class="card-body content-info">
+                                        <div class="billing-info">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="clearfix">
+                                                        <h6 class="ct-design">Shipping address</h6>
+                                                    </div>
+                                                    <div class="clearfix">
+                                                        <form action="#">
+                                                            <div class="new-customers">
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group name-group">
+                                                                            <div class="palceholder">
+                                                                                <label for="name">First Name</label>
+                                                                                <span class="star">*</span>
+                                                                            </div>
+                                                                            <input type="text" class=" custom-form" id="name" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group name-group">
+                                                                            <div class="palceholder">
+                                                                                <label for="name">Last Name</label>
+                                                                                <span class="star">*</span>
+                                                                            </div>
+                                                                            <input type="text" class=" custom-form" id="name" required>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group name-group">
+                                                                            <div class="palceholder">
+                                                                                <label for="name">Address</label>
+                                                                                <span class="star">*</span>
+                                                                            </div>
+                                                                            <input type="text" class=" custom-form" id="name" required>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group name-group">
+                                                                            <div class="palceholder">
+                                                                                <label for="name">City</label>
+                                                                                <span class="star">*</span>
+                                                                            </div>
+                                                                            <input type="text" class=" custom-form" id="name" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group name-group">
+                                                                            <div class="palceholder">
+                                                                                <label for="name">Country</label>
+                                                                                <span class="star">*</span>
+                                                                            </div>
+                                                                            <input type="text" class=" custom-form" id="name" required>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group name-group">
+                                                                            <div class="palceholder">
+                                                                                <label for="name">Phone Number</label>
+                                                                                <span class="star">*</span>
+                                                                            </div>
+                                                                            <input type="number" class=" custom-form" id="name" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group name-group">
+                                                                            <div class="palceholder">
+                                                                                <label for="name">PIN Code</label>
+                                                                                <span class="star">*</span>
+                                                                            </div>
+                                                                            <input type="number" class=" custom-form" id="name" required>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-lg-12">
+                                                                        <div class="form-group name-group">
+                                                                            <div class="palceholder">
+                                                                                <label for="name">Email</label>
+                                                                                <span class="star">*</span>
+                                                                            </div>
+                                                                            <input type="email" class=" custom-form" id="name" required>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="clearfix">
+                                                        <h6 class="ct-design">Billing address <small>(if not same as shipping address)</small></h6>
+                                                    </div>
+                                                    <div class="clearfix">
+                                                        <form action="#">
+                                                            <div class="new-customers">
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group name-group">
+                                                                            <div class="palceholder">
+                                                                                <label for="name">First Name</label>
+                                                                                <span class="star">*</span>
+                                                                            </div>
+                                                                            <input type="text" class=" custom-form" id="name" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group name-group">
+                                                                            <div class="palceholder">
+                                                                                <label for="name">Last Name</label>
+                                                                                <span class="star">*</span>
+                                                                            </div>
+                                                                            <input type="text" class=" custom-form" id="name" required>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group name-group">
+                                                                            <div class="palceholder">
+                                                                                <label for="name">Adress</label>
+                                                                                <span class="star">*</span>
+                                                                            </div>
+                                                                            <input type="text" class=" custom-form" id="name" required>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group name-group">
+                                                                            <div class="palceholder">
+                                                                                <label for="name">City</label>
+                                                                                <span class="star">*</span>
+                                                                            </div>
+                                                                            <input type="text" class=" custom-form" id="name" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group name-group">
+                                                                            <div class="palceholder">
+                                                                                <label for="name">Country</label>
+                                                                                <span class="star">*</span>
+                                                                            </div>
+                                                                            <input type="text" class=" custom-form" id="name" required>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group name-group">
+                                                                            <div class="palceholder">
+                                                                                <label for="name">PIN Code</label>
+                                                                                <span class="star">*</span>
+                                                                            </div>
+                                                                            <input type="number" class=" custom-form" id="name" required>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="block-area-button">
+                                                        <button class="btn btn-default add-tag-btn checkPageBtn">Continue</button>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <p class="rqudField">* Required Fields</p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card sauget-accordion">
+                                <div class="card-header" role="tab" id="headingThree">
+                                    <h4 class="card-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                            <span>3</span> Shipping Charge
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseThree" class="collapse" data-parent="#accordion" aria-labelledby="headingThree">
+                                    <div class="card-body content-info">
+                                        <div class="shiping-method">
+                                            <p><small>Flat Rate</small></p>
+                                            <p>Fixed $40.00</p>
+                                            <div class="block-area-button">
+                                                <button class="btn btn-default add-tag-btn checkPageBtn">Continue</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card sauget-accordion">
+                                <div class="card-header" role="tab" id="headingFour">
+                                    <h4 class="card-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                                            <span>4</span> Payment Information
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseFour" class="collapse" data-parent="#accordion" aria-labelledby="headingFour">
+                                    <div class="card-body content-info">
+                                        <div class="checkout-option">
+                                            <div class="method-input-box">
+                                                <p><label><input type="radio" name="payment" value="check"> Cash on Delivery </label></p>
+                                                <p><label><input type="radio" name="payment" value="check"> Debit  Card </label></p>
+                                                <p><label><input type="radio" name="payment" value="card" checked> Credit Card </label></p>
+                                                <p><label><input type="radio" name="payment" value="card" checked> Net Banking </label></p>
+                                                <p><label><input type="radio" name="payment" value="card" checked> PayPal </label></p>
+                                            </div>
+                                        </div>
+                                        <div class="block-area-button">
+                                            <button class="btn btn-default add-tag-btn checkPageBtn">Continue</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card sauget-accordion">
+                                <div class="card-header" role="tab" id="headingFive">
+                                    <h4 class="card-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                                            <span>5</span> Order Review
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseFive" class="collapse" data-parent="#accordion" aria-labelledby="headingFive">
+                                    <div class="card-body content-info">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="table-responsive table-borderouter Order-Review">
+                                                    <table class="cart-table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Product</th>
+                                                                <th>Product name</th>
+                                                                <th>Unit Price</th>
+                                                                <th>Qty</th>
+                                                                <th>Subtotal</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <a href="single-product.html"><img alt="" class="img-responsive" src="img/prod-img.jpg"></a>
+                                                                </td>
+                                                                <td>
+                                                                    <h6><a href="single-product.html">Product name</a></h6>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="cart-price">$50.00</div>
+                                                                </td>
+                                                                <td>
+                                                                    <form>
+                                                                        <input type="text" placeholder="1">
+                                                                    </form>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="cart-subtotal">$50.00</div>
+                                                                </td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <a href="single-product.html"><img alt="" class="img-responsive" src="img/prod-img.jpg"></a>
+                                                                </td>
+                                                                <td>
+                                                                    <h6><a href="single-product.html">Product name</a></h6>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="cart-price">$32.40</div>
+                                                                </td>
+                                                                <td>
+                                                                    <form>
+                                                                        <input type="text" placeholder="1">
+                                                                    </form>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="cart-subtotal">$32.40</div>
+                                                                </td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <a href="single-product.html"><img alt="" class="img-responsive" src="img/prod-img.jpg"></a>
+                                                                </td>
+                                                                <td>
+                                                                    <h6><a href="single-product.html">Product name</a></h6>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="cart-price">$36.60</div>
+                                                                </td>
+                                                                <td>
+                                                                    <form>
+                                                                        <input type="text" placeholder="1">
+                                                                    </form>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="cart-subtotal">$36.60</div>
+                                                                </td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="3"> </td>
+                                                                <td class="text-left">
+                                                                    Total:
+                                                                </td>
+                                                                <td>
+                                                                    <div class="cart-subtotal">$660.60</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="3"> </td>
+                                                                <td class="text-left">
+                                                                    Tax:
+                                                                </td>
+                                                                <td>
+                                                                    <div class="cart-subtotal">$6.60</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="3"> </td>
+                                                                <td class="text-left">
+                                                                    Sub Total:
+                                                                </td>
+                                                                <td>
+                                                                    <div class="cart-subtotal">$666.60</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="3"> </td>
+                                                                <td class="text-left">
+                                                                    <b>Grand Total:</b>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="cart-subtotal ">$666.60</div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                                <div class="col-md-12 margin-top-30">
+                                                    <div class="cartPage-btn">
+                                                        <ul>
+                                                            <li><a href="#" class="cbtn ">Back to Cart</a></li>
+                                                            <li><a href="#" class="cbtn green">Pay Now</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

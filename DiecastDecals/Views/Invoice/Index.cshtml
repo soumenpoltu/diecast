@@ -1,0 +1,292 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section title{
+    Diecast Decals - No 1. Decals In Here
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="~/Content/main-assets/pdfscript/pdfjs.js"></script>
+
+
+<div class="container-fluid margin-top-60 padding-top-60 padding-bottom-60 cart">
+
+    <div class="col-lg-8 col-md-12 offset-lg-2 offset-md-0">
+        <div class="row">
+            <div class="col-lg-12 mb-5 text-center">
+                <h2>Payment successful</h2>
+                <p>Thank you for shopping</p>
+            </div>
+        </div>
+        <div class="row" id="Grid">
+            <style>
+                body {
+                    font-family: arial;
+                }
+
+                .table-responsive {
+                    display: block;
+                    width: 100%;
+                    max-width: 1240px;
+                    margin: auto;
+                }
+
+                table.cart-table {
+                    margin-bottom: 5px;
+                    width: 100%;
+                }
+
+                img {
+                    max-width: 100%;
+                    height: auto;
+                }
+
+                .mb-3, .my-3 {
+                    margin-bottom: 1rem !important;
+                }
+
+                table {
+                    border-collapse: collapse;
+                    border-spacing: 0;
+                }
+
+                tbody {
+                    display: table-row-group;
+                    vertical-align: middle;
+                    border-color: inherit;
+                }
+
+                tr {
+                    display: table-row;
+                    vertical-align: inherit;
+                    border-color: inherit;
+                }
+
+                .cart-table tbody tr td:last-child {
+                    padding: 15px;
+                    text-align: center;
+                }
+
+                .cart-table tbody tr td {
+                    border: 1px solid #e1e1e1;
+                    font-family: arial;
+                    font-size: 15px;
+                    font-weight: normal;
+                    padding: 15px;
+                    text-align: center;
+                }
+
+                td, th {
+                    padding: 0;
+                }
+
+                *, ::after, ::before {
+                    box-sizing: border-box;
+                }
+
+                .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+                    margin-bottom: .5rem;
+                    font-family: inherit;
+                    font-weight: 500;
+                    line-height: 1.2;
+                    color: inherit;
+                }
+
+                .pdt-thumb {
+                    width: 120px;
+                    height: auto;
+                }
+
+                .cart-table thead tr th {
+                    border: 1px solid #e1e1e1;
+                    border-collapse: collapse;
+                    color: #fff;
+                    background: #ff4c2e;
+                    font-family: Arial;
+                    font-size: 14px;
+                    font-weight: bold;
+                    height: 49px;
+                    text-align: center;
+                    vertical-align: middle;
+                }
+
+                .nobordertable tbody tr td {
+                    border: none;
+                }
+
+                .text-left {
+                    text-align: left;
+                }
+
+                .text-right {
+                    text-align: right;
+                }
+
+                .text-center {
+                    text-align: center;
+                }
+            </style>
+            <div class="col-lg-12">
+                <h4 class="cart-title">Invoice</h4>
+                <div class="table-responsive table-borderouter">
+                    <table class="cart-table mb-3">
+                        <tbody>
+                            <tr>
+                                <td colspan="2">
+                                    <h2>Diecast Decals Tax Invoice</h2>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="text-left">
+                                    <img src="@ViewBag.img_HEADER_LOGO" alt="" width="120" height="104" />
+                                </td>
+                                <td class="text-right">
+                                    <p>Invoice Number:#@ViewBag.inv</p>
+                                    <p>Invoice Date:@ViewBag.invdate</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">
+                                    <b>Billing Address:<br /></b>
+                                    @ViewBag.billaddr
+                                </td>
+                                <td class="text-left">
+                                    <b>Shipping Address:<br /></b>
+                                    @ViewBag.shipaddr
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="cart-table">
+                        <thead>
+                            <tr>
+                                <th>SL No.</th>
+                                <th>Product </th>
+                                <th>Product name</th>
+                                <th>Unit Price</th>
+                                <th>Qty</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+
+
+                        @{int i = 0; }
+
+
+
+                    <tbody>
+                        @foreach (System.Data.DataRow dr in Model)
+                        {
+                            i = i + 1;
+                            <tr>
+                                <td>
+                                    @i
+                                </td>
+                                <td>
+                                    <a href="#"><img alt="" class="img-responsive" src="~/documents/product/@dr["PRODUCT_IMAGE"]" /></a>
+                                </td>
+                                <td>
+                                    <h6><a href="#">@dr["PRODUCT"]</a></h6>
+                                </td>
+                                <td>
+                                    <div class="cart-price">$@dr["PRICE"]</div>
+                                </td>
+                                <td>
+                                    @dr["QUANTITY"]
+                                </td>
+                                <td>
+                                    <div class="cart-subtotal">$@dr["GROSS_AMOUNT"]</div>
+                                </td>
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="4"> </td>
+                            <td class="text-left">
+                                Total:
+                            </td>
+                            <td>
+                                <div class="cart-subtotal text-left">$@ViewBag.subtotal</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"> </td>
+                            <td class="text-left">
+                                G.S.T:
+                            </td>
+                            <td>
+                                <div class="cart-subtotal text-left">$@ViewBag.tax</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"> </td>
+                            <td class="text-left">
+                                Shipping Amount:
+                            </td>
+                            <td colspan="2">
+                                <div class="cart-subtotal text-left">$@ViewBag.shipping</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"> </td>
+                            <td class="text-left">
+                                Sub Total:
+                            </td>
+                            <td>
+                                <div class="cart-subtotal text-left">$@ViewBag.totalamnt</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"> </td>
+                            <td class="text-left">
+                                <b>Grand Total:</b>
+                            </td>
+                            <td>
+                                <div class="cart-subtotal text-left">$@ViewBag.totalamnt</div>
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- start cart discount code area -->
+            <div class="col-lg-12 mt-3 actions">
+                <div class="cartPage-btn btn-center">
+                    @using (Html.BeginForm("Export", "Invoice", FormMethod.Post, new { id = "submitform" }))
+                    {
+
+                        <input type="hidden" name="GridHtml" />
+                        <ul>
+                            <li><a href="#" class="cbtn"><i class="fa fa-home text-white"></i> Continue Shopping</a></li>
+
+                            <li onclick="callingexport();"><a href="#" class="cbtn green"><i class="fa fa-download text-white"></i> Download Invoice</a></li>
+
+                        </ul>
+                    }
+                </div>
+            </div>
+            <!-- End cart discount code area -->
+        </div>
+
+    </div>
+</div>
+<!-- Start footer -->
+<script>
+    function callingexport() {
+        const element = document.getElementById("Grid");
+        html2pdf()
+            .from(element)
+        .save();
+        $("input[name='GridHtml']").val($("#Grid").html());
+        //document.forms["submitform"].submit();
+    }
+
+</script>

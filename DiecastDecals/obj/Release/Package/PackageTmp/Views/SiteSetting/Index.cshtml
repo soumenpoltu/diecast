@@ -1,0 +1,598 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section FormName{
+
+    <i class="icon-home2 mr-2"></i>Site Settings
+
+}
+
+@section StyleCss{
+    <style type="text/css">
+        .filename {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .preview {
+            height: 230px;
+        }
+    </style>
+}
+<script>
+    $(document).ready(function () {
+        /*alert('ok');*/
+        $('#loadingMask').fadeOut();
+
+        $('.form-input-styled').uniform({
+            fileButtonClass: 'action btn bg-pink-400'
+        });
+
+
+
+
+
+
+        $("#fu_CLIENT_IMAGE").on("change", function (evt) {
+            var tgt = evt.target || window.event.srcElement, files = tgt.files;
+            if (files.length > 0) {
+                if (files[0].size > 2097134) {
+                    $(this).val("");
+                    $(this).next(".filename").text("No file selected");
+                    $('#img_CLIENT_IMAGE').attr("src", "~/Content/admin-assets/images/no_image.jpg");
+                    $(this).focus();
+                    openErrorPopup("Please maintain allowed document size (2MB maximum).");
+                }
+                else {
+                    readURL(this, $('#img_CLIENT_IMAGE'));
+                }
+            }
+            else {
+                $('#img_CLIENT_IMAGE').attr("src", "~/Content/admin-assets/images/no_image.jpg");
+            }
+        });
+
+        $("#fu_Logo").on("change", function (evt) {
+            var tgt = evt.target || window.event.srcElement, files = tgt.files;
+            if (files.length > 0) {
+                if (files[0].size > 2097134) {
+                    $(this).val("");
+                    $(this).next(".filename").text("No file selected");
+                    $('#img_HEADER_LOGO').attr("src", "~/Content/admin-assets/images/no_image.jpg");
+                    $(this).focus();
+                    openErrorPopup("Please maintain allowed document size (2MB maximum).");
+                }
+                else {
+                    readURL(this, $('#img_HEADER_LOGO'));
+                }
+            }
+            else {
+                $('#img_HEADER_LOGO').attr("src", "~/Content/admin-assets/images/no_image.jpg");
+            }
+        });
+
+
+        $("#fu_footer").on("change", function (evt) {
+            var tgt = evt.target || window.event.srcElement, files = tgt.files;
+            if (files.length > 0) {
+                if (files[0].size > 2097134) {
+                    $(this).val("");
+                    $(this).next(".filename").text("No file selected");
+                    $('#img_FOOTER_LOGO').attr("src", "~/Content/admin-assets/images/no_image.jpg");
+                    $(this).focus();
+                    openErrorPopup("Please maintain allowed document size (2MB maximum).");
+                }
+                else {
+                    readURL(this, $('#img_FOOTER_LOGO'));
+                }
+            }
+            else {
+                $('#img_FOOTER_LOGO').attr("src", "~/Content/admin-assets/images/no_image.jpg");
+            }
+        });
+
+    });
+</script>
+
+<script type="text/javascript">
+
+    function OpenTab1(strMsg, error) {
+        $("#tab1").fadeIn();
+        $("#tab3").hide();
+        $("#tab2").hide();
+
+        setDatatable("gvBenefits");
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+    function OpenTab2(strMsg, error) {
+
+        $("#tab1").hide();
+        $("#tab3").hide();
+        $("#tab2").fadeIn();
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+    function OpenTab3(strMsg, error) {
+        $("#tab1").hide();
+        $("#tab3").fadeIn();
+        $("#tab2").hide();
+
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+</script>
+
+<div id="tab1" class="card">
+    <div class="card-body">
+        <div class="col-md-12">
+            <fieldset>
+                <legend class="font-weight-semibold">Basic Informations</legend>
+                @using (Html.BeginForm("btn_Head_Save_Click", "SiteSetting", FormMethod.Post, new { id = "submitform", enctype = "multipart/form-data" }))
+                {
+                    <input type="hidden" id="hf_HEADER_LOGO" name="hf_HEADER_LOGO" value="@ViewBag.HEADER_LOGO" />
+                    <input type="hidden" id="hf_FOOTER_LOGO" name="hf_FOOTER_LOGO" value="@ViewBag.FOOTER_LOGO" />
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>
+                                    Contact Mail
+                                </label>
+                                <input type="text" id="txt_MAIL" name="txt_MAIL" class="form-control" value="@ViewBag.txt_MAIL" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>
+                                    Address/Location
+                                </label>
+                                <input type="text" id="txt_ADDRESS" name="txt_ADDRESS" class="form-control" value="@ViewBag.txt_ADDRESS" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>
+                                    Contact No
+                                </label>
+                                <input type="text" id="txt_CONTACT_NO" name="txt_CONTACT_NO" class="form-control" value="@ViewBag.txt_CONTACT_NO" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>
+                                    Facebook Link
+                                </label>
+                                <input type="text" id="txt_FACEBOOK_LINK" name="txt_FACEBOOK_LINK" class="form-control" value="@ViewBag.txt_FACEBOOK_LINK" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>
+                                    Twitter Link
+                                </label>
+                                <input type="text" id="txt_TWITTER_LINK" name="txt_TWITTER_LINK" class="form-control" value="@ViewBag.txt_TWITTER_LINK" />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>
+                                    Printerest Link
+                                </label>
+                                <input type="text" id="txt_PRINTEREST_LINK" name="txt_PRINTEREST_LINK" class="form-control" value="@ViewBag.txt_PRINTEREST_LINK" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>
+                                    Instagram Link
+                                </label>
+                                <input type="text" id="txt_INSTAGRAM_LINK" name="txt_INSTAGRAM_LINK" class="form-control" value="@ViewBag.txt_INSTAGRAM_LINK" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <fieldset>
+                                        <legend>Header Logo</legend>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>
+                                                        Upload Header Logo (Accepted Format .png, .jpg, .svg, .jpeg only. Max size 2MB)
+                                                    </label>
+                                                    <input type="file" id="fu_Logo" name="fu_Logo" class="form-input-styled" data-fouc accept=".gif, .png, .jpg, .svg, .jpeg, .svg" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8 ml-auto mr-auto">
+                                                <img id="img_HEADER_LOGO" src="@ViewBag.img_HEADER_LOGO" class="form-control preview" />
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <fieldset>
+                                        <legend>Footer Logo</legend>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>
+                                                        Upload Footer Logo (Accepted Format .png, .jpg, .svg, .jpeg only. Max size 2MB)
+                                                    </label>
+                                                    <input type="file" id="fu_footer" name="fu_footer" class="form-input-styled" data-fouc accept=".gif, .png, .jpg, .svg, .jpeg" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8 ml-auto mr-auto">
+                                                <img id="img_FOOTER_LOGO" src="@ViewBag.img_FOOTER_LOGO" class="form-control preview" />
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <input type="submit" id="btn_Head_Save" value="Submit" class="mb-xs mt-xs btn btn-success" />
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+                <div class="col-md-12">
+                    <fieldset>
+                        <legend>Important Links - Footer Menu</legend>
+                        @using (Html.BeginForm("btn_Link_Save_Click", "SiteSetting", FormMethod.Post, new { id = "submitformlink", enctype = "multipart/form-data" }))
+                        {
+                            <input type="hidden" name="hf_DTLS_USEFULL_LINKS_KEY" id="hf_DTLS_USEFULL_LINKS_KEY" value="@ViewBag.hf_DTLS_USEFULL_LINKS_KEY" />
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label>
+                                            Title
+                                        </label>
+                                        <input type="text" id="txt_TITLE" name="txt_TITLE" value="@ViewBag.txt_TITLE" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>
+                                            Link
+                                        </label>
+                                        <input type="text" id="txt_LINK" name="txt_LINK" value="@ViewBag.txt_LINK" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label>
+                                            &nbsp;
+                                        </label>
+                                        <input type="submit" id="btn_Link_Save" value="Add +" class="btn btn-primary form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <div class="row">
+                            @{
+                                System.Data.DataTable dt = (System.Data.DataTable)TempData["modelLink"];
+                            }
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table cellspacing="0" rules="all" class="table table-bordered table-sm table-hover" border="1" id="gvLinks" style="border-collapse:collapse;">
+                                        <tbody>
+                                            <tr>
+                                                <th>Title</th>
+                                                <th>Link</th>
+                                                <th>Edit</th>
+                                                <th>Delete</th>
+
+                                            </tr>
+                                            @foreach (System.Data.DataRow dr in dt.Rows)
+                                            {
+                                                <tr>
+                                                    <td>@dr["TITLE"].ToString()</td>
+                                                    <td>@dr["LINK"].ToString()</td>
+
+
+
+                                                    <td>
+                                                        @using (Html.BeginForm("editlink", "SiteSetting", FormMethod.Post, new { id = "submitE+" + dr["DTLS_USEFULL_LINKS_KEY"].ToString() + "" }))
+                                                        {
+                                                            <input type="hidden" name="editid" value="@dr["DTLS_USEFULL_LINKS_KEY"].ToString()" />
+                                                            <a id="submitE+@dr["DTLS_USEFULL_LINKS_KEY"].ToString()" href="#" onclick="postmethodusingjs(this.id)" class="list-icons-item"><i class="icon-menu9"></i></a>
+
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @using (Html.BeginForm("deletelink", "SiteSetting", FormMethod.Post, new { id = "submitD+" + dr["DTLS_USEFULL_LINKS_KEY"].ToString() + "" }))
+                                                        {
+                                                            <input type="hidden" name="editid" value="@dr["DTLS_USEFULL_LINKS_KEY"].ToString()" />
+                                                            <a id="submitD+@dr["DTLS_USEFULL_LINKS_KEY"].ToString()" href="#" onclick="postmethodusingjs(this.id)" class="list-icons-item"><i class="icon-trash"></i></a>
+
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+            </fieldset>
+
+            <fieldset>
+                <legend class="font-weight-semibold">Page Settings</legend>
+                <div class="row">
+                    <div class="col-md-12">
+
+                        @using (Html.BeginForm("btn_Page_Settings_Save_Click", "SiteSetting", FormMethod.Post, new { id = "submitformpage", enctype = "multipart/form-data" }))
+                        {
+                            <div class="row">
+                                <input type="hidden" name="hf_DTLS_PAGE_SETTING_KEY" value="@ViewBag.hf_DTLS_PAGE_SETTING_KEY" />
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>
+                                            Select Page
+                                        </label>
+                                        @Html.DropDownList("ddl_MAST_PAGE_KEY", ViewBag.PageName as SelectList, new { @class = "form-control populate" })
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>
+                                            Page Title
+                                        </label>
+                                        <input type="text" class="form-control" id="txt_PAGE_TITLE" name="txt_PAGE_TITLE" value="@ViewBag.txt_PAGE_TITLE" />
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>
+                                            Meta Description
+                                        </label>
+                                        <input type="text" class="form-control" id="txt_META_DESCRIPTION" name="txt_META_DESCRIPTION" value="@ViewBag.txt_META_DESCRIPTION" />
+
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>
+                                            Meta Keyword
+                                        </label>
+                                        <input type="text" class="form-control" id="txt_META_KEYWORD" name="txt_META_KEYWORD" value="@ViewBag.txt_META_KEYWORD" />
+
+
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label>
+                                            &nbsp;
+                                        </label>
+                                        <input type="submit" id="btn_Page_Settings_Save" value="Save" class="save btn btn-primary form-control" />
+
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table cellspacing="0" rules="all" class="table table-bordered table-sm table-hover" border="1" id="gvQuickFact" style="border-collapse:collapse;">
+                                        <tbody>
+                                            <tr>
+                                                <th>Page Name</th>
+                                                <th>Page Title</th>
+                                                <th>Meta Description</th>
+                                                <th>Meta Keyword</th>
+                                                <th>Edit</th>
+                                            </tr>
+                                            @foreach (System.Data.DataRow dr in Model)
+                                            {
+                                                <tr>
+                                                    <td>@dr["PAGE_NAME"].ToString()</td>
+                                                    <td>@dr["PAGE_TITLE"].ToString()</td>
+                                                    <td>@dr["META_DESCRIPTION"].ToString()</td>
+                                                    <td>@dr["META_KEYWORD"].ToString()</td>
+
+                                                    <td>
+                                                        @using (Html.BeginForm("edit", "SiteSetting", FormMethod.Post, new { id = "submitE+" + dr["DTLS_PAGE_SETTING_KEY"].ToString() + "" }))
+                                                        {
+                                                            <input type="hidden" name="editid" value="@dr["DTLS_PAGE_SETTING_KEY"].ToString()" />
+                                                            <a id="submitE+@dr["DTLS_PAGE_SETTING_KEY"].ToString()" href="#" onclick="postmethodusingjs(this.id)" class="list-icons-item"><i class="icon-menu9"></i></a>
+
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </fieldset>
+
+
+            <fieldset>
+                <legend class="font-weight-semibold">Testimonials</legend>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        @using (Html.BeginForm("btn_Testimonial_Save_Click", "SiteSetting", FormMethod.Post, new { id = "submitformclient", enctype = "multipart/form-data" }))
+                        {
+                            <input type="hidden" name="hf_MAST_TESTIMONIALS_KEY" id="hf_MAST_TESTIMONIALS_KEY" value="@ViewBag.hf_MAST_TESTIMONIALS_KEY" />
+                            <input type="hidden" id="hf_CLIENT_IMAGE" name="hf_CLIENT_IMAGE" value="@ViewBag.CLIENT_IMAGE" />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>
+                                            Client Name
+                                        </label>
+                                        <input type="text" id="txt_CLIENT_NAME" name="txt_CLIENT_NAME" class="form-control" value="@ViewBag.txt_CLIENT_NAME" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>
+                                            Client Feedback
+                                        </label>
+                                        <textarea id="txt_CLIENT_FEEDBACK" name="txt_CLIENT_FEEDBACK" class="form-control" rows="11">@ViewBag.txt_CLIENT_FEEDBACK</textarea>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <fieldset>
+                                        <legend>Client Image</legend>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>
+                                                        Upload Client Image (Accepted Format .png, .jpg, .svg, .jpeg only. Max size 2MB)
+                                                    </label>
+                                                    <input type="file" id="fu_CLIENT_IMAGE" name="fu_CLIENT_IMAGE" class="form-input-styled" data-fouc accept=".gif, .png, .jpg, .svg, .jpeg, .svg" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8 ml-auto mr-auto">
+                                                <img id="img_CLIENT_IMAGE" src="@ViewBag.img_CLIENT_IMAGE" class="form-control preview" />
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12 text-center">
+                                            <input type="submit" id="btn_Save" value="Save" class="mb-xs mt-xs btn btn-success" ToolTip="Submit" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <div class="row">
+                            @{
+                                System.Data.DataTable dt1 = (System.Data.DataTable)TempData["clientmodel"];
+                            }
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table cellspacing="0" rules="all" class="table table-bordered table-sm table-hover" border="1" id="gvTestimonials" style="border-collapse:collapse;">
+                                        <tbody>
+                                            <tr>
+                                                <th>Client Name</th>
+                                                <th>Client Feedback</th>
+                                                <th>Client Image</th>
+                                                <th>Edit</th>
+                                                <th>Delete</th>
+
+                                            </tr>
+                                            @foreach (System.Data.DataRow dr in dt1.Rows)
+                                            {
+                                                <tr>
+                                                    <td>@dr["CLIENT_NAME"].ToString()</td>
+                                                    <td>@dr["CLIENT_FEEDBACK"].ToString()</td>
+                                                    <td><img src="@dr["CLIENT_IMAGE"].ToString()" height=100 width=100 /></td>
+
+
+                                                    <td>
+                                                        @using (Html.BeginForm("edittestimonials", "SiteSetting", FormMethod.Post, new { id = "submitTE+" + dr["MAST_TESTIMONIALS_KEY"].ToString() + "" }))
+                                                        {
+                                                            <input type="hidden" name="editiT" value="@dr["MAST_TESTIMONIALS_KEY"].ToString()" />
+                                                            <a id="submitTE+@dr["MAST_TESTIMONIALS_KEY"].ToString()" href="#" onclick="postmethodusingjs(this.id)" class="list-icons-item"><i class="icon-menu9"></i></a>
+
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @using (Html.BeginForm("deletetestimonials", "SiteSetting", FormMethod.Post, new { id = "submitTD+" + dr["MAST_TESTIMONIALS_KEY"].ToString() + "" }))
+                                                        {
+                                                            <input type="hidden" name="editiT" value="@dr["MAST_TESTIMONIALS_KEY"].ToString()" />
+                                                            <a id="submitTD+@dr["MAST_TESTIMONIALS_KEY"].ToString()" href="#" onclick="postmethodusingjs(this.id)" class="list-icons-item"><i class="icon-trash"></i></a>
+
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </fieldset>
+
+        </div>
+    </div>
+</div>
+
+
+@if (TempData["JavaScriptMsg"] != null)
+{
+
+    <script type="text/javascript">
+                    @Html.Raw(TempData["JavaScriptMsg"]);
+    </script>
+}
+
+<script type="text/javascript">
+
+        function postmethodusingjs(id) {
+            /*alert('ok');*/
+            document.forms[id].submit();
+        return false;
+    }
+
+    function postmethodusingheadsavejs() {
+            document.forms["submitform"].submit();
+        document.forms["submitformlink"].submit();
+        document.forms["submitformpage"].submit();
+        document.forms["submitformclient"].submit();
+        return false;
+    }
+</script>
+
+
+

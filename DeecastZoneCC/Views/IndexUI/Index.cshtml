@@ -1,0 +1,211 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section title{
+    HOME
+}
+
+
+<section class="banner-part">
+    <img class="img1" src="@ViewBag.BANNER_IMAGE" alt="">
+    <img class="img2" src="~/Content/main-assets/images/banner-shape.png" alt="">
+    <div class="ban-tx">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4 col-3">
+                    @*<img src="~/Content/main-assets/images/ban-img.png" alt="">*@
+                    <img src="@ViewBag.PRODUCT_IMAGE" alt="">
+                </div>
+                <div class="col-lg-8 col-9">
+                    <div>
+                        @Html.Raw(ViewBag.BANNER_DESC)
+                        @*<h4>Crystal Clear Case with Outstanding Protection</h4>
+                            <h2>Protect Your Investments with the Top Quality Car Protectors</h2>
+                            <p>Now protect your Hot Wheel cars with top-grade plastic protectors with a better clip system so that it does not open unexpectedly.  </p>*@
+                    </div>
+                    <a href="@ViewBag.BANNER_VIDEO_LINK"><i class="fas fa-video"></i> Watch Video</a>
+                    <a href="/ProductUI/Index"><i class="fas fa-shopping-cart"></i> Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="body-cont1">
+    <div class="container">
+        <div class="row  align-items-center">
+            <div class="col-lg-6 col-md-4">
+                @*<img src="~/Content/main-assets/images/home-img.png" alt="">*@
+                <img src="@ViewBag.PRODUCT_IMAGE_1" alt="">
+            </div>
+            <div class="col-lg-6 col-md-8">
+                <ul>
+                    @Html.Raw(ViewBag.PRODUCT_DETAILS)
+                    @*<li>
+                            <span>25</span>
+                            <div class="decp">
+                                <a href="#">
+                                    <i class="fas fa-chevron-double-right"></i> $2.40 Each <i class="fas fa-shopping-cart"></i>
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <span>50</span>
+                            <div class="decp">
+                                <a href="#">
+                                    <i class="fas fa-chevron-double-right"></i> $2.25 Each <i class="fas fa-shopping-cart"></i>
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <span>100</span>
+                            <div class="decp">
+                                <a href="#">
+                                    <i class="fas fa-chevron-double-right"></i> $2.10 Each <i class="fas fa-shopping-cart"></i>
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <span>200</span>
+                            <div class="decp">
+                                <a href="#">
+                                    <i class="fas fa-chevron-double-right"></i> $2.05 Each <i class="fas fa-shopping-cart"></i>
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <span>300</span>
+                            <div class="decp">
+                                <a href="#">
+                                    <i class="fas fa-chevron-double-right"></i> $2.00 Each <i class="fas fa-shopping-cart"></i>
+                                </a>
+                            </div>
+                        </li>*@
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="body-cont2">
+    <img class="img1" src="~/Content/main-assets/images/home-img2.png" alt="">
+    <div class="decp">
+        <h2>If Buying Diecast Cars Are Your Passion, Our Passion Is to Protect Them </h2>
+        <p>
+            Watch the video to understand how to use and reuse our protectors to protect your investments in diecast toy cars.
+        </p>
+        <a href="#"><img src="~/Content/main-assets/images/play-icon.svg" alt=""></a>
+        <h4>Play Video</h4>
+    </div>
+</section>
+<section class="body-cont3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul>
+                    @Html.Raw(ViewBag.TESTIMONIAL_LIST)
+                    @*<li>
+                            <img src="~/Content/main-assets/images/home-img3.png" alt="">
+                            <h4>User Name Here</h4>
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            <p>Being a hobbyist, I have a great collection of diecast cars, but protecting my investment was a real challenge since the protectors I used started cracking within a few days of using. Then I heard about Diecast Zone CC from one of my friends and gave them a try. The highest quality plastic makes the product top grade. I must say, buying every protector is worth the money.  </p>
+                            <h5>Tuesday, April 2021</h5>
+                        </li>
+                        <li>
+                            <img src="~/Content/main-assets/images/home-img4.png" alt="">
+                            <h4>User Name Here</h4>
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            <p>Highly satisfied with the quality of plastic of the protectors I bought from Diecast Zone CC. The top-grade PVC plastic ensures the quality of the protector. Loved it. Would recommend them for sure.</p>
+                            <h5>Tuesday, April 2021</h5>
+                        </li>
+                        <li>
+                            <img src="~/Content/main-assets/images/home-img5.png" alt="">
+                            <h4>User Name Here</h4>
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            <p>
+                                Found Diecast Zone CC on Google. The protectors were reasonable and got them delivered within just two days. Hassle-free transaction and high-quality products. Everything was up to the mark. Loved the purchase. Will definitely do future dealings with them.
+                            </p>
+                            <h5>Tuesday, April 2021</h5>
+                        </li>*@
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="body-cont4">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul>
+                    <li>
+                        <img src="~/Content/main-assets/images/home-img7.svg" alt="">
+                        <h5>Provides outstanding protection.</h5>
+                    </li>
+                    <li>
+                        <img src="~/Content/main-assets/images/home-img8.svg" alt="">
+                        <h5>Prevents corner bending!</h5>
+                    </li>
+                    <li>
+                        <img src="~/Content/main-assets/images/home-img9.svg" alt="">
+                        <h5>Thick & Sturdy</h5>
+                    </li>
+                    <li>
+                        <img src="~/Content/main-assets/images/home-img10.svg" alt="">
+                        <h5>Crystal Clear Case</h5>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="body-cont5">
+  
+        <div class="container">
+            <div class="row">
+
+
+                <div class="col-lg-12">
+                    <h2>BUY IT NOW</h2>
+                    <table>
+                        <tr>
+                            <th>Item</th>
+                            <th>Unit Price</th>
+                            <th>Quantity</th>
+                        </tr>
+                        @foreach (System.Data.DataRow dr in Model)
+                        {
+
+                    <tr>
+                        <td>
+                            @*<img src="~/Content/main-assets/images/ban-img.png" alt="">*@
+                            <img src="@ViewBag.PRODUCT_IMAGE1" alt="">
+                        </td>
+                        <td>$ @dr["PRICE"]</td>
+                        <td>$ @dr["QUANTITY"]</td>
+                    </tr>
+                        }
+                        </table>
+                    <div class="sub-total">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6 col-md-6">
+                                <h3>Subtotal</h3>
+
+                            </div>
+                            <div class="col-lg-6 col-md-6 text-right">
+                                <h4>$ @ViewBag.subtotal</h4>
+                            </div>
+                            <div class="col-lg-12">
+                                <a href="~/CheckOutUI/Index"><i class="fas fa-chevron-double-right"></i> Proceed to checkout</a>
+                                <p>
+                                    YOU’LL BE REDIRECTED TO OUR SECURE PAYMENT SERVER
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+   
+</section>

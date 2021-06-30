@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section title{
+    Diecast Decals - No 1. Decals In Here
+}
+
+@section script{
+    <script src="~/Content/main-assets/js/vendor/jquery-1.12.4.min.js"></script>
+}
+
+<div class="container-fluid margin-top-60 padding-top-60 padding-bottom-60">
+
+    <div class="col-lg-8 col-md-12 offset-lg-2 offset-md-0">
+        <div class="row">
+            <div class="col-lg-12">
+                <h4 class="cart-title">Track Order</h4>
+                <div class="row">
+                    <div class="col-md-3 col-sm-4">
+                        <ul class="myacc-nav">
+                            <li><a href="~/DashboardUI/Index">Dashboard</a></li>
+                            <li><a href="~/MyAccountAddressUI/Index">Address</a></li>
+                            <li><a href="~/OrderHistoryUI/Index">Order History</a></li>
+                            <li><a href="~/Invoice/InvoiceHistroy">Paid Invoices</a></li>
+                            <li class="active"><a href="~/TrackOrderUI/Index">Track Order</a></li>
+                            <li><a href="~/LogoutUI/Index">Logout</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-9 col-sm-8">
+                        <div class="account-rightarea">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Track Your Order</h6>
+                                    <p>Enter the order ID here to track the order</p>
+                                    <form action="#">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <input type="text" class="custom-form" placeholder="Order ID">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <button class="btn btn-default checkPageBtn">Track</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-md-12">
+                                    <h6>Order Status</h6>
+                                    <p>Your order is on transit</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

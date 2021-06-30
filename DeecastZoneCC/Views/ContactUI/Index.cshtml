@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section title{
+    Contact
+}
+
+<section class="inner-banner-part">
+    <img class="img1" src="/Content/main-assets/images/inner-ban.png" alt="">
+    <img class="img2" src="/Content/main-assets/images/banner-shape.png" alt="">
+    <div class="ban-tx">
+        <h2>Contact Us</h2>
+        <p>As a team of car enthusiasts, we care your cars just like they are ours with better protectors and ensure your investment is protected.</p>
+    </div>
+</section>
+<section class="ab-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3540.256715944028!2d153.02364755092407!3d-27.461266122835546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b9159f83273e2ff%3A0xc6b281255661a8b8!2s336%20Boundary%20St%2C%20Spring%20Hill%20QLD%204000%2C%20Australia!5e0!3m2!1sen!2sin!4v1622787812801!5m2!1sen!2sin" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                    <div class="col-md-6 write-us mb-3">
+                        <h1>Connect with us</h1>
+
+                        <ul>
+                            <li><i class="fas fa-home"></i> <span>Office:</span> Queensland, Brisbane</li>
+                            <li><i class="fas fa-phone"></i> <span>Phone:</span> +X 1234 56789 / +X 9876 543210</li>
+                            <li><i class="fas fa-envelope"></i> <span>Email:</span> order@yourdomen.com</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            
+            <div class="col-md-8 offset-md-2  mt-3 contactform">
+                <h2>Write to us</h2>
+                @using (Html.BeginForm("btn_Submit_click", "ContactUI", FormMethod.Post, new { id = "submitform", enctype = "multipart/form-data" }))
+                {
+                    <form action="">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="txt_name" placeholder="Enter Name" name="txt_name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="txt_email" placeholder="Enter Email" name="txt_email">
+                        </div>
+                        <div class="form-group">
+                            <label for="number">Phone Number:</label>
+                            <input type="text" class="form-control" id="txt_phn" placeholder="Enter Phone Number" name="txt_phn">
+                        </div>
+                        <div class="form-group">
+                            <label for="number">Your Message:</label>
+                            <textarea type="text" class="form-control" id="txt_msg" placeholder="Your Message" name="txt_msg"></textarea>
+                        </div>
+                        <button type="submit" id="btn_Submit_click" name="btn_Submit_click" class="submitcont btn btn-primary">Submit</button>
+                    </form>
+                }
+                </div>
+
+            
+        </div>
+    </div>
+</section>
+<section class="common-logo-sec">
+    <ul>
+        <li><a href="#"><img src="~/Content/main-assets/images/ab-img1.svg" alt=""></a></li>
+        <li><a href="#"><img src="~/Content/main-assets/images/ab-img2.svg" alt=""></a></li>
+        <li><a href="#"><img src="~/Content/main-assets/images/ab-img3.svg" alt=""></a></li>
+    </ul>
+</section>

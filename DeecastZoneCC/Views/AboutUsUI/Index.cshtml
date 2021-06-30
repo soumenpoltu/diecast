@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section title{
+    About Us
+}
+
+
+<section class="inner-banner-part">
+    <img class="img1" src="~/Content/main-assets/images/inner-ban.png" alt="">
+    <img class="img2" src="~/Content/main-assets/images/banner-shape.png" alt="">
+    <div class="ban-tx">
+        <h2>Welcome to Diecast Zone CC</h2>
+        <p>
+            As a team of car enthusiasts, we care your cars just like they are ours with better protectors and ensure your investment is protected.
+        </p>
+    </div>
+</section>
+<section class="ab-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                @*<p>Being collectors for over two decades, protectors are a big part of our hobby, and it was really difficult to find a good range of protectors that protect our investments. From Mainlines to RLC and convention pieces, if a car matters to you, you would want it to be protected. We understand there are protectors available in the market with different qualities and shapes. But are they capable enough to protect your favourite cars? We design the one that not only serves the purpose of protection but also makes a great display. </p>
+        <h3>How we make a difference with our diecast cars protectors:</h3>
+        <p>One of the major issues with toy car protectors is that they do not shut properly after a few uses due to poor clipping and might come open during shipping. Also, they can not stand upright and lean forward while kept for displaying on a shelf. In our design, we have used a better clip system. It ensures after opening and closing the protector case it will still hold shut and not open unexpectedly, therefore, keeping your investment protected. This design also stands up on a shelf for the best display. We have designed this protector in a way with two feet to support the protector for balance. And to keep its level, we ensure it stays upright when placed on a table or shelf. We use only the thicker and better quality PVC plastic and design it for hanging on a peg or for wall displays. Also, the protectors are specially designed to stay upright when placed on a table or shelf.</p>
+        <p>To make your collection safe, secure and display great, these protectors are just perfect. If you have any suggestions, please let us know. We would love to upgrade and modify our products based on your suggestions.</p>
+        <h3>Our Mission:</h3>
+        <p>
+            Our mission is to protect your investments in diecast cars. Being the collectors, we understand your feelings for Hot Wheel cars as a hobbyist or enthusiast. We use top quality PVC plastic and a better clipping to protect your toy cars and your feelings associated with them.
+        </p>
+        <h3>
+            Our Vision:
+        </h3>
+        <p>Our vision is to provide premium car care for car enthusiasts. To fulfil our dream, we strive hard to provide the best quality Hot Wheel car protectors with better clipping and upgrade our services based on your suggestions and requirements. </p>*@
+                @Html.Raw(ViewBag.ABOUT_US_DESC)
+            </div>
+        </div>
+    </div>
+</section>
+<section class="common-logo-sec">
+    <ul>
+        <li><a href="#"><img src="@ViewBag.ICON_IMG_1" alt=""></a></li>
+        <li><a href="#"><img src="@ViewBag.ICON_IMG_2" alt=""></a></li>
+        <li><a href="#"><img src="@ViewBag.ICON_IMG_3" alt=""></a></li>
+    </ul>
+</section>
+

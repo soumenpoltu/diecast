@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section title{
+    Log In
+}
+
+<section class="login-page" style="background-image: url(../Content/main-assets/images/banner.png);">
+
+    <img class="img2" src="../Content/main-assets/images/banner-shape.png" alt="">
+    <div class="login-wrap">
+        <div class="login-decp">
+            <div class="tab-content">
+                <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                    <!-- Registered-Customers Start -->
+                    <div class="col-lg-6 offset-lg-3 col-md-6 offset-md-3 ">
+                        <div class="registered-customers text-center">
+                            <div class="animatedcheck">
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+                                    <circle class="path circle" fill="none" stroke="#73AF55" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"></circle>
+                                    <polyline class="path check" fill="none" stroke="#73AF55" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 "></polyline>
+                                </svg>
+                            </div>
+                            <h3>Registration Confirmed</h3>
+                            <p>Congratulations! Your registration is confirmed.</p>
+                            <a href="/LoginUI/Index" class="btn btnContact">Login</a>
+                        </div>
+
+                    </div>
+                    <!-- Registered-Customers End -->
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="common-logo-sec">
+    <ul>
+        <li><a href="#"><img src="~/Content/main-assets/images/ab-img1.svg" alt=""></a></li>
+        <li><a href="#"><img src="~/Content/main-assets/images/ab-img2.svg" alt=""></a></li>
+        <li><a href="#"><img src="~/Content/main-assets/images/ab-img3.svg" alt=""></a></li>
+    </ul>
+</section>

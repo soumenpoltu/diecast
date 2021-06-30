@@ -1,0 +1,15 @@
+<svg version="1.2" baseProfile="tiny-ps" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 694 1004" width="694" height="1004">
+	<title>Blog</title>
+	<style>
+		tspan { white-space:pre }
+		.shp0 { fill: none;stroke: #969696;stroke-linecap:round;stroke-width: 2 } 
+	</style>
+	<g id="Blog">
+		<g id="Group 57">
+			<g id="Icon feather-search">
+				<path id="Path 50" class="shp0" d="M610.49 399.14C610.49 401.82 608.32 403.99 605.64 403.99C602.97 403.99 600.8 401.82 600.8 399.14C600.8 396.47 602.97 394.3 605.64 394.3C608.32 394.3 610.49 396.47 610.49 399.14L610.49 399.14Z" />
+				<path id="Path 51" class="shp0" d="M611.7 405.2L609.06 402.56" />
+			</g>
+		</g>
+	</g>
+</svg>

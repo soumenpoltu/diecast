@@ -1,0 +1,280 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="~/Content/main-assets/pdfscript/pdfjs.js"></script>
+
+
+<section class="inner-banner-part">
+    <img class="img1" src="~/Content/main-assets/images/inner-ban.png" alt="">
+    <img class="img2" src="~/Content/main-assets/images/banner-shape.png" alt="">
+    <div class="ban-tx">
+        <h2>Invoice</h2>
+        <ul>
+            <li><a href="#">Home</a>/</li>
+            <li>Invoice</li>
+        </ul>
+    </div>
+</section>
+
+
+<div class="container-fluid pt-6 pb-5 cart-page cart">
+
+    <div class="col-lg-8 col-md-12 offset-lg-2 offset-md-0">
+        <div class="row" id="Grid">
+            <style>
+                body {
+                    font-family: arial;
+                }
+
+                .table-responsive {
+                    display: block;
+                    width: 100%;
+                    max-width: 1240px;
+                    margin: auto;
+                }
+
+                table.cart-table {
+                    margin-bottom: 5px;
+                    width: 100%;
+                }
+
+                img {
+                    max-width: 100%;
+                    height: auto;
+                }
+
+                .mb-3, .my-3 {
+                    margin-bottom: 1rem !important;
+                }
+
+                table {
+                    border-collapse: collapse;
+                    border-spacing: 0;
+                }
+
+                tbody {
+                    display: table-row-group;
+                    vertical-align: middle;
+                    border-color: inherit;
+                }
+
+                tr {
+                    display: table-row;
+                    vertical-align: inherit;
+                    border-color: inherit;
+                }
+
+                .cart-table tbody tr td:last-child {
+                    padding: 15px;
+                    text-align: center;
+                }
+
+                .cart-table tbody tr td {
+                    border: 1px solid #e1e1e1;
+                    font-family: arial;
+                    font-size: 15px;
+                    font-weight: normal;
+                    padding: 15px;
+                    text-align: center;
+                }
+
+                td, th {
+                    padding: 0;
+                }
+
+                *, ::after, ::before {
+                    box-sizing: border-box;
+                }
+
+                .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+                    margin-bottom: .5rem;
+                    font-family: inherit;
+                    font-weight: 500;
+                    line-height: 1.2;
+                    color: inherit;
+                }
+
+                .pdt-thumb {
+                    width: 120px;
+                    height: auto;
+                }
+
+                .cart-table thead tr th {
+                    border: 1px solid #e1e1e1;
+                    border-collapse: collapse;
+                    color: #fff;
+                    background: #cc0000;
+                    font-family: Arial;
+                    font-size: 14px;
+                    font-weight: bold;
+                    height: 49px;
+                    text-align: center;
+                    vertical-align: middle;
+                }
+
+                .nobordertable tbody tr td {
+                    border: none;
+                }
+
+                .text-left {
+                    text-align: left;
+                }
+
+                .text-right {
+                    text-align: right;
+                }
+
+                .text-center {
+                    text-align: center;
+                }
+            </style>
+            <div class="col-lg-12">
+                <h1 class="cart-title">Invoice</h1>
+                <div class="table-responsive table-borderouter">
+
+
+
+                    <table class="cart-table nobordertable mb-3">
+                        <tbody>
+                            <tr>
+                                <td colspan="2">
+                                    <h2>Diecast Zone CC</h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">
+                                    <img src="@ViewBag.img_WEBSITE_LOGO" alt="" width="202" height="78">
+                                </td>
+                                <td class="text-right">
+                                    <p>Invoice Number:#@ViewBag.inv</p>
+                                    <p>Invoice Date:@ViewBag.invdate</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">
+                                    <b>Billing Address:<br></b>
+                                    @ViewBag.biladdr
+                                </td>
+                                <td class="text-left">
+                                    <b>Shipping Address:<br></b>
+                                    @ViewBag.addr
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="cart-table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Product name</th>
+                                <th>Unit Price</th>
+                                <th>Qty</th>
+                                <th>Subtotal</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (System.Data.DataRow dr in Model)
+                            {
+
+                                <tr>
+
+                                    <td>
+                                        <a href="#"><img alt="" class="img-responsive" src="~/documents/product/@dr["PRODUCT_IMAGE"]" /></a>
+                                    </td>
+                                    <td>
+                                        <h6><a href="#">@dr["PRODUCT"]</a></h6>
+                                    </td>
+                                    <td>
+                                        <div class="cart-price">$@dr["PRICE"]</div>
+                                    </td>
+                                    <td>
+                                        @dr["QUANTITY"]
+                                    </td>
+                                    <td>
+                                        <div class="cart-subtotal">$@dr["GROSS_AMOUNT"]</div>
+                                    </td>
+                                </tr>
+                            }
+                            <tr>
+                                <td colspan="3"> </td>
+                                <td class="text-left">
+                                    Total:
+                                </td>
+                                <td colspan="2">
+                                    <div class="cart-subtotal text-left">$@ViewBag.subtotal</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"> </td>
+                                <td class="text-left">
+                                    Tax:
+                                </td>
+                                <td colspan="2">
+                                    <div class="cart-subtotal text-left">$@ViewBag.tax</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"> </td>
+                                <td class="text-left">
+                                    Sub Total:
+                                </td>
+                                <td colspan="2">
+                                    <div class="cart-subtotal text-left">$@ViewBag.totalamnt</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"> </td>
+                                <td class="text-left">
+                                    <b>Grand Total:</b>
+                                </td>
+                                <td colspan="2">
+                                    <div class="cart-subtotal text-left">$@ViewBag.totalamnt</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <table class="cart-table">
+                    <tbody>
+                        <tr>
+                            <td colspan="7" class="actions">
+                                <div class="cartPage-btn">
+                                    <ul>
+                                        <li><a href="~/" class="cbtn">Continue Shopping</a></li>
+
+                                        <li onclick="callingexport();"><a href="#" class="cbtn green">Download</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    </div>
+    <script>
+        function callingexport() {
+            const element = document.getElementById("Grid");
+            html2pdf()
+                .from(element)
+                .save();
+            $("input[name='GridHtml']").val($("#Grid").html());
+            //document.forms["submitform"].submit();
+        }
+
+    </script>

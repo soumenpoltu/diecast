@@ -1,0 +1,20 @@
+<svg version="1.2" baseProfile="tiny-ps" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 106 122" width="106" height="122">
+	<title>homepage – 1</title>
+	<style>
+		tspan { white-space:pre }
+		.shp0 { fill: none;stroke: #ffffff;stroke-width: 5 } 
+	</style>
+	<g id="homepage – 1">
+		<g id="Group 894">
+			<g id="Group 893">
+				<g id="Group 891">
+					<g id="Group 858">
+						<path id="Path 54" class="shp0" d="M90.17 11.69C90.17 11.69 78.14 7.15 53 4.7C27.86 7.15 15.83 11.69 15.83 11.69C17.27 26.29 4.61 32.06 4.61 32.06C6.11 101.51 53 117.97 53 117.97C53 117.97 99.89 101.51 101.39 32.06C101.39 32.06 88.73 26.29 90.17 11.69Z" />
+						<path id="Ellipse 5" class="shp0" d="M53 76.9C38.95 76.9 27.6 66.46 27.6 53.56C27.6 40.65 38.95 30.21 53 30.21C67.05 30.21 78.4 40.65 78.4 53.56C78.4 66.46 67.05 76.9 53 76.9Z" />
+						<path id="Path 55" class="shp0" d="M42.7 51.04L50.43 58.76L63.3 45.89" />
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+</svg>

@@ -1,0 +1,798 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section title{
+    Diecast Decals - No 1. Decals In Here
+}
+
+@section script{
+    <script src="~/Content/main-assets/js/vendor/jquery-1.12.4.min.js"></script>
+}
+
+<section class="top-info-bar container">
+    <div class="row">
+        <div class="col-lg-4 my-auto">
+            <div class="d-flex upload-userprofiledet">
+                <img src="~/Content/main-assets/img/Page-1/profile-pic.png" alt="" class="img-fluid">
+                <div class="d-block my-auto pl-4">
+                    <h6>Jodi O Hangstrom</h6>
+                    <p>Member since 2015</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mt-5">
+            <div class="row text-center">
+                <div class="col-4 mb-2">
+                    <p><b>likes</b></p>
+                    <p>1k+</p>
+                </div>
+                <div class="col-4 mb-2">
+                    <p><b>Followers</b></p>
+                    <p>865</p>
+                </div>
+                <div class="col-4 mb-2">
+                    <p><b>Following</b></p>
+                    <p>464</p>
+                </div>
+                <hr>
+                <div class="col-lg-12 text-center total-upload"> <h6>Total Uploads: <span>877</span></h6></div>
+            </div>
+        </div>
+        <div class="col-lg-4 my-auto text-center d-flex align-items-center justify-content-center">
+            <label for="" class="mr-2">Profile URL: </label>
+            <input type="url" name="" id="" value="https://diecastdecals.com.au/sibankar" readonly="readonly" class="linkprofile">
+            <i class="fa fa-share-alt copylink" title="Copy shareable link"></i>
+            <span class="copied"></span>
+        </div>
+    </div>
+</section>
+<section class="upload-section mt-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-lg-3 topnav-upload mx-auto tab-slider--nav">
+                <ul class="d-flex text-center tab-slider--tabs  justify-content-center">
+                    <li class="tab-slider--trigger active" rel="tab1">
+                        <a class="active">
+                            <i class="fa fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="tab-slider--trigger" rel="tab2">
+                        <a>
+                            <i class="fa fa-th-list" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li class="tab-slider--trigger" rel="tab3">
+                        <a>
+                            <i class="fa fa-bell-o" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row upload-info-section">
+            <div class="col-lg-3 mb-5">
+                <div class="section-title">Upload Your Custom Diecast</div>
+                <div class="row">
+                    <div class="col-4 mb-4 thumb-img">
+                        <img src="~/Content/main-assets/img/Page-1/Image-1-5.png" alt="" class="img-fluid">
+                        <i class="fa fa-times"></i>
+                    </div>
+                    <div class="col-4 mb-4 thumb-img">
+                        <img src="~/Content/main-assets/img/Page-1/Image-1-5.png" alt="" class="img-fluid">
+                        <i class="fa fa-times"></i>
+                    </div>
+                    <div class="col-4 mb-4 thumb-img">
+                        <img src="~/Content/main-assets/img/Page-1/Image-1-5.png" alt="" class="img-fluid">
+                        <i class="fa fa-times"></i>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-lg-12 position-relative">
+                        <img src="~/Content/main-assets/img/Page-1/Image-1-8.png" alt="" class="img-fluid samplethumb">
+                        <input type="file" class="browsefield" onchange='Test.UpdatePreview(this)'>
+                    </div>
+                    <div class="col-lg-12"><button type="submit" class="thumbsubmit">Submit</button></div>
+                </div>
+                <div class="form-group">
+                    <label for="">Title Here</label>
+                    <input type="text" placeholder="Enter Title">
+                </div>
+                <div class="form-group">
+                    <label for="">Description</label>
+                    <input type="textarea" placeholder="Enter Description">
+                </div>
+                <div class="form-group ">
+                    <label for="">Casting</label>
+                    <div class="select-dropdown">
+                        <select name="" id="">
+                            <option value="1">55 Gasser1</option>
+                            <option value="1">55 Gasser2</option>
+                            <option value="1">55 Gasser3</option>
+                            <option value="1">55 Gasser4</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label for="">Color</label>
+                    <input type="text" placeholder="Enter Color">
+                </div>
+                <div class="form-group">
+                    <label for="">Wheel Style</label>
+                    <input type="text" placeholder="Enter Here">
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <img src="~/Content/main-assets/img/Page-1/Image-1-8.png" alt="" class="img-fluid samplethumb-new">
+                    </div>
+                    <div class="col-lg-6 my-auto file-upld-pop">
+                        <a class="btn-a float-right text-white">Browse</a>
+                        <input type="file" class="browsefield" onchange='Testa.UpdatePreview(this)'>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="">Decals by</label>
+                    <input type="text" placeholder="Enter Decals supplier name">
+                </div>
+                <a href="" class="btn-b float-right">Post</a>
+            </div>
+            <div class="col-lg-9 mb-5">
+                <div class="tab-slider--container">
+                    <div id="tab1" class="tab-slider--body">
+                        <div class="row upload-info-section">
+                            <div class="col-lg-8">
+                                <div class="row mb-4 newupload-outeritem">
+                                    <div class="col-lg-2 col-2 upld-l-thumb">
+                                        <img src="~/Content/main-assets/img/Page-1/Image-1-2.png" alt="" class="img-fluid">
+                                    </div>
+                                    <div class="col-lg-10 col-10 upld-r-cont">
+                                        <div class="upload-image">
+                                            <a href="#"><img src="~/Content/main-assets/img/Page-1/Image-1-1.png" alt="" class="img-fluid mb-4"></a>
+                                            <a href="#" class="addprofile-post"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                                            <a href="#" class="addheart"><i class="fa fa-heart" aria-hidden="true"></i></a>
+                                        </div>
+                                        <div class="upload-details">
+                                            <div class="row">
+                                                <div class="col-sm-9"><h3 class="up-ttl float-left"><a href="#">Heading of the upload here</a></h3></div>
+                                                <div class="col-sm-3  upload-name my-auto"> <span class="catname-11 float-right">Category name</span></div>
+                                            </div>
+                                            <p class="uplod-para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum in laboriosam natus ad deleniti neque magnam praesentium odio voluptatem sed.</p>
+                                            <div class="row">
+                                                <div class="col-lg-6  col-6">
+                                                    12 Comments
+                                                </div>
+                                                <div class="col-lg-6 col-6 ">
+                                                    <div class="upload-icon text-right">
+                                                        <i class="fa fa-commenting mr-2" aria-hidden="true"></i>
+                                                        <i class="fa fa-share-alt"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row mb-4 newupload-outeritem">
+                                    <div class="col-lg-2 col-2 upld-l-thumb">
+                                        <img src="~/Content/main-assets/img/Page-1/Image-1-2.png" alt="" class="img-fluid">
+                                    </div>
+                                    <div class="col-lg-10 col-10 upld-r-cont">
+                                        <div class="upload-image">
+                                            <a href="#"><img src="~/Content/main-assets/img/Page-1/Image-1-1a.png" alt="" class="img-fluid mb-4"></a>
+                                            <a href="#" class="addprofile-post"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                                            <a href="#" class="addheart"><i class="fa fa-heart" aria-hidden="true"></i></a>
+                                        </div>
+                                        <div class="upload-details">
+                                            <div class="row">
+                                                <div class="col-sm-9"><h3 class="up-ttl float-left"><a href="#">Heading of the upload here</a></h3></div>
+                                                <div class="col-sm-3  upload-name my-auto"> <span class="catname-11 float-right">Category name</span></div>
+                                            </div>
+                                            <p class="uplod-para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum in laboriosam natus ad deleniti neque magnam praesentium odio voluptatem sed.</p>
+                                            <div class="row">
+                                                <div class="col-lg-6  col-6">
+                                                    12 Comments
+                                                </div>
+                                                <div class="col-lg-6  col-6">
+                                                    <div class="upload-icon text-right">
+                                                        <i class="fa fa-commenting mr-2" aria-hidden="true"></i>
+                                                        <i class="fa fa-share-alt"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row mb-4 newupload-outeritem">
+                                    <div class="col-lg-2 col-2 upld-l-thumb">
+                                        <img src="~/Content/main-assets/img/Page-1/Image-1-2.png" alt="" class="img-fluid">
+                                    </div>
+                                    <div class="col-lg-10 col-10 upld-r-cont">
+                                        <div class="upload-image">
+                                            <a href="#"><img src="~/Content/main-assets/img/Page-1/Image-1-1b.png" alt="" class="img-fluid mb-4"></a>
+                                            <a href="#" class="addprofile-post"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                                            <a href="#" class="addheart"><i class="fa fa-heart" aria-hidden="true"></i></a>
+                                        </div>
+                                        <div class="upload-details">
+                                            <div class="row">
+                                                <div class="col-sm-9"><h3 class="up-ttl float-left"><a href="#">Heading of the upload here</a></h3></div>
+                                                <div class="col-sm-3  upload-name my-auto"> <span class="catname-11 float-right">Category name</span></div>
+                                            </div>
+                                            <p class="uplod-para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum in laboriosam natus ad deleniti neque magnam praesentium odio voluptatem sed.</p>
+                                            <div class="row">
+                                                <div class="col-lg-6 col-6 ">
+                                                    12 Comments
+                                                </div>
+                                                <div class="col-lg-6 col-6 ">
+                                                    <div class="upload-icon text-right">
+                                                        <i class="fa fa-commenting mr-2" aria-hidden="true"></i>
+                                                        <i class="fa fa-share-alt"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="section-title">Check out these decals</div>
+                                <div class="single-decals">
+                                    <img src="~/Content/main-assets/img/Page-1/Image-1-6.png" alt="" class="img-fluid">
+                                    <div class="decals-info">
+                                        <div class="category-name-green">Category name</div>
+                                        <p>Lorem ipsum dolor it amet, consectetur</p>
+                                    </div>
+                                </div>
+                                <div class="single-decals">
+                                    <img src="~/Content/main-assets/img/Page-1/Image-1-6.png" alt="" class="img-fluid">
+                                    <div class="decals-info">
+                                        <div class="category-name-green">Category name</div>
+                                        <p>Lorem ipsum dolor it amet, consectetur</p>
+                                    </div>
+                                </div>
+                                <div class="single-decals">
+                                    <img src="~/Content/main-assets/img/Page-1/Image-1-6.png" alt="" class="img-fluid">
+                                    <div class="decals-info">
+                                        <div class="category-name-green">Category name</div>
+                                        <p>Lorem ipsum dolor it amet, consectetur</p>
+                                    </div>
+                                </div>
+                                <div class="single-decals">
+                                    <img src="~/Content/main-assets/img/Page-1/Image-1-6.png" alt="" class="img-fluid">
+                                    <div class="decals-info">
+                                        <div class="category-name-green">Category name</div>
+                                        <p>Lorem ipsum dolor it amet, consectetur</p>
+                                    </div>
+                                </div>
+                                <div class="single-decals">
+                                    <img src="~/Content/main-assets/img/Page-1/Image-1-6.png" alt="" class="img-fluid">
+                                    <div class="decals-info">
+                                        <div class="category-name-green">Category name</div>
+                                        <p>Lorem ipsum dolor it amet, consectetur</p>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <hr>
+                                <a href="#" class="morebtndecals">MORE DECALS</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab2" class="tab-slider--body">
+                        <div class="row d-flex align-items-center mb-3">
+                            <div class="col-lg-3 col-md-4 d-flex align-items-center sortpanel mb-3">
+                                <span>Categories</span>
+                                <select>
+                                    <option>All</option>
+                                    <option>Categories 1</option>
+                                    <option>Categories 2</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-3 col-md-4 d-flex align-items-center sortpanel mb-3">
+                                <span>Filters</span>
+                                <select>
+                                    <option>Recent</option>
+                                    <option>Old-New</option>
+                                    <option>New-Old</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-6 col-md-4 d-flex align-items-center searchpanel mb-3">
+                                <input type="text" name="" placeholder="Search">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-4 col-md-6 col-sm-6 col-xs-12 castitem-tiles">
+                                <div class="castitem-tiles-inner">
+                                    <img src="~/Content/main-assets/img/uploaddecals/decals1.png" width="1711" height="1705" class="img-fluid" alt="Diecast Decals" title="Diecast Decals">
+
+                                    <div class="ot-overlay">
+                                        <span class="editop">
+                                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                            <ul>
+                                                <li><a href="#">Edit</a></li>
+                                                <li><a href="#">Delete</a></li>
+                                                <li><a href="#">Share</a></li>
+                                            </ul>
+                                        </span>
+
+                                        <span class="castname">Cast Name Here</span>
+                                        <span class="castdate">Date Uploaded: 12/04/2021</span>
+                                        <h2 class="castttl">Title Here</h2>
+                                        <p class="castpara">Its windy and cool. See Spanish-English translations with audio pronunciations, examples, and word-by-word explanations.</p>
+                                        <a href="#" class="castlink">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-6 col-sm-6 col-xs-12 castitem-tiles">
+                                <div class="castitem-tiles-inner">
+                                    <img src="~/Content/main-assets/img/uploaddecals/decals2.png" width="1711" height="1705" class="img-fluid" alt="Diecast Decals" title="Diecast Decals">
+
+                                    <div class="ot-overlay">
+                                        <span class="editop">
+                                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                            <ul>
+                                                <li><a href="#">Edit</a></li>
+                                                <li><a href="#">Delete</a></li>
+                                                <li><a href="#">Share</a></li>
+                                            </ul>
+                                        </span>
+
+                                        <span class="castname">Cast Name Here</span>
+                                        <span class="castdate">Date Uploaded: 12/04/2021</span>
+                                        <h2 class="castttl">Title Here</h2>
+                                        <p class="castpara">Its windy and cool. See Spanish-English translations with audio pronunciations, examples, and word-by-word explanations.</p>
+                                        <a href="#" class="castlink">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-6 col-sm-6 col-xs-12 castitem-tiles">
+                                <div class="castitem-tiles-inner">
+                                    <img src="~/Content/main-assets/img/uploaddecals/decals3.png" width="1711" height="1705" class="img-fluid" alt="Diecast Decals" title="Diecast Decals">
+
+                                    <div class="ot-overlay">
+                                        <span class="editop">
+                                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                            <ul>
+                                                <li><a href="#">Edit</a></li>
+                                                <li><a href="#">Delete</a></li>
+                                                <li><a href="#">Share</a></li>
+                                            </ul>
+                                        </span>
+
+                                        <span class="castname">Cast Name Here</span>
+                                        <span class="castdate">Date Uploaded: 12/04/2021</span>
+                                        <h2 class="castttl">Title Here</h2>
+                                        <p class="castpara">Its windy and cool. See Spanish-English translations with audio pronunciations, examples, and word-by-word explanations.</p>
+                                        <a href="#" class="castlink">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-6 col-sm-6 col-xs-12 castitem-tiles">
+                                <div class="castitem-tiles-inner">
+                                    <img src="~/Content/main-assets/img/uploaddecals/decals4.png" width="1711" height="1705" class="img-fluid" alt="Diecast Decals" title="Diecast Decals">
+
+                                    <div class="ot-overlay">
+                                        <span class="editop">
+                                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                            <ul>
+                                                <li><a href="#">Edit</a></li>
+                                                <li><a href="#">Delete</a></li>
+                                                <li><a href="#">Share</a></li>
+                                            </ul>
+                                        </span>
+
+                                        <span class="castname">Cast Name Here</span>
+                                        <span class="castdate">Date Uploaded: 12/04/2021</span>
+                                        <h2 class="castttl">Title Here</h2>
+                                        <p class="castpara">Its windy and cool. See Spanish-English translations with audio pronunciations, examples, and word-by-word explanations.</p>
+                                        <a href="#" class="castlink">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-6 col-sm-6 col-xs-12 castitem-tiles">
+                                <div class="castitem-tiles-inner">
+                                    <img src="~/Content/main-assets/img/uploaddecals/decals5.png" width="1711" height="1705" class="img-fluid" alt="Diecast Decals" title="Diecast Decals">
+
+                                    <div class="ot-overlay">
+                                        <span class="editop">
+                                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                            <ul>
+                                                <li><a href="#">Edit</a></li>
+                                                <li><a href="#">Delete</a></li>
+                                                <li><a href="#">Share</a></li>
+                                            </ul>
+                                        </span>
+
+                                        <span class="castname">Cast Name Here</span>
+                                        <span class="castdate">Date Uploaded: 12/04/2021</span>
+                                        <h2 class="castttl">Title Here</h2>
+                                        <p class="castpara">Its windy and cool. See Spanish-English translations with audio pronunciations, examples, and word-by-word explanations.</p>
+                                        <a href="#" class="castlink">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-6 col-sm-6 col-xs-12 castitem-tiles">
+                                <div class="castitem-tiles-inner">
+                                    <img src="~/Content/main-assets/img/uploaddecals/decals6.png" width="1711" height="1705" class="img-fluid" alt="Diecast Decals" title="Diecast Decals">
+
+                                    <div class="ot-overlay">
+                                        <span class="editop">
+                                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                            <ul>
+                                                <li><a href="#">Edit</a></li>
+                                                <li><a href="#">Delete</a></li>
+                                                <li><a href="#">Share</a></li>
+                                            </ul>
+                                        </span>
+
+                                        <span class="castname">Cast Name Here</span>
+                                        <span class="castdate">Date Uploaded: 12/04/2021</span>
+                                        <h2 class="castttl">Title Here</h2>
+                                        <p class="castpara">Its windy and cool. See Spanish-English translations with audio pronunciations, examples, and word-by-word explanations.</p>
+                                        <a href="#" class="castlink">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-6 col-sm-6 col-xs-12 castitem-tiles">
+                                <div class="castitem-tiles-inner">
+                                    <img src="~/Content/main-assets/img/uploaddecals/decals6.png" width="1711" height="1705" class="img-fluid" alt="Diecast Decals" title="Diecast Decals">
+
+                                    <div class="ot-overlay">
+                                        <span class="editop">
+                                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                            <ul>
+                                                <li><a href="#">Edit</a></li>
+                                                <li><a href="#">Delete</a></li>
+                                                <li><a href="#">Share</a></li>
+                                            </ul>
+                                        </span>
+
+                                        <span class="castname">Cast Name Here</span>
+                                        <span class="castdate">Date Uploaded: 12/04/2021</span>
+                                        <h2 class="castttl">Title Here</h2>
+                                        <p class="castpara">Its windy and cool. See Spanish-English translations with audio pronunciations, examples, and word-by-word explanations.</p>
+                                        <a href="#" class="castlink">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-6 col-sm-6 col-xs-12 castitem-tiles">
+                                <div class="castitem-tiles-inner">
+                                    <img src="~/Content/main-assets/img/uploaddecals/decals5.png" width="1711" height="1705" class="img-fluid" alt="Diecast Decals" title="Diecast Decals">
+
+                                    <div class="ot-overlay">
+                                        <span class="editop">
+                                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                            <ul>
+                                                <li><a href="#">Edit</a></li>
+                                                <li><a href="#">Delete</a></li>
+                                                <li><a href="#">Share</a></li>
+                                            </ul>
+                                        </span>
+
+                                        <span class="castname">Cast Name Here</span>
+                                        <span class="castdate">Date Uploaded: 12/04/2021</span>
+                                        <h2 class="castttl">Title Here</h2>
+                                        <p class="castpara">Its windy and cool. See Spanish-English translations with audio pronunciations, examples, and word-by-word explanations.</p>
+                                        <a href="#" class="castlink">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-6 col-sm-6 col-xs-12 castitem-tiles">
+                                <div class="castitem-tiles-inner">
+                                    <img src="~/Content/main-assets/img/uploaddecals/decals4.png" width="1711" height="1705" class="img-fluid" alt="Diecast Decals" title="Diecast Decals">
+
+                                    <div class="ot-overlay">
+                                        <span class="editop">
+                                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                            <ul>
+                                                <li><a href="#">Edit</a></li>
+                                                <li><a href="#">Delete</a></li>
+                                                <li><a href="#">Share</a></li>
+                                            </ul>
+                                        </span>
+
+                                        <span class="castname">Cast Name Here</span>
+                                        <span class="castdate">Date Uploaded: 12/04/2021</span>
+                                        <h2 class="castttl">Title Here</h2>
+                                        <p class="castpara">Its windy and cool. See Spanish-English translations with audio pronunciations, examples, and word-by-word explanations.</p>
+                                        <a href="#" class="castlink">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <nav class="pagi_new">
+                                    <ul class="pagination">
+                                        <li class="page-item disabled">
+                                            <span class="page-link"><i class="fa fa-angle-left"></i></span>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item active">
+                                            <span class="page-link">
+                                                2
+                                                <span class="sr-only">(current)</span>
+                                            </span>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab3" class="tab-slider--body">
+                        <div class="row upload-info-section">
+                            <div class="col-lg-8 mb-4">
+                                <ul class="notification-list">
+                                    <li>
+                                        <h2 class="name-noti">
+                                            <img src="~/Content/main-assets/img/userthumb.png" width="100" height="100" class="img-fluid user-noti" alt="Diecast Decals" title="Diecast Decals">
+                                            <a href="#" class="name-noti-name">Faz</a>
+                                            <a href="#" class="ttl-noti">Liked (Title here)</a>
+                                        </h2>
+                                        <span class="dateprod-noti">
+                                            <span class="user-date">11/04/2021</span>
+                                            <img src="~/Content/main-assets/img/Page-1/Image-1-1b.png" class="img-fluid user-prod" alt="Diecast Decals" title="Diecast Decals">
+                                        </span>
+                                    </li>
+
+                                    <li>
+                                        <h2 class="name-noti">
+                                            <img src="~/Content/main-assets/img/userthumb.png" width="100" height="100" class="img-fluid user-noti" alt="Diecast Decals" title="Diecast Decals">
+                                            <a href="#" class="name-noti-name">Faz</a>
+                                            <a href="#" class="ttl-noti">Liked (Title here)</a>
+                                        </h2>
+                                        <span class="dateprod-noti">
+                                            <span class="user-date">11/04/2021</span>
+                                            <img src="~/Content/main-assets/img/Page-1/Image-1-1b.png" class="img-fluid user-prod" alt="Diecast Decals" title="Diecast Decals">
+                                        </span>
+                                    </li>
+
+                                    <li>
+                                        <h2 class="name-noti">
+                                            <img src="~/Content/main-assets/img/userthumb.png" width="100" height="100" class="img-fluid user-noti" alt="Diecast Decals" title="Diecast Decals">
+                                            <a href="#" class="name-noti-name">Faz</a>
+                                            <a href="#" class="ttl-noti">Liked (Title here)</a>
+                                        </h2>
+                                        <span class="dateprod-noti">
+                                            <span class="user-date">11/04/2021</span>
+                                            <img src="~/Content/main-assets/img/Page-1/Image-1-1b.png" class="img-fluid user-prod" alt="Diecast Decals" title="Diecast Decals">
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <h2 class="name-noti">
+                                            <img src="~/Content/main-assets/img/userthumb.png" width="100" height="100" class="img-fluid user-noti" alt="Diecast Decals" title="Diecast Decals">
+                                            <a href="#" class="name-noti-name">Faz</a>
+                                            <a href="#" class="ttl-noti">Liked (Title here)</a>
+                                        </h2>
+                                        <span class="dateprod-noti">
+                                            <span class="user-date">11/04/2021</span>
+                                            <img src="~/Content/main-assets/img/Page-1/Image-1-1b.png" class="img-fluid user-prod" alt="Diecast Decals" title="Diecast Decals">
+                                        </span>
+                                    </li>
+
+                                    <li>
+                                        <h2 class="name-noti">
+                                            <img src="~/Content/main-assets/img/userthumb.png" width="100" height="100" class="img-fluid user-noti" alt="Diecast Decals" title="Diecast Decals">
+                                            <a href="#" class="name-noti-name">Faz</a>
+                                            <a href="#" class="ttl-noti">Liked (Title here)</a>
+                                        </h2>
+                                        <span class="dateprod-noti">
+                                            <span class="user-date">11/04/2021</span>
+                                            <img src="~/Content/main-assets/img/Page-1/Image-1-1b.png" class="img-fluid user-prod" alt="Diecast Decals" title="Diecast Decals">
+                                        </span>
+                                    </li>
+
+                                    <li>
+                                        <h2 class="name-noti">
+                                            <img src="~/Content/main-assets/img/userthumb.png" width="100" height="100" class="img-fluid user-noti" alt="Diecast Decals" title="Diecast Decals">
+                                            <a href="#" class="name-noti-name">Faz</a>
+                                            <a href="#" class="ttl-noti">Liked (Title here)</a>
+                                        </h2>
+                                        <span class="dateprod-noti">
+                                            <span class="user-date">11/04/2021</span>
+                                            <img src="~/Content/main-assets/img/Page-1/Image-1-1b.png" class="img-fluid user-prod" alt="Diecast Decals" title="Diecast Decals">
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <h2 class="name-noti">
+                                            <img src="~/Content/main-assets/img/userthumb.png" width="100" height="100" class="img-fluid user-noti" alt="Diecast Decals" title="Diecast Decals">
+                                            <a href="#" class="name-noti-name">Faz</a>
+                                            <a href="#" class="ttl-noti">Liked (Title here)</a>
+                                        </h2>
+                                        <span class="dateprod-noti">
+                                            <span class="user-date">11/04/2021</span>
+                                            <img src="~/Content/main-assets/img/Page-1/Image-1-1b.png" class="img-fluid user-prod" alt="Diecast Decals" title="Diecast Decals">
+                                        </span>
+                                    </li>
+
+                                    <li>
+                                        <h2 class="name-noti">
+                                            <img src="~/Content/main-assets/img/userthumb.png" width="100" height="100" class="img-fluid user-noti" alt="Diecast Decals" title="Diecast Decals">
+                                            <a href="#" class="name-noti-name">Faz</a>
+                                            <a href="#" class="ttl-noti">Liked (Title here)</a>
+                                        </h2>
+                                        <span class="dateprod-noti">
+                                            <span class="user-date">11/04/2021</span>
+                                            <img src="~/Content/main-assets/img/Page-1/Image-1-1b.png" class="img-fluid user-prod" alt="Diecast Decals" title="Diecast Decals">
+                                        </span>
+                                    </li>
+
+                                    <li>
+                                        <h2 class="name-noti">
+                                            <img src="~/Content/main-assets/img/userthumb.png" width="100" height="100" class="img-fluid user-noti" alt="Diecast Decals" title="Diecast Decals">
+                                            <a href="#" class="name-noti-name">Faz</a>
+                                            <a href="#" class="ttl-noti">Liked (Title here)</a>
+                                        </h2>
+                                        <span class="dateprod-noti">
+                                            <span class="user-date">11/04/2021</span>
+                                            <img src="~/Content/main-assets/img/Page-1/Image-1-1b.png" class="img-fluid user-prod" alt="Diecast Decals" title="Diecast Decals">
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <h2 class="name-noti">
+                                            <img src="~/Content/main-assets/img/userthumb.png" width="100" height="100" class="img-fluid user-noti" alt="Diecast Decals" title="Diecast Decals">
+                                            <a href="#" class="name-noti-name">Faz</a>
+                                            <a href="#" class="ttl-noti">Liked (Title here)</a>
+                                        </h2>
+                                        <span class="dateprod-noti">
+                                            <span class="user-date">11/04/2021</span>
+                                            <img src="~/Content/main-assets/img/Page-1/Image-1-1b.png" class="img-fluid user-prod" alt="Diecast Decals" title="Diecast Decals">
+                                        </span>
+                                    </li>
+
+                                    <li>
+                                        <h2 class="name-noti">
+                                            <img src="~/Content/main-assets/img/userthumb.png" width="100" height="100" class="img-fluid user-noti" alt="Diecast Decals" title="Diecast Decals">
+                                            <a href="#" class="name-noti-name">Faz</a>
+                                            <a href="#" class="ttl-noti">Liked (Title here)</a>
+                                        </h2>
+                                        <span class="dateprod-noti">
+                                            <span class="user-date">11/04/2021</span>
+                                            <img src="~/Content/main-assets/img/Page-1/Image-1-1b.png" class="img-fluid user-prod" alt="Diecast Decals" title="Diecast Decals">
+                                        </span>
+                                    </li>
+
+                                    <li>
+                                        <h2 class="name-noti">
+                                            <img src="~/Content/main-assets/img/userthumb.png" width="100" height="100" class="img-fluid user-noti" alt="Diecast Decals" title="Diecast Decals">
+                                            <a href="#" class="name-noti-name">Faz</a>
+                                            <a href="#" class="ttl-noti">Liked (Title here)</a>
+                                        </h2>
+                                        <span class="dateprod-noti">
+                                            <span class="user-date">11/04/2021</span>
+                                            <img src="~/Content/main-assets/img/Page-1/Image-1-1b.png" class="img-fluid user-prod" alt="Diecast Decals" title="Diecast Decals">
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <h2 class="name-noti">
+                                            <img src="~/Content/main-assets/img/userthumb.png" width="100" height="100" class="img-fluid user-noti" alt="Diecast Decals" title="Diecast Decals">
+                                            <a href="#" class="name-noti-name">Faz</a>
+                                            <a href="#" class="ttl-noti">Liked (Title here)</a>
+                                        </h2>
+                                        <span class="dateprod-noti">
+                                            <span class="user-date">11/04/2021</span>
+                                            <img src="~/Content/main-assets/img/Page-1/Image-1-1b.png" class="img-fluid user-prod" alt="Diecast Decals" title="Diecast Decals">
+                                        </span>
+                                    </li>
+
+                                    <li>
+                                        <h2 class="name-noti">
+                                            <img src="~/Content/main-assets/img/userthumb.png" width="100" height="100" class="img-fluid user-noti" alt="Diecast Decals" title="Diecast Decals">
+                                            <a href="#" class="name-noti-name">Faz</a>
+                                            <a href="#" class="ttl-noti">Liked (Title here)</a>
+                                        </h2>
+                                        <span class="dateprod-noti">
+                                            <span class="user-date">11/04/2021</span>
+                                            <img src="~/Content/main-assets/img/Page-1/Image-1-1b.png" class="img-fluid user-prod" alt="Diecast Decals" title="Diecast Decals">
+                                        </span>
+                                    </li>
+
+                                    <li>
+                                        <h2 class="name-noti">
+                                            <img src="~/Content/main-assets/img/userthumb.png" width="100" height="100" class="img-fluid user-noti" alt="Diecast Decals" title="Diecast Decals">
+                                            <a href="#" class="name-noti-name">Faz</a>
+                                            <a href="#" class="ttl-noti">Liked (Title here)</a>
+                                        </h2>
+                                        <span class="dateprod-noti">
+                                            <span class="user-date">11/04/2021</span>
+                                            <img src="img/Page-1/Image-1-1b.png" class="img-fluid user-prod" alt="Diecast Decals" title="Diecast Decals">
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <h2 class="name-noti">
+                                            <img src="~/Content/main-assets/img/userthumb.png" width="100" height="100" class="img-fluid user-noti" alt="Diecast Decals" title="Diecast Decals">
+                                            <a href="#" class="name-noti-name">Faz</a>
+                                            <a href="#" class="ttl-noti">Liked (Title here)</a>
+                                        </h2>
+                                        <span class="dateprod-noti">
+                                            <span class="user-date">11/04/2021</span>
+                                            <img src="~/Content/main-assets/img/Page-1/Image-1-1b.png" class="img-fluid user-prod" alt="Diecast Decals" title="Diecast Decals">
+                                        </span>
+                                    </li>
+
+                                    <li>
+                                        <h2 class="name-noti">
+                                            <img src="~/Content/main-assets/img/userthumb.png" width="100" height="100" class="img-fluid user-noti" alt="Diecast Decals" title="Diecast Decals">
+                                            <a href="#" class="name-noti-name">Faz</a>
+                                            <a href="#" class="ttl-noti">Liked (Title here)</a>
+                                        </h2>
+                                        <span class="dateprod-noti">
+                                            <span class="user-date">11/04/2021</span>
+                                            <img src="~/Content/main-assets/img/Page-1/Image-1-1b.png" class="img-fluid user-prod" alt="Diecast Decals" title="Diecast Decals">
+                                        </span>
+                                    </li>
+
+                                    <li>
+                                        <h2 class="name-noti">
+                                            <img src="~/Content/main-assets/img/userthumb.png" width="100" height="100" class="img-fluid user-noti" alt="Diecast Decals" title="Diecast Decals">
+                                            <a href="#" class="name-noti-name">Faz</a>
+                                            <a href="#" class="ttl-noti">Liked (Title here)</a>
+                                        </h2>
+                                        <span class="dateprod-noti">
+                                            <span class="user-date">11/04/2021</span>
+                                            <img src="~/Content/main-assets/img/Page-1/Image-1-1b.png" class="img-fluid user-prod" alt="Diecast Decals" title="Diecast Decals">
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="section-title">Check out these decals</div>
+                                <div class="single-decals">
+                                    <img src="~/Content/main-assets/img/Page-1/Image-1-6.png" alt="" class="img-fluid">
+                                    <div class="decals-info">
+                                        <div class="category-name-green">Category name</div>
+                                        <p>Lorem ipsum dolor it amet, consectetur</p>
+                                    </div>
+                                </div>
+                                <div class="single-decals">
+                                    <img src="~/Content/main-assets/img/Page-1/Image-1-6.png" alt="" class="img-fluid">
+                                    <div class="decals-info">
+                                        <div class="category-name-green">Category name</div>
+                                        <p>Lorem ipsum dolor it amet, consectetur</p>
+                                    </div>
+                                </div>
+                                <div class="single-decals">
+                                    <img src="~/Content/main-assets/img/Page-1/Image-1-6.png" alt="" class="img-fluid">
+                                    <div class="decals-info">
+                                        <div class="category-name-green">Category name</div>
+                                        <p>Lorem ipsum dolor it amet, consectetur</p>
+                                    </div>
+                                </div>
+                                <div class="single-decals">
+                                    <img src="~/Content/main-assets/img/Page-1/Image-1-6.png" alt="" class="img-fluid">
+                                    <div class="decals-info">
+                                        <div class="category-name-green">Category name</div>
+                                        <p>Lorem ipsum dolor it amet, consectetur</p>
+                                    </div>
+                                </div>
+                                <div class="single-decals">
+                                    <img src="~/Content/main-assets/img/Page-1/Image-1-6.png" alt="" class="img-fluid">
+                                    <div class="decals-info">
+                                        <div class="category-name-green">Category name</div>
+                                        <p>Lorem ipsum dolor it amet, consectetur</p>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <hr>
+                                <a href="#" class="morebtndecals">MORE DECALS</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

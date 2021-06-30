@@ -1,0 +1,24 @@
+<svg version="1.2" baseProfile="tiny-ps" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 29" width="28" height="29">
+	<title>homepage – 1</title>
+	<style>
+		tspan { white-space:pre }
+		.shp0 { fill: #ffffff;stroke: #000000;stroke-width: 2 } 
+		.shp1 { fill: none;stroke: #000000;stroke-linecap:round;stroke-width: 2 } 
+		.shp2 { fill: #ffffff;stroke: #000000;stroke-linecap:round;stroke-width: 2 } 
+		.shp3 { fill: none;stroke: #000000;stroke-width: 2 } 
+	</style>
+	<g id="homepage – 1">
+		<g id="Group 854">
+			<g id="Group 17">
+				<path id="Ellipse 1" class="shp0" d="M9.88 27.03C8.87 27.03 8.06 26.22 8.06 25.21C8.06 24.21 8.87 23.39 9.88 23.39C10.88 23.39 11.7 24.21 11.7 25.21C11.7 26.22 10.88 27.03 9.88 27.03Z" />
+				<path id="Ellipse 2" class="shp0" d="M22 27.03C20.99 27.03 20.18 26.22 20.18 25.21C20.18 24.21 20.99 23.39 22 23.39C23.01 23.39 23.82 24.21 23.82 25.21C23.82 26.22 23.01 27.03 22 27.03Z" />
+				<path id="Line 3" class="shp1" d="M26.85 7.03L24.42 17.33L26.85 7.03Z" />
+				<path id="Line 4" class="shp1" d="M24.42 17.33L7.45 17.33L24.42 17.33Z" />
+				<path id="Path 40" class="shp2" d="M4.42 4L7.45 17.33L8.06 20.36L23.82 20.36" />
+				<path id="Line 5" class="shp1" d="M4.42 4L2 4L4.42 4Z" />
+				<path id="Line 6" class="shp3" d="M26.85 7.03L10.07 7.03L26.85 7.03Z" />
+				<path id="Line 7" class="shp3" d="M11.7 7.03L5.03 7.03L11.7 7.03Z" />
+			</g>
+		</g>
+	</g>
+</svg>

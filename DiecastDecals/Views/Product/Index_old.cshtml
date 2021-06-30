@@ -1,0 +1,532 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@section FormName{
+
+    <i class="icon-home2 mr-2"></i>Product
+
+}
+
+@section StyleCss{
+    <style type="text/css">
+        .filename {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .preview {
+            height: 230px;
+        }
+    </style>
+}
+
+<script>
+    function OpenTab3(strMsg, error) {
+
+        $("#tab1").hide();
+        $("#tab3").fadeIn();
+        $("#tab2").fadeIn();
+
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+    function OpenTab2(strMsg, error) {
+        $("#tab1").hide();
+        $("#tab3").hide();
+        $("#tab2").fadeIn();
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+
+    function OpenTab1(strMsg, error) {
+        $("#tab1").fadeIn();
+        $("#tab3").hide();
+        $("#tab2").hide();
+
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+</script>
+
+
+<div class="content" style="min-height: 10px;">
+    <ul id="fbAdd" class="fab-menu fab-menu-fixed fab-menu-bottom-right">
+
+        <li>
+            @using (Html.BeginForm("Add", "Product", FormMethod.Post, new { id = "submitaddform" }))
+            {
+
+
+                <a id="A2" href="#" class="fab-menu-btn btn bg-green btn-float rounded-round btn-icon" onclick="btn_Add_Click();">
+                    <i class="fab-icon-open icon-plus3"></i><i class="fab-icon-close icon-cross2"></i>
+                </a>
+            }
+        </li>
+    </ul>
+    <div id="tab1" class="card">
+        <div class="card-body">
+
+
+            <table cellspacing="0" rules="all" class="table table-hover table-bordered table-striped" border="1" id="gvMastBenefits" name="gvMastBenefits" style="border-collapse:collapse;">
+                <tbody>
+                    <tr>
+                        <th>Sr. No</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    @{int i = 0; }
+
+
+
+                    @foreach (System.Data.DataRow dr in Model)
+                    {
+                        i = i + 1;
+                        <tr>
+                            <td>@i</td>
+                            <td>@dr["PRODUCT_NAME"].ToString()</td>
+                            <td>@dr["PRICE"].ToString()</td>
+
+                            <td>
+                                @using (Html.BeginForm("edit", "Product", FormMethod.Post, new { id = "submitE+" + dr["HEAD_PRODUCT_KEY"].ToString() + "" }))
+                                {
+
+                                    <input type="hidden" name="editid" value="@dr["HEAD_PRODUCT_KEY"].ToString()" />
+
+                                    <a id="submitE+@dr["HEAD_PRODUCT_KEY"].ToString()" href="#" onclick="postmethodusingjs(this.id)" class="list-icons-item"><i class="icon-menu9"></i></a>
+
+                                }
+                            </td>
+
+                            <td>
+                                @using (Html.BeginForm("delete", "Product", FormMethod.Post, new { id = "submitD+" + dr["HEAD_PRODUCT_KEY"].ToString() + "" }))
+                                {
+
+                                    <input type="hidden" name="editid" value="@dr["HEAD_PRODUCT_KEY"].ToString()" />
+
+                                    <a id="submitD+@dr["HEAD_PRODUCT_KEY"].ToString()" href="#" onclick="postmethodusingjs(this.id)" class="list-icons-item"><i class="icon-trash"></i></a>
+
+                                }
+                            </td>
+
+                        </tr>
+
+                    }
+
+
+
+
+                </tbody>
+            </table>
+
+
+
+        </div>
+    </div>
+    <ul id="tabsmenu" class="tabsmenu" style="display: none">
+        <li class="active"><a id="atab1" href="#tab1">List</a></li>
+        <li><a id="atab2" href="#tab2">Add / Edit</a></li>
+        <li><a id="aPageName" href="#" style="margin: 0 5px 0 33%; border-radius: 6px;">&nbsp;</a></li>
+    </ul>
+    <div id="tab2" class="card" style="display: none">
+
+        @using (Html.BeginForm("btn_Head_Save_Click", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+
+            <input type="hidden" name="hf_HEAD_PRODUCT_IMG" id="hf_HEAD_PRODUCT_IMG" value="@ViewBag.hf_HEAD_PRODUCT_IMG" />
+
+            <div>
+
+                <input type="hidden" name="hf_DTLS_PRODUCT_KEY" id="hf_DTLS_PRODUCT_KEY" value="@ViewBag.hf_DTLS_PRODUCT_KEY" />
+                <input type="hidden" name="hf_HEAD_PRODUCT_KEY" id="hf_HEAD_PRODUCT_KEY" value="@ViewBag.hf_HEAD_PRODUCT_KEY" />
+
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <fieldset>
+                            <legend class="font-weight-semibold">Product Details</legend>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>
+                                                Category Name
+                                            </label>
+
+                                            @Html.DropDownList("ddl_MAST_PRODUCT_CATG_KEY", ViewBag.ProductCategoryName as SelectList, new { @class = "form-control populate" })
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>
+                                                Product Name
+                                            </label>
+
+                                            <input type="text" name="txt_PRODUCT_NAME" id="txt_PRODUCT_NAME" value="@ViewBag.txt_PRODUCT_NAME" class="form-control" />
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>
+                                                Price
+                                            </label>
+
+                                            <input type="text" name="txt_PRICE" id="txt_PRICE" value="@ViewBag.txt_PRICE" class="form-control" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <fieldset>
+                                        <legend>Product Picture</legend>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>
+                                                        Upload Picture (Accepted Format .png,.svg, .jpg, .jpeg only. Max size 2 MB)
+                                                    </label>
+
+                                                    <input type="file" id="fu_head_Product_img" name="fu_head_Product_img" class="form-input-styled" data-fouc accept=".gif, .svg, .png, .jpg, .jpeg" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8 ml-auto mr-auto">
+                                                <img id="head_product_img" src="@ViewBag.head_product_img" class="form-control preview" runat="server" />
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+
+                            <input type="submit" value="Submit" class="mb-xs mt-xs btn btn-success" ToolTip="Submit" onclick="btn_Head_Save_Click" />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div id="tab3" class="card" style="display: none">
+
+        @using (Html.BeginForm("btn_DTLS_Product_Save_Click", "Product", FormMethod.Post, new{ id="submitdtlsproduct", enctype = "multipart/form-data" }))
+        {
+
+
+
+        <div>
+
+            <input type="hidden" name="hf_PRODUCT_IMG" id="hf_PRODUCT_IMG" value="@ViewBag.hf_PRODUCT_IMG" />
+            <input type="hidden" name="hf_PRODUCT_IMG_2" id="hf_PRODUCT_IMG_2" value="@ViewBag.hf_PRODUCT_IMG_2" />
+
+            <input type="hidden" name="hf_DTLS_PRODUCT_KEY" id="hf_DTLS_PRODUCT_KEY" value="@ViewBag.hf_DTLS_PRODUCT_KEY" />
+            <input type="hidden" name="hf_HEAD_PRODUCT_KEY" id="hf_HEAD_PRODUCT_KEY" value="@ViewBag.hf_HEAD_PRODUCT_KEY" />
+
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="col-md-12">
+                    <fieldset>
+                        <legend class="font-weight-semibold">Product Sheet Details</legend>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>
+                                            Sheet Code
+                                        </label>
+
+
+                                        <input type="text" name="txt_SHEETCODE" id="txt_SHEETCODE" value="@ViewBag.txt_SHEETCODE" class="form-control" />
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
+                                <fieldset>
+                                    <legend>Product Picture</legend>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>
+                                                    Upload Picture (Accepted Format .pdf,.AI only. Max size 2 MB)
+                                                </label>
+
+                                                <input type="file" id="fu_Product_img" name="fu_Product_img" class="form-input-styled" data-fouc accept=".pdf,.ai" />
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8 ml-auto mr-auto">
+                                            <img id="product_img" src="@ViewBag.product_img" class="form-control preview" runat="server" />
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-md-4">
+                                <fieldset>
+                                    <legend>Product Picture</legend>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>
+                                                    Upload Picture (Accepted Format .png,.svg, .jpg, .jpeg only. Max size 2 MB)
+                                                </label>
+
+                                                <input type="file" id="fu_Product_img_2" name="fu_Product_img_2" class="form-input-styled" data-fouc accept=".gif, .svg, .png, .jpg, .jpeg" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8 ml-auto mr-auto">
+                                            <img id="product_img_2" src="@ViewBag.product_img_2" class="form-control preview" runat="server" />
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+
+
+                                @{
+                                    System.Data.DataTable dt1 = (System.Data.DataTable)TempData["dt1"];
+                                }
+                                <table cellspacing="0" rules="all" class="table table-hover table-bordered table-striped" border="1" id="gvProductdetails" name="gvProductdetails" style="border-collapse:collapse;">
+                                    <tbody>
+                                        <tr>
+                                            <th>Sr. No</th>
+                                            <th>Sheet Code</th>
+                                           
+                                            <th>Edit</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                        @{int j = 0; }
+                                        @foreach (System.Data.DataRow dr1 in dt1.Rows)
+                                        {
+                                            j = j + 1;
+                                            using (Html.BeginForm())
+                                            {
+
+                                            }
+                                            <tr>
+                                                <td>@j</td>
+                                                <td>@dr1["SHEET_CODE"].ToString()</td>
+                                                <td>
+                                                    @using (Html.BeginForm("productedit", "Product", FormMethod.Post, new { id = "submitT1+" + dr1["DTLS_PRODUCT_KEY"].ToString() + "" }))
+                                                    {
+
+                                                        <input type="hidden" name="editid1" value="@dr1["DTLS_PRODUCT_KEY"].ToString()" />
+
+                                                        <a id="submitT1+@dr1["DTLS_PRODUCT_KEY"].ToString()" href="#" onclick="postmethodusingjs(this.id)" class="list-icons-item"><i class="icon-menu9"></i></a>
+
+                                                    }
+                                                </td>
+
+                                                <td>
+                                                    @using (Html.BeginForm("productdelete", "Product", FormMethod.Post, new { id = "submitD1+" + dr1["DTLS_PRODUCT_KEY"].ToString() + "" }))
+                                                    {
+
+                                                        <input type="hidden" name="editid" value="@dr1["DTLS_PRODUCT_KEY"].ToString()" />
+
+                                                        <a id="submitD1+@dr1["DTLS_PRODUCT_KEY"].ToString()" href="#" onclick="postmethodusingjs(this.id)" class="list-icons-item"><i class="icon-trash"></i></a>
+
+                                                    }
+                                                </td>
+
+                                            </tr>
+
+
+
+
+                                        }
+
+                                    </tbody>
+                                </table>
+
+
+
+
+
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <input type="submit" value="Submit" class="mb-xs mt-xs btn btn-success" ToolTip="Submit" onclick="btn_DTLS_Product_Save_Click()" />
+                      
+
+                    </div>
+                </div>
+            </div>
+        </div>
+                                            }
+    </div>
+</div>
+
+
+@if (ViewBag.JavaScriptFunction != null)
+{
+
+    <script type="text/javascript">
+                    @Html.Raw(ViewBag.JavaScriptFunction);
+    </script>
+}
+
+@if (TempData["JavaScriptFunction"] != null)
+{
+
+    <script type="text/javascript">
+                    @Html.Raw(TempData["JavaScriptFunction"]);
+    </script>
+}
+
+<script>
+
+
+    function postmethodusingjs(id) {
+      
+        document.forms[id].submit();
+        return false;
+    }
+    function btn_Add_Click() {
+
+        //    alert('ok');
+        document.forms["submitaddform"].submit();
+        return false;
+    }
+
+    function btn_DTLS_Product_Save_Click() {
+
+        //    alert('ok');
+        document.forms["submitdtlsproduct"].submit();
+        return false;
+    }
+
+</script>
+
+<script>
+   
+
+    $(document).ready(function () {
+
+        $('.form-input-styled').uniform({
+            fileButtonClass: 'action btn bg-pink-400'
+        });
+
+        setDatatable("gvProductdetails");
+
+
+        setDatatable("gvMastBenefits");
+
+
+        $("#fu_head_Product_img").on("change", function (evt) {
+            var tgt = evt.target || window.event.srcElement, files = tgt.files;
+            if (files.length > 0) {
+                if (files[0].size > 20097134) {
+                    $(this).val("");
+                    $(this).next(".filename").text("No file selected");
+                    $('#produc_head_img').attr("src", "~/assets/images/no_image.jpg");
+                    $(this).focus();
+                    openErrorPopup("Please maintain allowed document size (20MB maximum).");
+                }
+                else {
+                    readURL(this, $('#head_product_img'));
+                }
+            }
+            else {
+                $('#head_product_img').attr("src", "~/assets/images/no_image.jpg");
+            }
+        });
+
+
+        $("#fu_Product_img").on("change", function (evt) {
+            var tgt = evt.target || window.event.srcElement, files = tgt.files;
+            if (files.length > 0) {
+                if (files[0].size > 20097134) {
+                    $(this).val("");
+                    $(this).next(".filename").text("No file selected");
+                    $('#product_img').attr("src", "~/assets/images/no_image.jpg");
+                    $(this).focus();
+                    openErrorPopup("Please maintain allowed document size (20MB maximum).");
+                }
+                else {
+                    readURL(this, $('#product_img'));
+                }
+            }
+            else {
+                $('#product_img').attr("src", "~/assets/images/no_image.jpg");
+            }
+        });
+
+
+
+        $("#fu_Product_img_2").on("change", function (evt) {
+            var tgt = evt.target || window.event.srcElement, files = tgt.files;
+            if (files.length > 0) {
+                if (files[0].size > 20097134) {
+                    $(this).val("");
+                    $(this).next(".filename").text("No file selected");
+                    $('#product_img_2').attr("src", "~/assets/images/no_image.jpg");
+                    $(this).focus();
+                    openErrorPopup("Please maintain allowed document size (20MB maximum).");
+                }
+                else {
+                    readURL(this, $('#product_img_2'));
+                }
+            }
+            else {
+                $('#product_img_2').attr("src", "~/assets/images/no_image.jpg");
+            }
+        });
+
+        $('#loadingMask').fadeOut();
+    });
+</script>

@@ -1,0 +1,180 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section FormName{
+
+    <i class="icon-home2 mr-2"></i>Blog Category
+
+}
+
+@section StyleCss{
+    <style type="text/css">
+        .filename {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .preview {
+            height: 230px;
+        }
+    </style>
+}
+
+<script type="text/javascript">
+
+    function OpenTab1(strMsg, error) {
+        $("#tab1").fadeIn();
+        $("#tab3").hide();
+        $("#tab2").hide();
+        setDatatable("gvBlogCat");
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+    function OpenTab2(strMsg, error) {
+        $("#tab1").hide();
+        $("#tab3").hide();
+        $("#tab2").fadeIn();
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+    function OpenTab3(strMsg, error) {
+        $("#tab1").hide();
+        $("#tab3").fadeIn();
+        $("#tab2").hide();
+
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+    $(document).ready(function () {
+        $('.form-input-styled').uniform({
+            fileButtonClass: 'action btn bg-pink-400'
+        });
+
+        $("#btn_Save").click(function () {
+            if ($("#txt_BLOG_CAT_DESC").val().trim() == "") {
+                $("#txt_BLOG_CAT_DESC").focus();
+                alert("Blog category can't left blank");
+                return false;
+            }
+        });
+
+        $('#loadingMask').fadeOut();
+    });
+</script>
+
+
+<div id="tab1" class="card">
+    <div class="card-body">
+        <div class="col-md-12">
+            <fieldset>
+                <legend class="font-weight-semibold">Blog Tag Entry</legend>
+                <div class="row">
+                    <div class="col-md-12">
+                        @using (Html.BeginForm("btn_Head_Save_Click", "BlogCategory", FormMethod.Post, new { id = "submitform", enctype = "multipart/form-data" }))
+                        {
+                            <div class="row">
+                                <input type="hidden" name="hf_MAST_BLOG_CATEGORY_KEY" id="hf_MAST_BLOG_CATEGORY_KEY" value="@ViewBag.hf_MAST_BLOG_CATEGORY_KEY" />
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>
+                                            Blog Category
+                                        </label>
+                                        <input type="text" id="txt_BLOG_CAT_DESC" name="txt_BLOG_CAT_DESC" value="@ViewBag.txt_BLOG_CAT_DESC" class="form-control daterange-single">
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label>
+                                            &nbsp;
+                                        </label>
+                                        <input type="submit" id="btn_Save" value="Add +" class="btn btn-primary form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card-body">
+                                    <table cellspacing="0" rules="all" class="table table-bordered table-sm table-hover" border="1" id="gvBlogCat" style="border-collapse:collapse;">
+                                        <tbody>
+                                            <tr>
+                                                <th>Blog Category</th>
+                                                <th>Edit</th>
+                                                <th>Delete</th>
+
+                                            </tr>
+                                            @foreach (System.Data.DataRow dr in Model)
+                                            {
+                                                <tr>
+                                                    <td>@dr["BLOG_CAT_DESC"].ToString()</td>
+                                                    <td>
+                                                        @using (Html.BeginForm("edit", "BlogCategory", FormMethod.Post, new { id = "submitTE+" + dr["MAST_BLOG_CATEGORY_KEY"].ToString() + "" }))
+                                                        {
+                                                            <input type="hidden" name="editiT" value="@dr["MAST_BLOG_CATEGORY_KEY"].ToString()" />
+                                                            <a id="submitTE+@dr["MAST_BLOG_CATEGORY_KEY"].ToString()" href="#" onclick="postmethodusingjs(this.id)" class="list-icons-item"><i class="icon-menu9"></i></a>
+
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @using (Html.BeginForm("delete", "BlogCategory", FormMethod.Post, new { id = "submitTD+" + dr["MAST_BLOG_CATEGORY_KEY"].ToString() + "" }))
+                                                        {
+                                                            <input type="hidden" name="editiT" value="@dr["MAST_BLOG_CATEGORY_KEY"].ToString()" />
+                                                            <a id="submitTD+@dr["MAST_BLOG_CATEGORY_KEY"].ToString()" href="#" onclick="postmethodusingjs(this.id)" class="list-icons-item"><i class="icon-trash"></i></a>
+
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div>
+
+@if (TempData["JavaScriptMsg"] != null)
+{
+
+    <script type="text/javascript">
+                    @Html.Raw(TempData["JavaScriptMsg"]);
+    </script>
+}
+
+<script type="text/javascript">
+
+    function postmethodusingjs(id) {
+        /*alert('ok');*/
+        document.forms[id].submit();
+        return false;
+    }
+
+    function postmethodusingheadsavejs() {
+        document.forms["submitform"].submit();
+
+        return false;
+    }
+</script>

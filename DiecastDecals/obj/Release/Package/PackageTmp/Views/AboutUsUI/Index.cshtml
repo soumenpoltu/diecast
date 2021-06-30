@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section title{
+
+    Diecast Decals - No 1. Decals In Here
+}
+
+@section script{
+    <script src="~/Content/main-assets/js/vendor/jquery-1.12.4.min.js"></script>
+}
+
+<!-- Start slider area -->
+<div class="slider-area">
+    <div>
+        @*<img src="~/Content/main-assets/img/about-us.jpg" style="width:100%;" alt="" title="" />*@
+        <img src="@ViewBag.ABOUT_US_IMAGE" style="width:100%;" alt="" title="" />
+
+    </div>
+
+</div>
+<!-- End slider area -->
+<!--About section-->
+<div class="container pt-4 about-cont">
+    <div class="row">
+        <div class="col-md-2 tab-lap-d-none"></div>
+        <div class="col-md-12 col-lg-4 mx-auto ">
+            <div class="card about-card">
+                <div>
+                    <h1>About Us</h1>
+                    <p>
+                        @*Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi,
+                            nesciunt numquam culpa itaque fuga eos perferendis doloremque a illo corporis quasi ad sunt? Quasi saepe magni, doloremque eveniet fugiat,
+                            rerum quaerat corporis culpa sequi deserunt veritatis? Alias, a ducimus impedit nisi id natus, perferendis dolor, architecto delectus sed in quae?
+                            Veniam a veritatis recusandae illum dolorem esse, error at eveniet natus fugiat molestiae atque repudiandae nihil? Inventore nesciunt nostrum alias.*@
+
+                        @Html.Raw(ViewBag.ABOUT_US_DESC)
+                    </p>
+                    <div class="logo1">
+                        <a href="index.html"><img src="@ViewBag.HEADER_LOGO" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2 col-4 counterpoint"><h2>800+</h2><p>Decals Library</p></div>
+        <div class="col-md-2 col-4  counterpoint"><h2>30+</h2><p>Library Of Decals</p></div>
+        <div class="col-md-2 col-4 counterpoint"><h2>50+</h2><p>Satisfied Buyer</p></div>
+    </div>
+
+</div>
+
+<!-- End About section-->
+<!-- usp -->
+<div class="container">
+    <div class="row usppotn">
+        <div class=" col-md-2 mx-md-auto "><img src="@ViewBag.ICON_IMG_1" width="110" height="110" class="img-fluid" /><p>@ViewBag.ICON_DESC_1</p></div>
+        <div class=" col-md-2 mx-md-auto"><img src="@ViewBag.ICON_IMG_2" width="110" height="110" class="img-fluid" /><p>@ViewBag.ICON_DESC_2</p></div>
+        <div class=" col-md-2  mx-md-auto"><img src="@ViewBag.ICON_IMG_3" width="110" height="110" class="img-fluid" /><p>@ViewBag.ICON_DESC_3</p></div>
+        <div class=" col-md-2 mx-md-auto"><img src="@ViewBag.ICON_IMG_4" width="110" height="110" class="img-fluid" /><p>@ViewBag.ICON_DESC_4</p></div>
+        <div class=" col-md-2 mx-md-auto"><img src="@ViewBag.ICON_IMG_5" width="110" height="110" class="img-fluid" /><p>@ViewBag.ICON_DESC_5</p></div>
+    </div>
+
+</div>
+<!-- usp -->
+<!--testimonial-->
+
+
+<section class="testimonials p-50">
+    <div class="mb-5 text-center">
+        <h3 class="text-center" style="font-weight: 700;">
+            Testimonials
+        </h3>
+        <h6>During our work, we have accumulated <br>Hundreds of positive reviews</h6>
+    </div>
+    <div class="container">
+        <div class="testimonial owl-carousel">
+            @Html.Raw(ViewBag.DIV_TESTIMONIALS)
+
+            @*<div class="single_testimonial item">
+                    <div class="row">
+                        <div class="customer-img col-lg-3 m-auto">
+                            <img src="~/Content/main-assets/img/about/3.jpg" alt="">
+                        </div>
+                        <div class="col-lg-9 comments">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci non blanditiis modi tempore ipsa praesentium ex veniam a, rerum odit?</p>
+                            <div class="star ">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div class="name">Jessica Moorie,Customer</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="single_testimonial item">
+                    <div class="row">
+                        <div class="customer-img col-lg-3 m-auto">
+                            <img src="~/Content/main-assets/img/about/3.jpg" alt="">
+                        </div>
+                        <div class="col-lg-9 comments">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci non blanditiis modi tempore ipsa praesentium ex veniam a, rerum odit?</p>
+                            <div class="star ">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div class="name">Jessica Moorie,Customer</div>
+                        </div>
+                    </div>
+
+
+                </div>*@
+
+
+        </div>
+
+
+    </div>
+</section>
+
+<!--testimonial-->

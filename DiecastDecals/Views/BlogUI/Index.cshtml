@@ -1,0 +1,251 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section title{
+    @ViewBag.title
+}
+
+@section Meta{
+
+    <meta name="description" content="@ViewBag.MetaDescription">
+    <meta name="keywords" content="@ViewBag.MetaKeywords">
+}
+
+<script>
+    function callingfromjs() {
+        document.getElementById('divbloggrid').style.display = "none";
+        document.getElementById('divbloginner').style.display = "block";
+    }
+
+</script>
+
+<!-- Start slider area -->
+<div class="slider-area">
+    <!-- <div >
+        <img  src="~/Content/main-assets/img/banner-dcd-4.jpg" style="width:100%;"  alt="" title=""/>
+
+    </div> -->
+
+</div>
+<!-- End slider area -->
+
+
+<section class="pt-5" style="border-top: 1px solid #ebebeb;">
+</section>
+<!--blog start-->
+<section class="blog_section m-top">
+    <div class="container">
+        <div class="row bllg" name="divbloggrid" id="divbloggrid">
+            <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+                <div class="bl-lefo">
+
+                    <!-- Search Widget -->
+                    @using (Html.BeginForm("btn_Searching_click", "BlogUI", FormMethod.Post, new { id = "submitform1", enctype = "multipart/form-data" }))
+                    {
+                        <div class="card my-4 searchmobile">
+
+                            <h5>Search</h5>
+                            <div class="card-body">
+                                <div class="input-group">
+                                    <input type="text" name="txt_Search1" id="search" class="form-control" placeholder="Search for...">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sa text-white" id="btn_Searching" name="btn_Searching" type="submit">Go!</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <!-- Search Widget -->
+
+                    <div id="maincontent_blogRender">
+
+                        @Html.Raw(ViewBag.blogRender)
+                        @*<div class="und-blle">
+                               <h2>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</h2>
+                               <p>Jun 22, 2020</p>
+                               <div class="undIm"><img src="~/Content/main-assets/img/banner-dcd-2.jpg" class="img-fluid" alt=""></div>
+                               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque eaque id, eveniet maxime labore quasi fuga tenetur provident rerum aperiam, officia repudiandae, qui ea a sunt obcaecati? Voluptas, odit dolore.</p>
+                               <a href="#" class="rmm">Read More</a>
+                            </div>*@
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12 bogRight">
+                <!-- Search Widget -->
+                @using (Html.BeginForm("btn_Search_click", "BlogUI", FormMethod.Post, new { id = "submitform", enctype = "multipart/form-data" }))
+                {
+                    <div class="card my-4 searchdekstop">
+                        <h5>Search</h5>
+                        <div class="card-body">
+                            <div class="input-group">
+                                <input type="text" name="txt_Search" id="txt_Search" class="form-control" placeholder="Search for...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sa" type="submit" id="btn_Search" name="btn_Search_click" style="color: white;">Go!</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <!-- Search Widget -->
+                <!--Archive-->
+                <div class="card my-4">
+                    <h5>Archive</h5>
+                    <ul id="maincontent_ulArchive">
+                        @Html.Raw(ViewBag.ulArchive)
+                        @*<li><a href="#"><span class="fa fa-chevron-circle-right"></span> July 2020</a></li>
+                            <li><a href="#"><span class="fa fa-chevron-circle-right"></span> June 2020</a></li>
+                            <li><a href="#"><span class="fa fa-chevron-circle-right"></span> May 2020</a></li>*@
+                    </ul>
+                </div>
+                <!--Archive-->
+                <!--Recent Posts-->
+                <div class="card my-4">
+                    <h5>Recent Posts</h5>
+                    <ul id="maincontent_ulRecentPosts">
+                        @Html.Raw(ViewBag.ulRecentPosts)
+                        @*<li><a href="#"><span class="fa fa-chevron-circle-right"></span> Lorem ipsum dolor sit amet consectetur. </a></li>
+                            <li><a href="#"><span class="fa fa-chevron-circle-right"></span> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia. </a></li>
+                            <li><a href="#"><span class="fa fa-chevron-circle-right"></span> Lorem ipsum dolor sit.</a></li>
+                            <li><a href="#"><span class="fa fa-chevron-circle-right"></span> Lorem ipsum dolor sit amet consectetur.</a></li>
+                            <li><a href="#"><span class="fa fa-chevron-circle-right"></span> Lorem ipsum dolor sit amet consectetur adipisicing.</a></li>*@
+                    </ul>
+                </div>
+                <!--Recent Posts-->
+                <!--Categories-->
+                <div class="card my-4">
+                    <h5>Categories</h5>
+                    <ul id="maincontent_categoryul">
+                        @Html.Raw(ViewBag.categoryul)
+                        @*<li><a href="#"><span class="fa fa-chevron-circle-right"></span> Lorem ipsum dolor</a></li>
+                            <li><a href="#"><span class="fa fa-chevron-circle-right"></span> Lorem ipsum dolor</a></li>
+                            <li><a href="#"><span class="fa fa-chevron-circle-right"></span> Lorem ipsum dolor</a></li>
+                            <li><a href="#"><span class="fa fa-chevron-circle-right"></span> Lorem ipsum dolor</a></li>*@
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 inner-bl" id="divbloginner">
+                @Html.Raw(TempData["bloginnerrender"])
+                @*<h1>A Few Reasons Why Blockchain is Important for Our Future. </h1>
+                        <p>02/07/2020</p>
+                        <div class="undIm"><img src="~/Content/main-assets/img/banner-dcd-2.jpg" class="img-fluid" alt=""></div>
+                        <div class="blog-content">
+                            <p class="MsoNormal">
+                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse rerum deleniti officiis.
+                            </p>
+                            <p>Lorem ipsum dolor sit amet consectetur.</p>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, nisi nulla? Odio delectus omnis itaque?</p>
+                            <p>Lorem ipsum dolor sit amet.</p>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos quos a beatae obcaecati assumenda placeat quod fugiat. Fugiat ab quas ducimus? Recusandae placeat adipisci dolor.</p>
+                        </div>
+
+                        <div id="shareIcons"></div>
+                        <!-- <div class="socl">
+                        <a href="#"><img src="images/fb.png" alt=""></a>
+                        <a href="#"><img src="images/twitt.png" alt=""></a>
+                        <a href="#"><img src="images/pinterest.png" alt=""></a>
+                        <a href="#"><img src="images/plus.png" alt=""></a>
+                    </div> -->
+                        <div class="blgBk" href="/blog">Back</div>*@
+            </div>
+        </div>
+    </div>
+</section>
+
+@if (TempData["jsf"] != null)
+{
+
+    <script type="text/javascript">
+        @Html.Raw(TempData["jsf"]);
+    </script>
+}
+
+@section script{
+    <script src="~/Content/main-assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $("#shareIcons").floatingSocialShare({
+            buttons: [
+                "facebook", "linkedin", "pinterest", "reddit",
+                "telegram", "tumblr", "twitter", "viber", "vk", "whatsapp"
+            ],
+            counter: false,
+            text: "share with: ",
+            url: "https://github.com/ozdemirburak/jquery-floating-social-share"
+        });</script>
+
+    <script>
+        $('#new-mega-menu-id').on("click", function () {
+            $(".new-mega-menu-use-cases").toggleClass("mega-menu-ul-active");
+        });
+        $("#new-mega-menu-id").mouseover(
+            function () {
+                $(".new-mega-menu-use-cases").addClass("mega-menu-ul-active");
+                $(".product-line-dropdown").removeClass("product-line-dropdown-menu-active");
+            }
+        );
+        $(".new-mega-menu-category-name").hover(
+            function () {
+                $(this).addClass("is-active");
+            },
+            function () {
+                $(this).removeClass("is-active");
+            }
+        );
+
+        $(document).mouseup(function (e) {
+            var megamenu = $("#new-mega-menu-dropdown");
+
+            if (!megamenu.is(e.target) && megamenu.has(e.target).length === 0) {
+
+                $(".new-mega-menu-use-cases").removeClass("mega-menu-ul-active");
+
+            }
+        });
+        $('#health-multi-drop').on("click", function () {
+            $("#coronavirus-id-m").toggleClass("coronavirus-show-m");
+        });
+        $('.new-mega-menu-close').on("click", function () {
+            $(".new-mega-menu-use-cases").removeClass("mega-menu-ul-active");
+        });
+
+        $(".product-line-dropdown").mouseover(
+            function () {
+                $(".new-mega-menu-use-cases").removeClass("mega-menu-ul-active");
+                $(".product-line-dropdown").addClass("product-line-dropdown-menu-active");
+            }
+        );
+        $('.product-line-menu-close').on("click", function () {
+            $(".new-mega-menu-use-cases").removeClass("mega-menu-ul-active");
+            $(".product-line-dropdown").removeClass("product-line-dropdown-menu-active");
+        });
+        $('#product-line-id-a').on("click", function () {
+            $('.product-line-dropdown').toggleClass("product-line-dropdown-menu-active");
+        });
+        $(document).mouseup(function (e) {
+            var megamenu = $("#product-line-dropdown");
+
+            if (!megamenu.is(e.target) && megamenu.has(e.target).length === 0) {
+
+                $(".product-line-dropdown").removeClass("product-line-dropdown-menu-active");
+
+            }
+        });
+                                    //$('.blgBk').on("click", function () {
+                                    //    $('.inner-bl').css('display', 'none');
+                                    //    $('.bllg').css('display', 'flex');
+                                    //});
+                                    //$('.rmm').on('click', function () {
+                                    //    $('.inner-bl').css('display', 'block');
+                                    //    $('.bllg').css('display', 'none');
+                                    //});
+    </script>
+
+}

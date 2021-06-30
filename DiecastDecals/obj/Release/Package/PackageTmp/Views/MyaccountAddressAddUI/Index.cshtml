@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section title{
+    Diecast Decals - No 1. Decals In Here
+}
+
+@section script{
+    <script src="~/Content/main-assets/js/vendor/jquery-1.12.4.min.js"></script>
+}
+
+<div class="container-fluid margin-top-60 padding-top-60 padding-bottom-60">
+
+    <div class="col-lg-8 col-md-12 offset-lg-2 offset-md-0">
+        <div class="row">
+            <div class="col-lg-12">
+                <h4 class="cart-title">Address</h4>
+                <div class="row">
+                    <div class="col-md-3 col-sm-4">
+                        <ul class="myacc-nav">
+                            <li><a href="~/DashboardUI/Index">Dashboard</a></li>
+                            <li class="active"><a href="~/MyAccountAddressUI/Index">Address</a></li>
+                            <li><a href="~/OrderHistoryUI/Index">Order History</a></li>
+                            <li><a href="~/Invoice/InvoiceHistroy">Paid Invoices</a></li>
+                            <li><a href="~/TrackOrderUI/Index">Track Order</a></li>
+                            <li><a href="~/LogoutUI/Index">Logout</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-9 col-sm-8">
+                        <div class="account-rightarea">
+
+                            <div class="billing-info">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="clearfix">
+                                            <h6 class="ct-design">Add/Edit address</h6>
+                                        </div>
+                                        <div class="clearfix">
+                                            @using (Html.BeginForm("SaveAddr", "MyaccountAddressAddUI", FormMethod.Post))
+                                            {
+                                                <input type="hidden" name="hf_address_key" value="@ViewBag.CUSTOMER_ADDRESS_KEY" />
+                                                <div class="new-customers">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <input type="text" name="txt_firstname" class="custom-form" value="@ViewBag.CUSTOMER_FNAME" placeholder="First Name">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="text" name="txt_lastname" class="custom-form" value="@ViewBag.CUSTOMER_LNAME" placeholder="Last Name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <input type="text" name="txt_address" class="custom-form" value="@ViewBag.CUSTOMER_ADDRESS" placeholder="Address">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <input type="text" name="txt_city" class="custom-form" value="@ViewBag.CUSTOMER_CITY" placeholder="City">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="text" name="txt_country" class="custom-form" value="@ViewBag.CUSTOMER_COUNTRY" placeholder="Country">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <input type="text" name="txt_phone" class="custom-form" value="@ViewBag.CUSTOMER_PHONE" placeholder="Phone Number">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="text" name="txt_pin" class="custom-form" value="@ViewBag.CUSTOMER_PINCODE" placeholder="PIN Code">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <input class="custom-form" type="text" placeholder="Email" value="@ViewBag.CUSTOMER_EMAIL" name="txt_email">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <button class="btn btn-default checkPageBtn">Save</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

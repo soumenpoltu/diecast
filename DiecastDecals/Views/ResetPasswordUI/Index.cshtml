@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section title{
+    Diecast Decals - No 1. Decals In Here
+}
+
+@section script{
+    <script src="~/Content/main-assets/js/vendor/jquery-1.12.4.min.js"></script>
+}
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+
+
+    function popup() {
+        swal({
+            title: "Successful!",
+            text: "Password reset successfully !! Please Login.",
+            icon: "success",
+            button: "Ok",
+        });
+    }
+    function popuperror() {
+        swal("Oops", "Please provide proper Email Address !", "error")
+    }
+    function popupservererror() {
+        swal({
+            title: "Server Error!",
+            text: "Server error ! Try again later.",
+            icon: "error",
+            button: "Ok",
+        });
+
+    }
+
+</script>
+<div class="container-fluid margin-top-60 padding-top-60 padding-bottom-60">
+    <!-- LOGIN-AREA START -->
+    <div class="lognin-area">
+        <div class="container">
+            <div class="row">
+                <!-- Registered-Customers Start -->
+                <div class="col-lg-6 offset-lg-3 col-md-6 offset-md-3 ">
+                    @using (Html.BeginForm("btn_submit_Click", "ResetPasswordUI", FormMethod.Post, new { id = "submitloginform", enctype = "multipart/form-data" }))
+                    {
+                        <input type="hidden" id="hf_CUSTOMER_EMAIL" name="hf_CUSTOMER_EMAIL" value="@ViewBag.hf_CUSTOMER_EMAIL" />
+                        <div class="registered-customers">
+                            <h3>Recover your Password</h3>
+                            <div class="registered">
+                                <p>Enter new password</p>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group conf-Password-group divpasswraper">
+                                            <div class="palceholder">
+                                                <label for="Password">New Password</label>
+                                                <span class="star1">*</span>
+                                            </div>
+                                            <input type="password" class="form-control password password-a" id="txt_pass" name="txt_pass" value="@ViewBag.txt_pass" required>
+                                            <i class="fa fa-eye showpass showpass-a"><input type="checkbox"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <p>Confirm password</p>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group conf-Password-group divpasswraper">
+                                            <div class="palceholder">
+                                                <label for="Password">Confirm Password</label>
+                                                <span class="star1">*</span>
+                                            </div>
+                                            <input type="password" class="form-control password password-b" id="txt_cPass" name="txt_cPass" value="@ViewBag.txt_cPass" required>
+                                            <i class="fa fa-eye showpass showpass-b"><input type="checkbox"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <button class="btn btnContact" type="submit">Submit</button>
+                                <a href="/LoginUI/Index">Back to Login</a>
+                            </div>
+
+                        </div>
+
+                    }
+
+                </div>
+                <!-- Registered-Customers End -->
+            </div>
+        </div>
+    </div>
+    <!-- LOGIN-AREA END -->
+</div>
+
+<script type="text/javascript">
+
+    function postmethodusingjs(id) {
+        document.forms[id].submit();
+        return false;
+    }
+
+    function postmethodusingheadsavejs() {
+        document.forms["submitform"].submit();
+        document.forms["submitloginform"].submit();
+        return false;
+    }
+</script>
+@if (TempData["JavaScriptMsg"] != null)
+{
+
+    <script type="text/javascript">
+                    @Html.Raw(TempData["JavaScriptMsg"]);
+    </script>
+}

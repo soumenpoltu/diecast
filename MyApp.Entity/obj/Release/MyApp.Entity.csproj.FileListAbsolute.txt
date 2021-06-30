@@ -1,0 +1,6 @@
+F:\yourflow\Dicas decast\DiecastDecals_07_05_2021\DiecastDecals\MyApp.Entity\bin\Release\MyApp.Entity.dll
+F:\yourflow\Dicas decast\DiecastDecals_07_05_2021\DiecastDecals\MyApp.Entity\bin\Release\MyApp.Entity.pdb
+F:\yourflow\Dicas decast\DiecastDecals_07_05_2021\DiecastDecals\MyApp.Entity\obj\Release\MyApp.Entity.csprojAssemblyReference.cache
+F:\yourflow\Dicas decast\DiecastDecals_07_05_2021\DiecastDecals\MyApp.Entity\obj\Release\MyApp.Entity.csproj.CoreCompileInputs.cache
+F:\yourflow\Dicas decast\DiecastDecals_07_05_2021\DiecastDecals\MyApp.Entity\obj\Release\MyApp.Entity.dll
+F:\yourflow\Dicas decast\DiecastDecals_07_05_2021\DiecastDecals\MyApp.Entity\obj\Release\MyApp.Entity.pdb

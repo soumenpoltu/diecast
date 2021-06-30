@@ -1,0 +1,134 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section title{
+    Product
+}
+
+
+<section class="inner-banner-part">
+    <img class="img1" src="~/Content/main-assets/images/inner-ban.png" alt="">
+    <img class="img2" src="~/Content/main-assets/images/banner-shape.png" alt="">
+    <div class="ban-tx">
+        <h2>Out Products</h2>
+        <ul>
+            <li><a href="~/">Home</a>/</li>
+            <li>Out Products</li>
+        </ul>
+    </div>
+</section>
+
+<section class="Products-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div id="content">
+                    <div id="featured_img">
+                        <img id="img" src="@ViewBag.PRODUCT_IMAGE">
+                    </div>
+                    <div id="thumb_img" class="cf">
+                        @*<img class="active" src="~/Content/main-assets/images/pro-img1.png" onclick="changeimg('~/Content/main-assets/images/pro-img1.png',this);">
+                            <img src="~/Content/main-assets/images/home-img.png" onclick="changeimg('~/Content/main-assets/images/home-img.png',this);">
+                            <img src="~/Content/main-assets/images/ban-img.png" onclick="changeimg('~/Content/main-assets/images/ban-img.png',this);">*@
+
+                        <img class="active" src="@ViewBag.PRODUCT_IMAGE" onclick="changeimg('@ViewBag.PRODUCT_IMAGE',this);">
+                        <img src="@ViewBag.PRODUCT_IMAGE_1" onclick="changeimg('@ViewBag.PRODUCT_IMAGE_1',this);">
+                        <img src="@ViewBag.PRODUCT_IMAGE_2" onclick="changeimg('@ViewBag.PRODUCT_IMAGE_2',this);">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <h5>Limited Time offer!</h5>
+                <h4><del>$3.00 </del> <span id="pro_price">$ @ViewBag.Price</span></h4>
+                <div>
+                    @Html.Raw(ViewBag.PRODUCT_DESC)
+                    @*<h2>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam Lorem ipsum dolor sit amet,
+                        consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam Lorem ipsum dolor sit amet,
+                        consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam </p>*@
+                </div>
+                @using (Html.BeginForm("addtocart", "ProductUI", FormMethod.Post))
+                {
+            <div class="qty-sec">
+                <input type="hidden" name="head_product_key" id="head_product_key" value="@ViewBag.head_product" />
+                <input type="hidden" name="txt_price" id="txt_price" value="@ViewBag.Price" />
+                <label for="">Quantity</label>
+                <input type="number" name="txt_quantity" onkeyup="setpriceofproduct();" id="txt_quantity" min="1" value="1">
+
+            </div>
+                    @*<a href="#" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to cart</a>*@
+                    <button type="submit" class="btn btn-danger cart-btn"><i class="fas fa-shopping-cart"></i>Add to cart</button>
+                }
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="body-cont2">
+    <img class="img1" src="~/Content/main-assets/images/home-img2.png" alt="">
+    
+    @*<iframe width="100%" height="100%" src="@ViewBag.LARGE_VIDEO_LINK" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>*@
+    <div class="decp">
+        <h2>If Buying Diecast Cars Are Your Passion, Our Passion Is to Protect Them </h2>
+        <p>
+            Watch the video to understand how to use and reuse our protectors to protect your investments in diecast toy cars.
+        </p>
+        <a href="#"><img src="~/Content/main-assets/images/play-icon.svg" alt=""></a>
+        <h4>Play Video</h4>
+    </div>
+</section>
+
+<script>
+    function changeimg(url, e) {
+        document.getElementById("img").src = url;
+        let nodes = document.getElementById("thumb_img");
+        let img_child = nodes.children;
+        for (i = 0; i < img_child.length; i++) {
+            img_child[i].classList.remove('active')
+        }
+        e.classList.add('active');
+
+    }
+
+   
+
+    function setpriceofproduct() {
+        
+        $.ajax({
+            url: '/ProductUI/filter',
+            data: "{QTY: '" + document.getElementById("txt_quantity").value + "'}",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data.d != 0) {
+
+                    document.getElementById("pro_price").innerHTML = "$ " + data.PRODUCT_PRICE;
+                    document.getElementById("txt_price").value = data.PRODUCT_PRICE;
+
+                }
+                else {
+                    alert("Sorry!!! some error occured");
+                }
+            },
+            error: function (response) {
+                console.log(response.responseText);
+            },
+
+            failure: function (response) {
+                console.log(response.responseText);
+            }
+
+        });
+
+
+    }
+
+</script>
+
+

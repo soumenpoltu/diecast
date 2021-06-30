@@ -1,0 +1,238 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@section FormName{
+
+    <i class="icon-home2 mr-2"></i>Product Category
+
+}
+
+@section StyleCss{
+    <style type="text/css">
+        .filename {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .preview {
+            height: 230px;
+        }
+    </style>
+}
+
+<script>
+
+    function OpenTab2(strMsg, error) {
+        $("#tab1").hide();
+        $("#tab3").hide();
+        $("#tab2").fadeIn();
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+
+    function OpenTab1(strMsg, error) {
+        $("#tab1").fadeIn();
+        $("#tab3").hide();
+        $("#tab2").hide();
+
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+</script>
+
+
+<div class="content" style="min-height: 10px;">
+    <ul id="fbAdd" class="fab-menu fab-menu-fixed fab-menu-bottom-right">
+        <li>
+            @using (Html.BeginForm("Add", "ProductCategory", FormMethod.Post, new { id = "submitaddform" }))
+            {
+
+
+                <a id="A2" href="#" class="fab-menu-btn btn bg-green btn-float rounded-round btn-icon" onclick="btn_Add_Click();">
+                    <i class="fab-icon-open icon-plus3"></i><i class="fab-icon-close icon-cross2"></i>
+                </a>
+            }
+        </li>
+    </ul>
+    <div id="tab1" class="card">
+        <div class="card-body">
+
+            <table cellspacing="0" rules="all" class="table table-hover table-bordered table-striped" border="1" id="gvpricing" name="gvpricing" style="border-collapse:collapse;">
+                <tbody>
+                    <tr>
+                        <th>Sr. No</th>
+                        <th>Category Name</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    @{int i = 0; }
+
+                    @foreach (System.Data.DataRow dr in Model)
+                    {
+                        i = i + 1;
+                        <tr>
+                            <td>@i</td>
+                            <td>@dr["CATEGORY_NAME"].ToString()</td>
+
+                            <td>
+                                @using (Html.BeginForm("edit", "ProductCategory", FormMethod.Post, new { id = "submitE+" + dr["MAST_CATEGORY_KEY"].ToString() + "" }))
+                                {
+
+                                    <input type="hidden" name="editid" value="@dr["MAST_CATEGORY_KEY"].ToString()" />
+
+                                    <a id="submitE+@dr["MAST_CATEGORY_KEY"].ToString()" href="#" onclick="postmethodusingjs(this.id)" class="list-icons-item"><i class="icon-menu9"></i></a>
+
+                                }
+                            </td>
+
+                            <td>
+                                @using (Html.BeginForm("delete", "ProductCategory", FormMethod.Post, new { id = "submitD+" + dr["MAST_CATEGORY_KEY"].ToString() + "" }))
+                                {
+
+                                    <input type="hidden" name="editid" value="@dr["MAST_CATEGORY_KEY"].ToString()" />
+
+                                    <a id="submitD+@dr["MAST_CATEGORY_KEY"].ToString()" href="#" onclick="postmethodusingjs(this.id)" class="list-icons-item"><i class="icon-trash"></i></a>
+
+                                }
+                            </td>
+
+                        </tr>
+                    }
+
+
+
+
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    <ul id="tabsmenu" class="tabsmenu" style="display: none">
+        <li class="active"><a id="atab1" href="#tab1">List</a></li>
+        <li><a id="atab2" href="#tab2">Add / Edit</a></li>
+        <li><a id="aPageName" href="#" style="margin: 0 5px 0 33%; border-radius: 6px;">&nbsp;</a></li>
+    </ul>
+    <div id="tab2" class="card" style="display: none">
+        @using (Html.BeginForm("btn_Head_Save_Click", "ProductCategory", FormMethod.Post))
+        {
+
+
+            <div>
+
+
+                <input type="hidden" id="hf_MAST_PRODUCT_CATG_KEY" name="hf_MAST_PRODUCT_CATG_KEY" value="@ViewBag.hf_MAST_PRODUCT_CATG_KEY" />
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <fieldset>
+                            <legend class="font-weight-semibold">Product Category Details</legend>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>
+                                                Category Name
+                                            </label>
+
+                                            <input type="text" class="form-control" id="txt_PRODUCT_CATG_NAME" name="txt_PRODUCT_CATG_NAME" value="@ViewBag.txt_PRODUCT_CATG_NAME" />
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+
+                            <input type="submit" class="mb-xs mt-xs btn btn-success" value="Submit" />
+
+                            <input type="submit" class="mb-xs mt-xs mr-xs btn btn-warning" value="Back" onclick="btn_Head_Save_Click" />
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+@if (ViewBag.JavaScriptFunction != null)
+{
+
+    <script type="text/javascript">
+                    @Html.Raw(ViewBag.JavaScriptFunction);
+    </script>
+}
+
+@if (TempData["JavaScriptFunction"] != null)
+{
+
+    <script type="text/javascript">
+                    @Html.Raw(TempData["JavaScriptFunction"]);
+    </script>
+}
+
+<script>
+
+
+    function postmethodusingjs(id) {
+        document.forms[id].submit();
+        return false;
+    }
+    function btn_Add_Click() {
+
+        //    alert('ok');
+        document.forms["submitaddform"].submit();
+        return false;
+    }
+
+</script>
+<script type="text/javascript">
+
+
+    function OpenTab3(strMsg, error) {
+        $("#tab1").hide();
+        $("#tab3").fadeIn();
+        $("#tab2").hide();
+
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+    $(document).ready(function () {
+        setDatatable("gvpricing");
+        $('.form-input-styled').uniform({
+            fileButtonClass: 'action btn bg-pink-400'
+        });
+
+
+        $('#loadingMask').fadeOut();
+    });
+</script>

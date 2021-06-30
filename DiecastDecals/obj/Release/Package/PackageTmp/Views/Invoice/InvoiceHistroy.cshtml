@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "InvoiceHistroy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section title{
+    Diecast Decals - No 1. Decals In Here
+}
+
+
+
+<div class="container-fluid margin-top-60 padding-top-60 padding-bottom-60">
+
+    <div class="col-lg-8 col-md-12 offset-lg-2 offset-md-0">
+        <div class="row">
+            <div class="col-lg-12">
+                <h4 class="cart-title">Invoices</h4>
+                <div class="row">
+                    <div class="col-md-3 col-sm-4">
+                        <ul class="myacc-nav">
+                            <li><a href="~/DashboardUI/Index">Dashboard</a></li>
+                            <li><a href="~/MyAccountAddressUI/Index">Address</a></li>
+                            <li><a href="~/OrderHistoryUI/Index">Order History</a></li>
+                            <li class="active"><a href="~/Invoice/InvoiceHistroy">Paid Invoices</a></li>
+                            <li><a href="~/TrackOrderUI/Index">Track Order</a></li>
+                            <li><a href="~/LogoutUI/Index">Logout</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-9 col-sm-8">
+                        <div class="account-rightarea">
+                            <div class="table-responsive table-borderouter">
+                                <table class="cart-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Invoice No.</th>
+                                            <th>Transaction ID</th>
+                                            <th>Date</th>
+
+                                            <th>Download</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (System.Data.DataRow dr in Model)
+                                        {
+
+                                            <tr>
+                                                <td>
+                                                    @dr["DTLS_INVOICE"]
+                                                </td>
+                                                <td>
+                                                    @dr["DTLS_TRANSACTION"]
+                                                </td>
+                                                <td>
+                                                    @dr["INV_DATE"]
+                                                </td>
+
+                                                <td><a href="~/Invoice/Index?invoice=@dr["DTLS_INVOICE"]" target="_blank" class="btn btn-success"><i class="fa fa-download" aria-hidden="true"></i> Download</a></td>
+                                            </tr>
+
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Start footer -->

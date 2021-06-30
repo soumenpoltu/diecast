@@ -1,0 +1,109 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section title{
+    Blog
+}
+
+<section class="inner-banner-part">
+    <img class="img1" src="~/Content/main-assets/images/inner-ban.png" alt="">
+    <img class="img2" src="~/Content/main-assets/images/banner-shape.png" alt="">
+    <div class="ban-tx">
+        <h2>Blog</h2>
+        <ul>
+            <li><a href="#">Home</a>/</li>
+            <li>Blog</li>
+        </ul>
+    </div>
+</section>
+
+<section class="Blog-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 decp">
+                <h2>Latest News</h2>
+
+                @Html.Raw(ViewBag.blogRender)
+
+                @*<div class="sec1">
+                    <img src="~/Content/main-assets/images/blog-img1.png" alt="">
+                    <div class="wrap">
+                        <h3><a href="#">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod </a></h3>
+                        <h4>__ Jessica Moore, Customer.  |   Posted on 09/01/2020</h4>
+                        <p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in </p>
+                        <a href="#" class="more-but">Read more</a>
+                    </div>
+                </div>
+                <div class="sec1">
+                    <img src="~/Content/main-assets/images/blog-img1.png" alt="">
+                    <h6>Latest News</h6>
+                    <div class="wrap">
+                        <h3><a href="#">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod </a></h3>
+                        <h4>__ Jessica Moore, Customer.  |   Posted on 09/01/2020</h4>
+                        <p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in </p>
+                        <a href="#" class="more-but">Read more</a>
+                    </div>
+                </div>*@
+            </div>
+            <div class="col-lg-4 side-bar">
+                @using (Html.BeginForm("btn_Search_click", "BlogUI", FormMethod.Post, new { id = "submitform", enctype = "multipart/form-data" }))
+                {
+                    <input type="text" name="txt_Search" id="txt_Search" placeholder="Blog Search....">
+                    <button type="submit"><img src="~/Content/main-assets/images/search.svg" alt="Submit" width="40" height="40"></button>
+                }
+                    <div class="sec1">
+                        <h5>Follow us on</h5>
+                        <ul class="social">
+                            <li><a href="@ViewBag.INSTAGRAM_LINK"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="@ViewBag.LARGE_VIDEO_LINK"><i class="fab fa-youtube"></i></a></li>
+                            <li><a href="@ViewBag.FACEBOOK_LINK"><i class="fab fa-facebook-f"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="sec1">
+                        <h5>Categories</h5>
+                        <ul class="Categories">
+                            @Html.Raw(ViewBag.categoryul)
+                            @*<li><a href="#"> Latest News</a></li>
+                    <li><a href="#">Special Offers</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Reviews</a></li>*@
+                        </ul>
+                    </div>
+                    <div class="sec1">
+                        <h5>Latest Posts</h5>
+                        <ul class="Posts">
+
+                            @Html.Raw(ViewBag.ulRecentPosts)
+
+                            @*<li>
+                        <a href="#">
+                            <img src='~/Content/main-assets/images/blog-img3.png' alt=''>
+                            <h4> Lorem ipsum dolor sit amet</h4>
+                            <h5>— January 4, 2921</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="~/Content/main-assets/images/blog-img3.png" alt="">
+                            <h4> Lorem ipsum dolor sit amet</h4>
+                            <h5>— January 4, 2921</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="~/Content/main-assets/images/blog-img3.png" alt="">
+                            <h4> Lorem ipsum dolor sit amet</h4>
+                            <h5>— January 4, 2921</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod </p>
+                        </a>
+                    </li>*@
+                        </ul>
+                    </div>
+                </div>
+        </div>
+    </div>
+</section>

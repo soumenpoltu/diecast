@@ -1,0 +1,254 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section FormName{
+
+    <i class="icon-home2 mr-2"></i>About Us Section
+
+}
+
+@section StyleCss{
+    <style type="text/css">
+        .filename {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .preview {
+            height: 230px;
+        }
+    </style>
+}
+
+
+<script>
+    $(document).ready(function () {
+        /*alert('ok');*/
+        $('#loadingMask').fadeOut();
+
+        $('.form-input-styled').uniform({
+            fileButtonClass: 'action btn bg-pink-400'
+        });
+
+        $("#txt_ABOUT_US_DESC").summernote({
+            height: 220,
+            codemirror: { "theme": "ambiance" }
+        });
+
+        $("#txt_ABOUT_US_DESC").on('summernote.blur', function () {
+            $("#txt_ABOUT_US_DESC").html($("#txt_ABOUT_US_DESC").summernote('code'));
+        });
+
+        $("#fu_About").on("change", function (evt) {
+            var tgt = evt.target || window.event.srcElement, files = tgt.files;
+            if (files.length > 0) {
+                if (files[0].size > 2097134) {
+                    $(this).val("");
+                    $(this).next(".filename").text("No file selected");
+                    $('#img_about').attr("src", "~/Content/admin-assets/images/no_image.jpg");
+                    $(this).focus();
+                    openErrorPopup("Please maintain allowed document size (2MB maximum).");
+                }
+                else {
+                    readURL(this, $('#img_about'));
+                }
+            }
+            else {
+                $('#img_about').attr("src", "~/Content/admin-assets/images/no_image.jpg");
+            }
+        });
+
+
+
+    });
+</script>
+
+
+<script type="text/javascript">
+
+    function OpenTab1(strMsg, error) {
+        $("#tab1").fadeIn();
+        $("#tab3").hide();
+        $("#tab2").hide();
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+    function OpenTab2(strMsg, error) {
+        $("#tab1").hide();
+        $("#tab3").hide();
+        $("#tab2").fadeIn();
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+    function OpenTab3(strMsg, error) {
+        $("#tab1").hide();
+        $("#tab3").fadeIn();
+        $("#tab2").hide();
+
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+</script>
+
+<div id="tab1" class="card">
+
+    @using (Html.BeginForm("btn_Head_Save_Click", "AboutUs", FormMethod.Post, new { id = "submitform", enctype = "multipart/form-data" }))
+    {
+        <input type="hidden" name="hf_ICON_IMG_1" id="hf_ICON_IMG_1" value="@ViewBag.ICON_IMG_1" />
+        <input type="hidden" name="hf_ICON_IMG_2" id="hf_ICON_IMG_2" value="@ViewBag.ICON_IMG_2" />
+        <input type="hidden" name="hf_ICON_IMG_3" id="hf_ICON_IMG_3" value="@ViewBag.ICON_IMG_3" />
+
+        <div class="card-body">
+            <div class="col-md-12">
+                <fieldset>
+                    <legend class="font-weight-semibold">Basic Informations</legend>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <fieldset>
+                                <legend>About Us Section</legend>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>
+                                                About Description
+                                            </label>
+                                            <textarea id="txt_ABOUT_US_DESC" name="txt_ABOUT_US_DESC" class="form-control summernote">@ViewBag.txt_ABOUT_US_DESC</textarea>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>
+                                                Remarks
+                                            </label>
+                                            <input type="text" id="txt_REMARKS" name="txt_REMARKS" value="@ViewBag.txt_REMARKS" class="form-control" />
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                            </fieldset>
+                            <fieldset>
+                                <legend>Icon Section</legend>
+                                <div class="row">
+                                    <div class="col-md-4">
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>
+                                                        Icon Image1 Upload Image (Accepted Format .png, .jpg, .jpeg only. Max size 2MB)
+                                                    </label>
+                                                    <input type="file" id="fu_Icon_Image1" name="fu_Icon_Image1" class="form-input-styled" data-fouc accept=".gif, .png, .jpg, .jpeg , .svg" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="col-md-4">
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>
+                                                        Icon Image2 Upload Image (Accepted Format .png, .jpg, .jpeg only. Max size 2MB)
+                                                    </label>
+                                                    <input type="file" id="fu_Icon_Image2" name="fu_Icon_Image2" class="form-input-styled" data-fouc accept=".gif, .png, .jpg, .jpeg , .svg" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="col-md-4">
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>
+                                                        Icon Image3 Upload Image (Accepted Format .png, .jpg, .jpeg only. Max size 2MB)
+                                                    </label>
+                                                    <input type="file" id="fu_Icon_Image3" name="fu_Icon_Image3" class="form-input-styled" data-fouc accept=".gif, .png, .jpg, .jpeg , .svg" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+
+                            </fieldset>
+
+                        </div>
+                    </div>
+
+
+                </fieldset>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <input type="submit" id="btn_Head_Save" value="Submit" class="mb-xs mt-xs btn btn-success" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@if (TempData["JavaScriptMsg"] != null)
+{
+
+    <script type="text/javascript">
+                    @Html.Raw(TempData["JavaScriptMsg"]);
+    </script>
+}
+
+
+<script type="text/javascript">
+
+    function postmethodusingjs(id) {
+        /*alert('ok');*/
+        document.forms[id].submit();
+        return false;
+    }
+
+    function postmethodusingheadsavejs() {
+        document.forms["submitform"].submit();
+
+        return false;
+    }
+</script>
+
+
+
+

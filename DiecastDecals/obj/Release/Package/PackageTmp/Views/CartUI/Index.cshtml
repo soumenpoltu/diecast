@@ -1,0 +1,484 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section title{
+
+    Diecast Decals - No 1. Decals In Here
+}
+
+@section script{
+    <script src="~/Content/main-assets/js/vendor/jquery-1.12.4.min.js"></script>
+}
+
+
+<div class="container-fluid margin-top-60 padding-top-60 padding-bottom-60 cart">
+
+    <div class="col-lg-8 col-md-12 offset-lg-2 offset-md-0">
+
+
+        <div class="row">
+            <div class="col-lg-12">
+
+                @using (Html.BeginForm("gotopayment", "CartUI", FormMethod.Post, new { id = "gopayment" }))
+                {
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+
+
+
+                            <input type="hidden" name="hf_billing_address" id="hf_billing_address" value="@ViewBag.CUSTOMER_BILLING_ADDRESS_KEY" />
+
+                            <h2 class="cart-title">Billing Address</h2>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                         
+                                    <p class="selectaddrsbtn-outer">Change Address <i class="fa fa-hand-o-right" aria-hidden="true"></i>  <a data-toggle="modal" data-target="#billingaddressmodal" class="selectaddrsbtn"><i class="fa fa-map-marker" aria-hidden="true"></i> address book</a></p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <!-- <input type="text" class="custom-form" placeholder="First Name" /> -->
+                                    <div class="form-group name-group">
+                                        <input type="text" class="form-control" id="txt_billing_fname" name="txt_billing_fname" value="@ViewBag.CUSTOMER_BILLING_FNAME" placeholder="First Name" required="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <!-- <input type="text" class="custom-form" placeholder="Last Name" /> -->
+                                    <div class="form-group name-group">
+                                        <input type="text" class="form-control" id="txt_billing_lname" name="txt_billing_lname" value="@ViewBag.CUSTOMER_BILLING_LNAME" placeholder="Last Name" required="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group name-group">
+                                        <input type="text" class="form-control" id="txt_billing_address" name="txt_billing_address" value="@ViewBag.CUSTOMER_BILLING_ADDRESS" placeholder="Address" required="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group name-group">
+                                        <input type="text" class="form-control" id="txt_billing_city" name="txt_billing_city" value="@ViewBag.CUSTOMER_BILLING_CITY" placeholder="City" required="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group name-group">
+                                        <input type="text" class="form-control" id="txt_billing_country" name="txt_billing_country" value="@ViewBag.CUSTOMER_BILLING_COUNTRY" placeholder="Country" required="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group name-group">
+                                        <input type="text" class="form-control" id="txt_billing_pincode" name="txt_billing_pincode" value="@ViewBag.CUSTOMER_BILLING_PINCODE" placeholder="PIN Code" required="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group name-group">
+                                        <input type="text" class="form-control" id="txt_billing_phone" name="txt_billing_phone" value="@ViewBag.CUSTOMER_BILLING_PHONE" placeholder="Phone Number" required="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group name-group">
+                                        <input type="text" class="form-control" id="txt_billing_email" name="txt_billing_email" value="@ViewBag.CUSTOMER_BILLING_EMAIL" placeholder="Email" required="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group name-group">
+                                        <input type="submit" name="update" class="form-control submitbtn" value="Update Billing">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- modal popup address -->
+                            <div class="modal fade addressmodal" id="billingaddressmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+
+
+
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Select a Billing Address</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            @Html.Raw(ViewBag.billingaddress)
+
+                                        </div>
+                                        @*<div class="modal-footer">
+                                    <button type="button" class=" submitbtn">Save changes</button>
+                                </div>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- modal popup address -->
+
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h2 class="cart-title">Shipping Address</h2>
+                            <div class="row">
+                                <div class="col-md-12">
+                                  
+                                    <p class="selectaddrsbtn-outer">Change Address <i class="fa fa-hand-o-right" aria-hidden="true"></i> <a data-toggle="modal" data-target="#shippingaddressmodal" class="selectaddrsbtn"><i class="fa fa-map-marker" aria-hidden="true"></i> address book</a></p>
+                                </div>
+                            </div>
+
+
+                            <input type="hidden" name="hf_shipping_address" id="hf_shipping_address" value="@ViewBag.CUSTOMER_SHIPPING_ADDRESS_KEY" />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <!-- <input type="text" class="custom-form" placeholder="First Name" /> -->
+                                    <div class="form-group name-group">
+                                        <input type="text" class="form-control" id="txt_shipping_fname" name="txt_shipping_fname" value="@ViewBag.CUSTOMER_SHIPPING_FNAME" placeholder="First Name" required="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <!-- <input type="text" class="custom-form" placeholder="Last Name" /> -->
+                                    <div class="form-group name-group">
+                                        <input type="text" class="form-control" id="txt_shipping_lname" name="txt_shipping_lname" value="@ViewBag.CUSTOMER_SHIPPING_LNAME" placeholder="Last Name" required="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group name-group">
+                                        <input type="text" class="form-control" id="txt_shipping_addr" name="txt_shipping_addr" value="@ViewBag.CUSTOMER_SHIPPING_ADDRESS" placeholder="Address" required="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group name-group">
+                                        <input type="text" class="form-control" id="txt_shipping_city" name="txt_shipping_city" value="@ViewBag.CUSTOMER_SHIPPING_CITY" placeholder="City" required="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group name-group">
+                                        <input type="text" class="form-control" id="txt_shipping_country" name="txt_shipping_country" value="@ViewBag.CUSTOMER_SHIPPING_COUNTRY" placeholder="Country" required="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group name-group">
+                                        <input type="text" class="form-control" id="txt_shipping_pincode" name="txt_shipping_pincode" value="@ViewBag.CUSTOMER_SHIPPING_PINCODE" placeholder="PIN Code" required="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group name-group">
+                                        <input type="text" class="form-control" id="txt_shipping_phone" name="txt_shipping_phone" value="@ViewBag.CUSTOMER_SHIPPING_PHONE" placeholder="Phone Number" required="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group name-group">
+                                        <input type="text" class="form-control" id="txt_shipping_email" name="txt_shipping_email" value="@ViewBag.CUSTOMER_SHIPPING_EMAIL" placeholder="Email" required="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group name-group">
+                                        <input type="submit" name="update" class="form-control submitbtn" value="Update Shipping">
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <!-- modal popup address -->
+                            <div class="modal fade addressmodal" id="shippingaddressmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Select a Shipping Address</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            @Html.Raw(ViewBag.shippingaddress)
+
+                                        </div>
+                                        @*<div class="modal-footer">
+                                    <button type="button" class=" submitbtn">Save changes</button>
+                                </div>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- modal popup address -->
+                        </div>
+                    </div>
+
+                }
+
+
+                @using (Html.BeginForm("updatecart", "CartUI", FormMethod.Post, new { id = "updatecart" }))
+                {
+
+
+                    <h4 class="cart-title">Shopping cart</h4>
+                    <div class="alert alert-success alert-offer">
+                        <h4 class="alert-heading"><i class="fa fa-gift"></i> &nbsp; Buy 7 Get 1 Free <span class="badge badge-secondary">Offer</span></h4>
+                        <p>Add 8 items in your cart, pay for 7 items and get one item free.</p>
+
+
+
+                    </div>
+                    <div class="table-responsive table-borderouter">
+                        <table class="cart-table">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Product name</th>
+                                    <th>Unit Price</th>
+                                    <th>Qty</th>
+                                    <th>Subtotal</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                                @foreach (System.Data.DataRow dr in Model)
+                                {
+
+
+                                    <tr>
+
+                                        <td>
+                                            <a href='#'><img alt='' class='img-responsive' src='~/documents/product/@dr["PRODUCT_IMAGE"]'></a>
+                                        </td>
+                                        <td>
+                                            <h6><a href='#'>@dr["PRODUCT"]</a></h6>
+                                        </td>
+                                        <td>
+                                            <div class='cart-price'>$@dr["PRICE"]</div>
+                                        </td>
+                                        <td>
+                                            <input type='hidden' name='hf_cart_key+@dr["DTLS_CART_KEY"].ToString()' id='hf_cart_key+@dr["DTLS_CART_KEY"].ToString()' value='@dr["DTLS_CART_KEY"]'>
+                                            <input type='text' placeholder='1' name="@dr["DTLS_CART_KEY"].ToString()" id="@dr["DTLS_CART_KEY"].ToString()" value="@dr["QUANTITY"]">
+
+                                        </td>
+                                        <td>
+                                            <div class='cart-subtotal'>$@dr["GROSS_AMOUNT"]</div>
+                                        </td>
+
+                                        <td><i onclick='deletecart(this.id)' id="submitD+@dr["DTLS_CART_KEY"].ToString()" class='fa fa-trash'></i></td>
+
+
+                                    </tr>
+                                }
+
+
+
+                                <tr>
+                                    <td colspan="3"> </td>
+                                    <td class="text-left">
+                                        Total:
+                                    </td>
+                                    <td colspan="2">
+                                        <div class="cart-subtotal text-left">$@ViewBag.subtotal</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"> </td>
+                                    <td class="text-left">
+                                        Tax:
+                                    </td>
+                                    <td colspan="2">
+                                        <div class="cart-subtotal text-left">$@ViewBag.tax</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"> </td>
+                                    <td class="text-left">
+                                        Shipping Amount:
+                                    </td>
+                                    <td colspan="2">
+                                        <div class="cart-subtotal text-left">$@ViewBag.shipping</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"> </td>
+                                    <td class="text-left">
+                                        Sub Total:
+                                    </td>
+                                    <td colspan="2">
+                                        <div class="cart-subtotal text-left">$@ViewBag.totalamnt</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"> </td>
+                                    <td class="text-left">
+                                        <b>Grand Total:</b>
+                                    </td>
+                                    <td colspan="2">
+                                        <div class="cart-subtotal text-left">$@ViewBag.totalamnt</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7" class="actions">
+                                        <div class="cartPage-btn">
+                                            <ul>
+                                                <li><a href="~/ProductListUI/Index" class="cbtn">Continue Shopping</a></li>
+                                                <li><a href="#" onclick="updatecart()" class="cbtn">UPDATE SHOPPING CART</a></li>
+                                                <li><a href="#" onclick="gotopayment()" class="cbtn green">Checkout</a></li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                }
+            </div>
+
+        </div>
+
+
+
+        <div class="row">
+            <!-- start cart discount code area -->
+            <div class="col-lg-12">
+                <div class="cart-discount-code-area">
+                    <h2>Discount codes</h2>
+                    <p>Enter your coupon code if you have one.</p>
+                    <input type="text">
+                    <a href="#">Apply coupon</a>
+                </div>
+            </div>
+            <!-- End cart discount code area -->
+        </div>
+
+    </div>
+
+</div>
+<script>
+    function deletecart(id) {
+        var newid = id.replace("submitD+", "");
+        var cartvalue = document.getElementById("hf_cart_key+" + newid).value;
+
+        $.ajax({
+            url: '/CartUI/delete',
+            data: "{id: '" + cartvalue + "'}",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data.d != 0) {
+                    window.location.href = "/CartUI/Index";
+                }
+                else {
+                    alert("Sorry!!! some error occured");
+                }
+            },
+            error: function (response) {
+                console.log(response.responseText);
+            },
+
+            failure: function (response) {
+                console.log(response.responseText);
+            }
+
+        });
+    }
+
+    function updatecart() {
+        document.forms["updatecart"].submit();
+    }
+    function gotopayment() {
+        document.forms["gopayment"].submit();
+    }
+
+
+    function selectedbillingaddress(id) {
+
+        $.ajax({
+            url: '/CartUI/filter',
+            data: "{addresskey: '" + document.getElementById(id).value + "'}",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data.d != 0) {
+
+                    document.getElementById("hf_billing_address").value = data.CUSTOMER_ADRESS_KEY;
+
+                    document.getElementById("txt_billing_fname").value = data.CUSTOMER_FNAME;
+                    document.getElementById("txt_billing_lname").value = data.CUSTOMER_LNAME;
+                    document.getElementById("txt_billing_address").value = data.CUSTOMER_ADDRESS;
+                    document.getElementById("txt_billing_city").value = data.CUSTOMER_CITY;
+                    document.getElementById("txt_billing_country").value = data.CUSTOMER_COUNTRY;
+                    document.getElementById("txt_billing_pincode").value = data.CUSTOMER_PINCODE;
+                    document.getElementById("txt_billing_phone").value = data.CUSTOMER_PHONE;
+                    document.getElementById("txt_billing_email").value = data.ADDRESS_CUSTOMER_EMAIL;
+
+                }
+                else {
+                    alert("Sorry!!! some error occured");
+                }
+            },
+            error: function (response) {
+                console.log(response.responseText);
+            },
+
+            failure: function (response) {
+                console.log(response.responseText);
+            }
+
+        });
+    }
+    function selectedshippingaddress(id) {
+
+
+        $.ajax({
+            url: '/CartUI/filter',
+            data: "{addresskey: '" + document.getElementById(id).value + "'}",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data.d != 0) {
+                    document.getElementById("hf_shipping_address").value = data.CUSTOMER_ADRESS_KEY;
+                    document.getElementById("txt_shipping_fname").value = data.CUSTOMER_FNAME;
+                    document.getElementById("txt_shipping_lname").value = data.CUSTOMER_LNAME;
+                    document.getElementById("txt_shipping_addr").value = data.CUSTOMER_ADDRESS;
+                    document.getElementById("txt_shipping_city").value = data.CUSTOMER_CITY;
+                    document.getElementById("txt_shipping_country").value = data.CUSTOMER_COUNTRY;
+                    document.getElementById("txt_shipping_pincode").value = data.CUSTOMER_PINCODE;
+                    document.getElementById("txt_shipping_phone").value = data.CUSTOMER_PHONE;
+                    document.getElementById("txt_shipping_email").value = data.ADDRESS_CUSTOMER_EMAIL;
+                }
+                else {
+                    alert("Sorry!!! some error occured");
+                }
+            },
+            error: function (response) {
+                console.log(response.responseText);
+            },
+
+            failure: function (response) {
+                console.log(response.responseText);
+            }
+
+        });
+    }
+
+</script>

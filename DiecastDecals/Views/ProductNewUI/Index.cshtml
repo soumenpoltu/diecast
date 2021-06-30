@@ -1,0 +1,271 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section title{
+    Diecast Decals - No 1. Decals In Here
+}
+<script src="https://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+<script>
+
+    function savetolocalstorage() {
+
+        @*window.localStorage.setItem("HeadProductKey", @Session["HEAD_PRODUCT"]);
+        window.localStorage.setItem("Price", @Session["Price"]);
+
+        alert(window.localStorage.getItem("HeadProductKey"));*@
+
+        alert(document.getElementById("hf_sheet_code").value);
+        alert(document.getElementById("txt_quantity").value);
+        alert(@TempData["tax"]);
+    }
+</script>
+
+<!-- Start slider area -->
+<div class="slider-area">
+    <!-- <div >
+        <img  src="img/banner-dcd-4.jpg" style="width:100%;"  alt="" title=""/>
+
+    </div> -->
+
+</div>
+<!-- End slider area -->
+<!--product details-->
+<section class="pt-5" style="border-top: 1px solid #ebebeb;">
+</section>
+<div class="container py-4">
+    <div class="row">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-12 order-3 order-lg-1 order-md-3">
+                    <div class="related-product-card">
+                        <div>
+                            <h3 style="border-bottom: 1px;">Related Products</h3>
+                        </div>
+
+                        @Html.Raw(ViewBag.relatedproduct)
+
+
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-5 margin-bottom-30 order-md-1 order-lg-2">
+
+                    <div id="custCarousel" class="carousel slide" align="center">
+                        <!-- slides -->
+                        @{
+                            string Domain = Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
+
+                        }
+                        <div id="gallery_01">
+                            <div class="carousel-inner">
+
+
+                                @*<div class='carousel-item productzoomcont active'> <img src='~/Content/main-assets/img/sheet.png' id='zoom_03' data-zoom-image='@Domain/Content/main-assets/img/sheet.png' alt='Hills'></div>*@
+
+                                @Html.Raw(ViewBag.slide)
+
+                            </div>
+                            @*Thumbnails*@
+                            <div id="gal1" class="carousel-indicators list-inline pdtdet-thum">
+
+                                @*<li class='list-inline-item custom-li-active active' id='list1'>
+                                        <a href='#'  onclick='click1("list1",1)'; class='elevatezoom-gallery active' data-update='' data-image='@Domain/Content/main-assets/img/sheet.png' data-zoom-image='@Domain/Content/main-assets/img/sheet.png'>
+                                            <img src='~/Content/main-assets/img/sheet.png' class='img-fluid'>
+                                        </a>
+                                    </li>
+                                    <li class='list-inline-item custom-li-active'  id="list2">
+                                        <a href="#"  onclick="click1('list2',2)"; class="elevatezoom-gallery" data-image="@Domain/Content/main-assets/img/sheet.png" data-zoom-image="@Domain/documents/product/20210602_024050-C.jpg">
+                                            <img src='~/Content/main-assets/img/sheet.png' class='img-fluid'>
+                                        </a>
+                                    </li>
+                                    <li class='list-inline-item custom-li-active'  id="list3">
+                                        <a href="#"  onclick="click1('list3',3)"; class="elevatezoom-gallery" data-image="@Domain/Content/main-assets/img/sheet.png" data-zoom-image="@Domain/Content/main-assets/img/sheet.png">
+                                            <img src='~/Content/main-assets/img/sheet.png' class='img-fluid'>
+                                        </a>
+                                    </li>
+                                    <li class='list-inline-item custom-li-active'  id="list4">
+                                        <a href="#"  onclick="click1('list4',4)"; class="elevatezoom-gallery" data-image="@Domain/Content/main-assets/img/sheet.png" data-zoom-image="@Domain/Content/main-assets/img/sheet.png">
+                                            <img src='~/Content/main-assets/img/sheet.png' class='img-fluid'>
+                                        </a>
+                                    </li>*@
+
+                                @Html.Raw(ViewBag.slideshow)
+
+                                @*<a class="carousel-control-prev" href="#custCarousel" data-slide="prev"> <span class="carousel-control-prev-icon"></span> </a>
+                                    <a class="carousel-control-next" href="#custCarousel" data-slide="next"> <span class="carousel-control-next-icon"></span> </a>*@
+                            </div>
+
+                        </div>
+                    </div>
+                    <h6 class="font-weight-bold my-2" style="text-align:center" id="dynamic-text">
+
+                        @ViewBag.Sheetcode
+                    </h6>
+
+                </div>
+                <div class="col-md-12 col-lg-4 margin-bottom-30 order-lg-3 order-md-2">
+                    <div class="card card-shadow">
+                        <img src="@ViewBag.head_product_img">
+                    </div>
+                    <div class="card card-shadow mt-4">
+                        <div class="container">
+                            @*<div class="row">
+                                    <div class="col-md-6 text-center ml-auto"><h6 class="stock my-2">In Stock</h6></div>
+
+                                </div>*@
+                            <div class="prdt-det-cont">
+                                <h6 class="font-weight-bold my-2 pdtname-det">Image Name: <span class="name-pdtname-det font-weight-normal"> @ViewBag.txt_PRODUCT_NAME</span> <span class="stock">In Stock</span> </h6>
+                                <h6 class="font-weight-bold my-2">Sheet Code: <span class="font-weight-normal" id="sheet"> @ViewBag.Sheetcode</span></h6>
+                                <h6 class="font-weight-bold price-amnt my-2">Price: <span>AUD $@ViewBag.txt_PRICE</span></h6>
+                                @*<h6 class="font-weight-bold my-2">Discount: <span class="font-weight-normal">N/A</span></h6>*@
+                                @using (Html.BeginForm("addtocart", "ProductNewUI", FormMethod.Post))
+                                {
+
+
+                                    <div class="row py-2">
+                                        <input type="hidden" name="hf_sheet_code" value="@ViewBag.sheet" id="hf_sheet_code" />
+
+                                        <div class="col-xl-6 col-lg-7 col-sm-6 col-xs-5 col-6">
+                                            <div class="quantity buttons_added">
+                                                <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="txt_quantity" id="txt_quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-12"><button type="submit" onclick="getsheetcode();" class="btn-2">Add To cart</button></div>
+                                    </div>
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card card-shadow mt-4">
+                        <div class="container offer-cont">
+                            <div class="row">
+                                <div class="col-3 col-md-4 col-xl-3">
+                                    <img src="~/Content/main-assets/img/shipping.svg" width="110" height="110" class="img-fluid">
+                                </div>
+                                <div class="col-9 col-md-8 m-auto mx-xl-0">
+                                    <h6 class="font-weight-bold my-2">Free Shipping</h6>
+                                    <p>For Orders Above $120</p>
+                                </div>
+                            </div>
+                            <!-- <div class="row">
+                                <div class="col-md-4">
+                                    <img src="img/customer.png" width="110" height="110" class="img-fluid">
+                                </div>
+                                <div class="col-md-8 m-auto">
+                                    <h6 class="font-weight-bold my-2">Support 24/7</h6>
+                                    <p>Call us anytime</p>
+                                </div>
+                            </div> -->
+                            <div class="row">
+                                <div class="col-3 col-md-4 col-xl-3">
+                                    <img src="~/Content/main-assets/img/secure.svg" width="110" height="110" class="img-fluid">
+                                </div>
+                                <div class="col-9 col-md-8 m-auto mx-xl-0">
+                                    <h6 class="font-weight-bold my-2">100% Safety</h6>
+                                    <p>Safe and Secure Payments</p>
+                                </div>
+                            </div>
+                            <!-- <div class="row">
+                                <div class="col-md-4">
+                                    <img src="img/hot-off.png" width="110" height="110" class="img-fluid">
+                                </div>
+                                <div class="col-md-8 m-auto">
+                                    <h6 class="font-weight-bold my-2">Hot Offers</h6>
+                                    <p>Discount Upto 90%</p>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+    function getsheetcode() {
+        var attribute = document.getElementById("sheet").innerText;
+
+        document.getElementById("hf_sheet_code").value = attribute;
+        // document.getElementById("sheet").innerText = attribute;
+
+    }
+
+
+
+</script>
+
+@*<script>
+        $('#img_02').elevateZoom({
+            zoomType: "inner",
+            cursor: "crosshair",
+            zoomWindowFadeIn: 500,
+            zoomWindowFadeOut: 750
+        });
+        //initiate the plugin and pass the id of the div containing gallery images
+        $("#zoom_03").elevateZoom({ gallery: 'gallery_01', cursor: 'pointer', galleryActiveClass: 'active', imageCrossfade: true, loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif' });
+
+        //pass the images to Fancybox
+        $("#zoom_03").bind("click", function (e) {
+            var ez = $('#zoom_03').data('elevateZoom');
+            $.fancybox(ez.getGalleryList());
+            return false;
+        });
+
+
+    </script>*@
+
+<script src="~/Content/main-assets/js/vendor/jquery-1.11.3.min.js"></script>
+@*<script src="~/Content/main-assets/js/jquery-1.8.3.min.js"></script>*@
+<script src="~/Content/main-assets/js/jquery.elevatezoom.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#zoom_03").elevateZoom({ gallery: 'gallery_01', cursor: 'crosshair', zoomType: "inner", zoomWindowFadeIn: 500, zoomWindowFadeOut: 750 });
+
+        $("#zoom_03").bind("click", function (e) {
+
+            var ez = $('#zoom_03').data('elevateZoom');
+            ez.closeAll(); //NEW: This function force hides the lens, tint and window
+            $.fancybox(ez.getGalleryList());
+            return false;
+        });
+
+    });
+</script>
+<script>
+    var textStr = ["Sheet No: 1234", "Sheet No: 12345", "Sheet No: 123456", "Sheet No: 1234567"];
+    //$("#dynamic-text").html(textStr[0]);
+    function click1(ids) {
+      //  alert(ids);
+        $(".custom-li-active").removeClass("active");
+        var newID = "#" + ids + "1";
+      //  alert(newID);
+        console.log(newID);
+        $(newID).addClass("active");
+        var currentText =  ids;
+        $("#dynamic-text").html(currentText);
+        $("#sheet").html(ids);
+
+
+     //   console.log(currentText);
+
+    }
+
+
+</script>
+
+
+@if (TempData["JavaScriptFunction"] != null)
+{
+
+    <script type="text/javascript">
+                    @Html.Raw(TempData["JavaScriptFunction"]);
+    </script>
+}

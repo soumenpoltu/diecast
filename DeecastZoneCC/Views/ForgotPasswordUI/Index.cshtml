@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section title{
+    Forgot Password
+}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+
+    function popupvalidation() {
+        swal({
+            title: "Error!",
+            text: "Please enter your register email",
+            icon: "error",
+            button: "Ok",
+        });
+    }
+
+</script>
+<section class="login-page" style="background-image: url(../Content/main-assets/images/banner.png);">
+
+    <img class="img2" src="../Content/main-assets/images/banner-shape.png" alt="">
+    <div class="login-wrap">
+        <div class="login-decp">
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                    @using (Html.BeginForm("btn_submit_Click", "ForgotPasswordUI", FormMethod.Post, new { id = "submitform1", enctype = "multipart/form-data" }))
+                    {
+                        <form action="">
+                            <label for="">Username/Email</label>
+                            <input type="text" name="useremail" id="useremail" placeholder="User name">
+
+                            <input type="submit" id="btn_submit_Click" name="btn_submit_Click" value="Submit">
+                        </form>
+                    }
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="common-logo-sec">
+    <ul>
+        <li><a href="#"><img src="~/Content/main-assets/images/ab-img1.svg" alt=""></a></li>
+        <li><a href="#"><img src="~/Content/main-assets/images/ab-img2.svg" alt=""></a></li>
+        <li><a href="#"><img src="~/Content/main-assets/images/ab-img3.svg" alt=""></a></li>
+    </ul>
+</section>
+
+@if (TempData["JavaScriptMsg"] != null)
+{
+
+    <script type="text/javascript">
+         @Html.Raw(TempData["JavaScriptMsg"]);
+    </script>
+}

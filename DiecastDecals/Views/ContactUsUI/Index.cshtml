@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section title{
+
+    Diecast Decals - No 1. Decals In Here
+}
+
+@section script{
+    <script src="~/Content/main-assets/js/vendor/jquery-1.12.4.min.js"></script>
+}
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    function popup() {
+        swal({
+            title: "Successful!",
+            text: "Thank you for contacting us!",
+            icon: "success",
+            button: "Ok",
+        });
+    }
+    function popuperror() {
+        swal("Oops", "Please provide proper Email Address !", "error")
+    }
+    function popupservererror() {
+        swal({
+            title: "Server Error!",
+            text: "Server error ! Try again later.",
+            icon: "error",
+            button: "Ok",
+        });
+
+    }
+    function popupvalidation() {
+        swal({
+            title: "Server Error!",
+            text: "Please Fill All * Mark Filed.",
+            icon: "error",
+            button: "Ok",
+        });
+    }
+
+</script>
+
+<!-- End header -->
+
+<div class="container-fluid margin-top-60 padding-top-60 padding-bottom-60 cart">
+    <div class="col-lg-8 col-md-12 offset-lg-2 offset-md-0">
+        <!-- Start contact-map -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h4 class="cart-title">Contact Us</h4>
+                <div class="contact-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14119.099307901852!2d153.2584371!3d-27.7859115!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x14245ac269a2b549!2s7-Eleven%20Ormeau!5e0!3m2!1sen!2sin!4v1610703824494!5m2!1sen!2sin" width="100%" height="250" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                </div>
+            </div>
+        </div>
+        <!-- End contact-map -->
+        <!-- Start contact from atea -->
+        <div class="contact-from-atea">
+            <div class="form-and-info">
+                <div class="row">
+                    <div class="col-lg-5 col-md-5 mb-3">
+                        <div class="contactDetails contactHead mb-3">
+                            <h3>CONTACT Info</h3>
+                            <p class="clearfix">
+                                <span class="iconContact"><i class="fa fa-map-marker"></i></span>
+                                Address : @*PO BOX 711, <br>Ormeau,QLD,4209*@  @ViewBag.txt_ADDRESS
+                            </p>
+
+                            <div class="clearfix"></div>
+                            <p class="clearfix">
+                                <span class="iconContact"><i class="fa fa-phone"></i></span>
+                                Telephone: <br> <a href="tel:@ViewBag.txt_CONTACT_NO">@*0434 284 295*@  @ViewBag.txt_CONTACT_NO </a>
+                            </p>
+                            <div class="clearfix"></div>
+                            <p class="clearfix">
+                                <span class="iconContact"><i class="fa fa-envelope-o"></i></span>
+                                Email: <br> <a href="mailto:@ViewBag.txt_MAIL">@*admin@diecastdecals.com.au*@ @ViewBag.txt_MAIL</a>
+                            </p>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="social-area contactHead">
+                            <h3>Follow Us</h3>
+                            <ul class="socialicon">
+                                <li><a href="@ViewBag.txt_PRINTEREST_LINK" target="_blank"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                                <li><a href="@ViewBag.txt_INSTAGRAM_LINK" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                <li><a href="@ViewBag.txt_FACEBOOK_LINK" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-md-7">
+                        <div class="contactfrom">
+                            <h3>Write to us</h3>
+                            @using (Html.BeginForm("btn_Contact_click", "ContactUsUI", FormMethod.Post))
+                            {
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="text" placeholder="Full name" id="txt_Name" name="txt_Name" class="form-control" required="">
+                                    </div>
+                                    <div class="col-md-6 contactemail">
+                                        <input type="email" placeholder="Email" id="txt_Email" name="txt_Email" class="form-control" required="">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <textarea placeholder="Message" rows="13" id="txtMessage" name="txtMessage" class="form-control" required=""></textarea>
+                                    </div>
+                                </div>
+                                <button class="btn btnContact" type="submit" id="btn_Contact">send message</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End contact from atea -->
+    </div>
+</div>
+
+@if (TempData["JavaScriptFunction"] != null)
+{
+
+    <script type="text/javascript">
+                    @Html.Raw(TempData["JavaScriptFunction"]);
+    </script>
+}

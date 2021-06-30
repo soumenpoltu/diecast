@@ -1,0 +1,380 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section title{
+    Diecast Decals - No 1. Decals In Here
+}
+
+<script type="text/javascript">
+
+    function OpenTab1(strMsg, error) {
+        $("#tab1").fadeIn();
+
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+</script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+<script>
+
+    function redirect() {
+        swal({
+            title: "Successful!",
+            text: "Thank you for register! Please check your mail to activate your account.",
+            type: "success",
+            confirmButtonText: "OK"
+        },
+            function (isConfirm) {
+                if (isConfirm) {
+                    window.location.href = "@ViewBag.DomainURL/UserActivationUI/Index";
+                }
+            });
+    }
+
+
+    function notactive() {
+        swal({
+            title: "Error!",
+            text: "You are not activated your account, please activate your account",
+            type: "error",
+            confirmButtonText: "OK"
+        },
+            function (isConfirm) {
+                if (isConfirm) {
+                    window.location.href = "@ViewBag.DomainURL/UserActivationUI/Index";
+                }
+            });
+    }
+
+    function popup() {
+        swal({
+            title: "Successful!",
+            text: "Thank you for Register! Please Check your mail.",
+            icon: "success",
+            button: "Ok",
+        });
+    }
+    function popuperror() {
+        swal("Oops", "Please provide proper Email Address !", "error")
+    }
+    function popupservererror() {
+        swal({
+            title: "Server Error!",
+            text: "Server error ! Try again later.",
+            icon: "error",
+            button: "Ok",
+        });
+
+    }
+    function popupvalidation() {
+        swal({
+            title: "Server Error!",
+            text: "Please Fill All * Mark Filed.",
+            icon: "error",
+            button: "Ok",
+        });
+    }
+
+</script>
+
+<div id="tab1" class="container-fluid margin-top-60 padding-top-60 padding-bottom-60">
+    <!-- LOGIN-AREA START -->
+    <div class="lognin-area">
+        <div class="container">
+            <div class="row">
+                <!-- Registered-Customers Start -->
+                <div class="col-lg-6">
+
+                    <div class="registered-customers">
+                        <h3>REGISTERED CUSTOMERS</h3>
+                        @using (Html.BeginForm("btn_Login_click", "LoginUI", FormMethod.Post, new { id = "submitloginform", enctype = "multipart/form-data" }))
+                        {
+                            <div class="registered">
+                                <p>If you have an account with us, please log in.</p>
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <div class="form-group name-group">
+                                            <div class="palceholder">
+                                                <label for="name">Email address</label>
+                                                <span class="star1">*</span>
+                                            </div>
+                                            <input type="email" class="form-control" id="txtemail" name="txtemail" value="@ViewBag.txtemail" required>
+                                        </div>
+                                        <div class="form-group conf-Password-group divpasswraper">
+                                            <div class="palceholder">
+                                                <label for="email">Password </label>
+                                                <span class="star1">*</span>
+                                            </div>
+                                            <input type="password" class="form-control password password-single" id="txtpass" name="txtpass" style="margin-bottom:10px;" value="@ViewBag.txtpass" required>
+                                            <i class="fa fa-eye showpass showpass-single "><input type="checkbox"></i>
+                                            <p class="rqudField1">* Required Fields</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <p><label class="forgot"><a href="/ForgotPasswordUI/Index">Forgot Password?</a></label></p>
+                                    </div>
+                                    <div class="col-lg-6">
+
+                                    </div>
+                                </div>
+
+                                <button class="btn btnContact" type="submit">login</button>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+                <!-- Registered-Customers End -->
+                <div class="col-lg-6">
+                    @using (Html.BeginForm("btn_Register_click", "LoginUI", FormMethod.Post, new { id = "submitform", enctype = "multipart/form-data" }))
+                    {
+                        <input type="hidden" id="hf_CUSTOMER_KEY" name="hf_CUSTOMER_KEY" value="@ViewBag.hf_CUSTOMER_KEY" />
+
+
+                        <div class="new-customers">
+                            <h3>NEW CUSTOMERS</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <!-- <input type="text" class="custom-form" placeholder="First Name" /> -->
+                                    <div class="form-group name-group">
+                                        <div class="palceholder">
+                                            <label for="name">First Name</label>
+                                            <span class="star1">*</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txt_First_Name" name="txt_First_Name" value="@ViewBag.txt_First_Name" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <!-- <input type="text" class="custom-form" placeholder="Last Name" /> -->
+                                    <div class="form-group name-group">
+                                        <div class="palceholder">
+                                            <label for="name">Last Name</label>
+                                            <span class="star1">*</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txt_Last_Name" name="txt_Last_Name" value="@ViewBag.txt_Last_Name" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group name-group">
+                                        <div class="palceholder">
+                                            <label for="name">Address</label>
+                                            <span class="star1">*</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txt_Address" name="txt_Address" value="" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group name-group">
+                                        <div class="palceholder">
+                                            <label for="name">City</label>
+                                            <span class="star1">*</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txt_City" name="txt_City" value="@ViewBag.txt_City" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group name-group">
+                                        <div class="palceholder">
+                                            <label for="name">Country</label>
+                                            <span class="star1">*</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txt_Country" name="txt_Country" value="@ViewBag.txt_Country" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group name-group">
+                                        <div class="palceholder">
+                                            <label for="name">Phone Number</label>
+                                            <span class="star1">*</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txt_Phone" name="txt_Phone" value="@ViewBag.txt_Phone" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group name-group">
+                                        <div class="palceholder">
+                                            <label for="name">PIN Code</label>
+                                            <span class="star1">*</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txt_Pin" name="txt_Pin" value="@ViewBag.txt_Pin" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group name-group">
+                                        <div class="palceholder">
+                                            <label for="name">Email</label>
+                                            <span class="star1">*</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txt_Email" name="txt_Email" value="@ViewBag.txt_Email" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group name-group conf-Password-group divpasswraper">
+                                        <div class="palceholder">
+                                            <label for="name">Password</label>
+                                            <span class="star1">*</span>
+                                        </div>
+                                        <input type="password" class="form-control password password-a" id="txt_Password" name="txt_Password" value="@ViewBag.txt_Password" required>
+                                        <i class="fa fa-eye showpass showpass-a"><input type="checkbox"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group name-group conf-Password-group divpasswraper">
+                                        <div class="palceholder">
+                                            <label for="name">Confirm Password</label>
+                                            <span class="star1">*</span>
+                                        </div>
+                                        <input type="password" class="form-control password password-b" id="txt_CPassword" name="txt_CPassword" value="@ViewBag.txt_CPassword" required>
+                                        <i class="fa fa-eye showpass showpass-b"><input type="checkbox"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <!-- <input type="submit" class="custom-form custom-submit no-margin" value="register" /> -->
+                                    <button class="btn btnContact" onclick="return validateuser();" type="submit">register</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <!--  <input type="submit" class="custom-form custom-submit no-margin" value="clear" /> -->
+                                    <button class="btn btnContact" type="submit">clear</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- LOGIN-AREA END -->
+</div>
+
+
+@section script{
+    <script src="~/Content/main-assets/js/vendor/jquery-1.12.4.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $('.palceholder').click(function () {
+            $(this).siblings('input').focus();
+        });
+        $('.form-control').focus(function () {
+            $(this).siblings('.palceholder').hide();
+        });
+        $('.form-control').blur(function () {
+            var $this = $(this);
+            if ($this.val().length == 0)
+                $(this).siblings('.palceholder').show();
+        });
+        $('.form-control').blur();
+    </script>
+
+}
+
+<script>
+
+    function validateuser() {
+        if (document.getElementById("txt_First_Name").value == '') {
+            swal("Oops", "Please provide proper first name !", "error")
+          
+            return false
+        }
+        if (document.getElementById("txt_Last_Name").value == '') {
+            swal("Oops", "Please provide proper last name!", "error")
+            return false
+        }
+
+        if (document.getElementById("txt_Address").value == '') {
+            swal("Oops", "Please provide proper address !", "error")
+            return false
+        }
+        if (document.getElementById("txt_City").value == '') {
+            swal("Oops", "Please provide proper city !", "error")
+            return false
+        }
+
+        if (document.getElementById("txt_Country").value == '') {
+            swal("Oops", "Please provide proper country !", "error")
+            return false
+        }
+        if (document.getElementById("txt_Phone").value == '') {
+            swal("Oops", "Please provide proper phone !", "error")
+            return false
+        }
+
+        if (document.getElementById("txt_Pin").value == '') {
+            swal("Oops", "Please provide proper pin !", "error")
+            return false
+        }
+        if (document.getElementById("txt_Email").value == '') {
+            swal("Oops", "Please provide proper email address !", "error")
+            return false
+        }
+
+        if (document.getElementById("txt_Password").value == '') {
+            swal("Oops", "Please provide proper password !", "error")
+            return false
+        }
+        if (document.getElementById("txt_CPassword").value == '') {
+            swal("Oops", "Please provide proper confirmed password !", "error")
+            return false
+        }
+        if (document.getElementById("txt_CPassword").value != document.getElementById("txt_Password").value) {
+            swal("Oops", "Confirmed password and password should be same !", "error")
+            return false
+        }
+
+        return true
+
+    }
+  
+
+</script>
+
+<script type="text/javascript">
+
+    function postmethodusingjs(id) {
+        document.forms[id].submit();
+        return false;
+    }
+
+    function postmethodusingheadsavejs() {
+        document.forms["submitform"].submit();
+        document.forms["submitloginform"].submit();
+        return false;
+    }
+</script>
+
+
+@if (TempData["JavaScriptMsg"] != null)
+{
+
+    <script type="text/javascript">
+                    @Html.Raw(TempData["JavaScriptMsg"]);
+    </script>
+}

@@ -1,0 +1,695 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+@section FormName{
+
+    <i class="icon-home2 mr-2"></i>Product
+
+}
+
+@section StyleCss{
+    <style type="text/css">
+        .filename {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .preview {
+            height: 230px;
+        }
+    </style>
+}
+
+
+<script>
+    function OpenTab3(strMsg, error) {
+
+        $("#tab1").hide();
+        $("#tab3").fadeIn();
+        $("#tab2").fadeIn();
+
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+    function OpenTab2(strMsg, error) {
+        $("#tab1").hide();
+        $("#tab3").hide();
+        $("#tab2").fadeIn();
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+
+    function OpenTab1(strMsg, error) {
+        $("#tab1").fadeIn();
+        $("#tab3").hide();
+        $("#tab2").hide();
+
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+</script>
+
+
+<div class="content">
+
+    <div class="content">
+
+        <div id="tab1" class="card">
+            <ul id="fbAdd" class="fab-menu fab-menu-fixed fab-menu-bottom-right">
+
+                <li>
+                    @using (Html.BeginForm("Add", "Product", FormMethod.Post, new { id = "submitaddform" }))
+                    {
+
+
+                        <a id="A2" href="#" class="fab-menu-btn btn bg-green btn-float rounded-round btn-icon" onclick="btn_Add_Click();">
+                            <i class="fab-icon-open icon-plus3"></i><i class="fab-icon-close icon-cross2"></i>
+                        </a>
+                    }
+                </li>
+            </ul>
+            <div class="card-body">
+                <div class="row mt-1">
+                    <div class="col-md-12">
+
+
+                        <table cellspacing="0" rules="all" class="table table-hover table-bordered table-striped" border="1" id="gvMastBenefits" name="gvMastBenefits" style="border-collapse:collapse;">
+                            <tbody>
+                                <tr>
+                                    <th>Category Name</th>
+                                    <th>Sub Category Name</th>
+                                    <th>Sub Sub Category Name</th>
+                                    <th>Product Name</th>
+                                    <th>Download</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+
+
+
+                                @foreach (System.Data.DataRow dr in Model)
+                                {
+
+                                    <tr>
+                                        <td>@dr["CATEGORY_NAME"].ToString()</td>
+                                        <td>@dr["SUB_CATEGORY_NAME"].ToString()</td>
+                                        <td>@dr["SUB_SUB_CATEGORY_NAME"].ToString()</td>
+
+                                        <td>@dr["PRODUCT_NAME"].ToString()</td>
+                                        <td>
+                                            @using (Html.BeginForm("download", "Product", FormMethod.Post, new { id = "submitdn+" + dr["HEAD_PRODUCT_KEY"].ToString() + "" }))
+                                            {
+
+                                                <input type="hidden" name="editid" value="@dr["HEAD_PRODUCT_KEY"].ToString()" />
+
+                                                <a id="submitdn+@dr["HEAD_PRODUCT_KEY"].ToString()" href="#" onclick="postmethodusingjs(this.id)" class="list-icons-item"><i class="icon-download"></i></a>
+
+                                            }
+                                        </td>
+                                        <td>
+                                            @using (Html.BeginForm("edit", "Product", FormMethod.Post, new { id = "submitE+" + dr["HEAD_PRODUCT_KEY"].ToString() + "" }))
+                                            {
+
+                                                <input type="hidden" name="editid" value="@dr["HEAD_PRODUCT_KEY"].ToString()" />
+
+                                                <a id="submitE+@dr["HEAD_PRODUCT_KEY"].ToString()" href="#" onclick="postmethodusingjs(this.id)" class="list-icons-item"><i class="icon-menu9"></i></a>
+
+                                            }
+                                        </td>
+
+                                        <td>
+                                            @using (Html.BeginForm("delete", "Product", FormMethod.Post, new { id = "submitD+" + dr["HEAD_PRODUCT_KEY"].ToString() + "" }))
+                                            {
+
+                                                <input type="hidden" name="editid" value="@dr["HEAD_PRODUCT_KEY"].ToString()" />
+
+                                                <a id="submitD+@dr["HEAD_PRODUCT_KEY"].ToString()" href="#" onclick="postmethodusingjs(this.id)" class="list-icons-item"><i class="icon-trash"></i></a>
+
+                                            }
+                                        </td>
+
+                                    </tr>
+
+                                }
+
+
+
+
+                            </tbody>
+                        </table>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+        </div>
+        <ul id="tabsmenu" class="tabsmenu" style="display: none">
+            <li class="active"><a id="atab1" href="#tab1">List</a></li>
+            <li><a id="atab2" href="#tab2">Add / Edit</a></li>
+            <li><a href="#" id="cph_MainBody_aPageName" style="margin: 0 5px 0 33%; border-radius: 6px;">&nbsp;</a></li>
+        </ul>
+
+        <div id="tab2" style="display: none;">
+
+            @using (Html.BeginForm("btn_Head_Save_Click", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+
+
+
+
+                <input type="hidden" name="hf_HEAD_PRODUCT_KEY" id="hf_HEAD_PRODUCT_KEY" value="@ViewBag.hf_HEAD_PRODUCT_KEY" />
+
+                <input type="hidden" name="hf_HEAD_PRODUCT_IMG" id="hf_HEAD_PRODUCT_IMG" value="@ViewBag.hf_HEAD_PRODUCT_IMG" />
+                <input type="hidden" name="hf_HEAD_PRODUCT_WATERMARK_IMG" id="hf_HEAD_PRODUCT_WATERMARK_IMG" value="@ViewBag.hf_HEAD_PRODUCT_WATERMARK_IMG" />
+                <input type="hidden" name="hf_HEAD_PRODUCT_AI_IMG" id="hf_HEAD_PRODUCT_AI_IMG" value="@ViewBag.hf_HEAD_PRODUCT_AI_IMG" />
+
+                <input type="hidden" name="hf_SHEET_CODE_1_IMG" id="hf_SHEET_CODE_1_IMG" value="@ViewBag.hf_SHEET_CODE_1_IMG" />
+                <input type="hidden" name="hf_SHEET_CODE_1_FILE" id="hf_SHEET_CODE_1_FILE" value="@ViewBag.hf_SHEET_CODE_1_FILE" />
+
+                <input type="hidden" name="hf_SHEET_CODE_2_IMG" id="hf_SHEET_CODE_2_IMG" value="@ViewBag.hf_SHEET_CODE_2_IMG" />
+                <input type="hidden" name="hf_SHEET_CODE_2_FILE" id="hf_SHEET_CODE_2_FILE" value="@ViewBag.hf_SHEET_CODE_2_FILE" />
+
+                <input type="hidden" name="hf_SHEET_CODE_3_IMG" id="hf_SHEET_CODE_3_IMG" value="@ViewBag.hf_SHEET_CODE_3_IMG" />
+                <input type="hidden" name="hf_SHEET_CODE_3_FILE" id="hf_SHEET_CODE_3_FILE" value="@ViewBag.hf_SHEET_CODE_3_FILE" />
+
+                <input type="hidden" name="hf_SHEET_CODE_4_IMG" id="hf_SHEET_CODE_4_IMG" value="@ViewBag.hf_SHEET_CODE_4_IMG" />
+                <input type="hidden" name="hf_SHEET_CODE_4_FILE" id="hf_SHEET_CODE_4_FILE" value="@ViewBag.hf_SHEET_CODE_4_FILE" />
+
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <fieldset>
+                                    <legend>Category info</legend>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label">
+                                            Category
+                                        </label>
+                                        <div class="col-lg-9">
+
+                                            @Html.DropDownList("ddl_MAST_PRODUCT_CATG_KEY", ViewBag.ProductCategoryName as SelectList, new { @class = "form-control populate", @onchange = "FillSub()" })
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label">
+                                            Sub Category
+                                        </label>
+                                        <div class="col-lg-9">
+
+                                            @Html.DropDownList("ddl_MAST_PRODUCT_SUB_CATG_KEY", ViewBag.ProductSubCategoryName as SelectList, new { @class = "form-control populate", @onchange = "FillSubSub()" })
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label">
+                                            Sub Sub Category
+                                        </label>
+                                        <div class="col-lg-9">
+
+                                            @Html.DropDownList("ddl_MAST_PRODUCT_SUB_SUB_CATG_KEY", ViewBag.ProductSubSubCategoryName as SelectList, new { @class = "form-control populate" })
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label">
+                                            Image Name
+                                        </label>
+                                        <div class="col-lg-9">
+                                            <input name="txt_IMAGE_NAME" type="text" id="txt_IMAGE_NAME" value="@ViewBag.txt_IMAGE_NAME" class="form-control" placeholder="Enter Image Name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label">
+                                            Price
+                                        </label>
+                                        <div class="col-lg-9">
+                                            <input name="txt_PRICE" type="text" id="txt_PRICE" value="@ViewBag.txt_PRICE" class="form-control" placeholder="Enter Price">
+                                        </div>
+                                    </div>
+
+                                </fieldset>
+                            </div>
+                            <div class="col-md-6">
+                                <fieldset>
+                                    <legend>Upload Documents (Each file 20 MB max)</legend>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>
+                                                    Main Image(Jpeg | Png ) (Size:1600*1975)
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="form-group">
+
+                                                <input type="file" id="fu_head_Product_img" name="fu_head_Product_img" class="form-input-styled" data-fouc accept=".gif, .svg, .png, .jpg, .jpeg" />
+
+                                            </div>
+                                        </div>
+                                        @using (Html.BeginForm())
+                                        {
+
+                                        }
+
+                                        @using (Html.BeginForm("DownloadPDF", "Product", FormMethod.Post, new { id = "" + ViewBag.hf_HEAD_PRODUCT_IMG + "" }))
+                                        {
+                                            <input type="hidden" name="hf_HEAD_PRODUCT_DOWNLOAD_IMG" id="hf_HEAD_PRODUCT_DOWNLOAD_IMG" value="@ViewBag.hf_HEAD_PRODUCT_IMG" />
+                                            <div class="col-md-1" @Html.Raw(ViewBag.DownloadStyle)>
+                                                <div class="form-group" id="@ViewBag.hf_HEAD_PRODUCT_IMG" onclick="postmethodusingjs(this.id);">
+                                                    <i class="icon-download"></i>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>
+                                                    Watermark File (Jpeg | png) (Size:1600*1975)
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="form-group">
+
+                                                <input type="file" id="fu_head_Watermark_Product_img" name="fu_head_Watermark_Product_img" class="form-input-styled" data-fouc accept=".gif, .svg, .png, .jpg, .jpeg" />
+
+                                            </div>
+                                        </div>
+                                        @using (Html.BeginForm("DownloadPDF", "Product", FormMethod.Post, new { id = "" + ViewBag.hf_HEAD_PRODUCT_WATERMARK_IMG + "" }))
+                                        {
+                                            <input type="hidden" name="hf_HEAD_PRODUCT_DOWNLOAD_WATERMARK_IMG" id="hf_HEAD_PRODUCT_DOWNLOAD_WATERMARK_IMG" value="@ViewBag.hf_HEAD_PRODUCT_WATERMARK_IMG" />
+                                            <div class="col-md-1" @Html.Raw(ViewBag.DownloadStyle)>
+                                                <div class="form-group" id="@ViewBag.hf_HEAD_PRODUCT_WATERMARK_IMG" onclick="postmethodusingjs(this.id);">
+                                                    <i class="icon-download"></i>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>
+                                                    AI File
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="form-group">
+
+                                                <input type="file" id="fu_head_ai_Product_img" name="fu_head_ai_Product_img" class="form-input-styled" data-fouc accept=".ai, .pdf" />
+
+                                            </div>
+                                        </div>
+                                        @using (Html.BeginForm("DownloadPDF", "Product", FormMethod.Post, new { id = "" + ViewBag.hf_HEAD_PRODUCT_AI_IMG + "" }))
+                                        {
+                                            <input type="hidden" name="hf_HEAD_PRODUCT_DOWNLOAD_AI_IMG" id="hf_HEAD_PRODUCT_DOWNLOAD_AI_IMG" value="@ViewBag.hf_HEAD_PRODUCT_AI_IMG" />
+
+                                            <div class="col-md-1" @Html.Raw(ViewBag.DownloadStyle)>
+                                                <div class="form-group" id="@ViewBag.hf_HEAD_PRODUCT_AI_IMG" onclick="postmethodusingjs(this.id);">
+                                                    <i class="icon-download"></i>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+
+                                </fieldset>
+
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <fieldset>
+                                    <legend>Sheet info</legend>
+
+                                    <div class="row" style=" padding-left: 1rem;align-items:center;">
+
+                                        <div class="col-md-3">
+
+                                            <div class="form-group row">
+
+                                                Sheet Code One&nbsp;&nbsp;
+
+                                                <input name="txt_SHEET_CODE_ONE" type="text" id="txt_SHEET_CODE_ONE" value="@ViewBag.txt_SHEET_CODE_ONE" class="form-control" placeholder="Enter Sheet Code One">
+
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+
+                                                Sheet Code One Image (jpeg | png only) (Size:1600*1975)
+
+
+                                                <input type="file" id="fu_sheet_code_one_img" name="fu_sheet_code_one_img" class="form-input-styled" data-fouc accept=".gif, .svg, .png, .jpg, .jpeg" />
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+
+                                                Sheet Code One File (Pdf only)&nbsp;&nbsp;
+
+                                                <input type="file" id="fu_sheet_code_one_pdf" name="fu_sheet_code_one_pdf" class="form-input-styled" data-fouc accept=".ai, .pdf" />
+
+                                            </div>
+                                        </div>
+
+                                      
+
+                                        @using (Html.BeginForm("DownloadPDF", "Product", FormMethod.Post, new { id = "" + ViewBag.hf_SHEET_CODE_1_FILE + "" }))
+                                        {
+                                            <input type="hidden" name="hf_SHEET_CODE_1_FILE_DOWNLOAD" id="hf_SHEET_CODE_1_FILE_DOWNLOAD" value="@ViewBag.hf_SHEET_CODE_1_FILE" />
+                                            <div class="col-md-1 text-center" @Html.Raw(ViewBag.DownloadStyle)>
+                                                <div class="form-group" id="@ViewBag.hf_SHEET_CODE_1_FILE" onclick="postmethodusingjs(this.id);">
+                                                    <i class="icon-download"></i>
+                                                </div>
+                                            </div>
+                                        }
+
+                                    </div>
+                                    <div class="row" style=" padding-left: 1rem;align-items:center;">
+
+                                        <div class="col-md-3">
+
+                                            <div class="form-group row">
+
+                                                Sheet Code Two&nbsp;&nbsp;
+
+                                                <input name="txt_SHEET_CODE_TWO" type="text" id="txt_SHEET_CODE_TWO" value="@ViewBag.txt_SHEET_CODE_TWO" class="form-control" placeholder="Enter Sheet Code One">
+
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+
+                                                Sheet Code Two Image (jpeg | png only) (Size:1600*1975)
+
+
+                                                <input type="file" id="fu_sheet_code_two_img" name="fu_sheet_code_two_img" class="form-input-styled" data-fouc accept=".gif, .svg, .png, .jpg, .jpeg" />
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+
+                                                Sheet Code Two File (Pdf only)&nbsp;&nbsp;
+
+                                                <input type="file" id="fu_sheet_code_two_pdf" name="fu_sheet_code_two_pdf" class="form-input-styled" data-fouc accept=".ai, .pdf" />
+
+                                            </div>
+                                        </div>
+
+                                        @using (Html.BeginForm("DownloadPDF", "Product", FormMethod.Post, new { id = "" + ViewBag.hf_SHEET_CODE_2_FILE + "" }))
+                                        {
+                                            <input type="hidden" name="hf_SHEET_CODE_2_FILE_DOWNLOAD" id="hf_SHEET_CODE_2_FILE_DOWNLOAD" value="@ViewBag.hf_SHEET_CODE_2_FILE" />
+                                            <div class="col-md-1 text-center" @Html.Raw(ViewBag.DownloadStyle)>
+                                                <div class="form-group" id="@ViewBag.hf_SHEET_CODE_2_FILE" onclick="postmethodusingjs(this.id);">
+                                                    <i class="icon-download"></i>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="row" style=" padding-left: 1rem;align-items:center;">
+
+                                        <div class="col-md-3">
+
+                                            <div class="form-group row">
+
+                                                Sheet Code Three&nbsp;&nbsp;
+
+                                                <input name="txt_SHEET_CODE_THREE" type="text" id="txt_SHEET_CODE_THREE" value="@ViewBag.txt_SHEET_CODE_THREE" class="form-control" placeholder="Enter Sheet Code One">
+
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+
+                                                Sheet Code Three Image (jpeg | png only) (Size:1600*1975)
+
+
+                                                <input type="file" id="fu_sheet_code_three_img" name="fu_sheet_code_three_img" class="form-input-styled" data-fouc accept=".gif, .svg, .png, .jpg, .jpeg" />
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+
+                                                Sheet Code Three File (Pdf only)&nbsp;&nbsp;
+
+                                                <input type="file" id="fu_sheet_code_three_pdf" name="fu_sheet_code_three_pdf" class="form-input-styled" data-fouc accept=".pdf, .ai" />
+
+                                            </div>
+                                        </div>
+
+                                        @using (Html.BeginForm("DownloadPDF", "Product", FormMethod.Post, new { id = "" + ViewBag.hf_SHEET_CODE_3_FILE + "" }))
+                                        {
+                                            <input type="hidden" name="hf_SHEET_CODE_3_FILE_DOWNLOAD" id="hf_SHEET_CODE_3_FILE_DOWNLOAD" value="@ViewBag.hf_SHEET_CODE_3_FILE" />
+                                            <div class="col-md-1 text-center" @Html.Raw(ViewBag.DownloadStyle)>
+                                                <div class="form-group" id="@ViewBag.hf_SHEET_CODE_3_FILE" onclick="postmethodusingjs(this.id);">
+                                                    <i class="icon-download"></i>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="row" style=" padding-left: 1rem;align-items:center;">
+
+                                        <div class="col-md-3">
+
+                                            <div class="form-group row">
+
+                                                Sheet Code Four&nbsp;&nbsp;
+
+                                                <input name="txt_SHEET_CODE_FOUR" type="text" id="txt_SHEET_CODE_FOUR" value="@ViewBag.txt_SHEET_CODE_FOUR" class="form-control" placeholder="Enter Sheet Code One">
+
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+
+                                                Sheet Code Four Image (jpeg | png only) (Size:1600*1975)
+
+
+                                                <input type="file" id="fu_sheet_code_four_img" name="fu_sheet_code_four_img" class="form-input-styled" data-fouc accept=".gif, .svg, .png, .jpg, .jpeg" />
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+
+                                                Sheet Code Four File (Pdf only)&nbsp;&nbsp;
+
+                                                <input type="file" id="fu_sheet_code_four_pdf" name="fu_sheet_code_four_pdf" class="form-input-styled" data-fouc accept=".pdf, .ai" />
+
+                                            </div>
+                                        </div>
+                                        @using (Html.BeginForm("DownloadPDF", "Product", FormMethod.Post, new { id = "" + ViewBag.hf_SHEET_CODE_4_FILE + "" }))
+                                        {
+                                            <input type="hidden" name="hf_SHEET_CODE_4_FILE_DOWNLOAD" id="hf_SHEET_CODE_4_FILE_DOWNLOAD" value="@ViewBag.hf_SHEET_CODE_4_FILE" />
+                                            <div class="col-md-1 text-center" @Html.Raw(ViewBag.DownloadStyle)>
+                                                <div class="form-group" id="@ViewBag.hf_SHEET_CODE_4_FILE" onclick="postmethodusingjs(this.id);">
+                                                    <i class="icon-download"></i>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <input type="submit" name="ctl00$cph_MainBody$btn_Head_Save" value="Submit" id="cph_MainBody_btn_Head_Save" title="Save" class="btn btn-warning">
+                                <input type="submit" name="ctl00$cph_MainBody$btn_Back" value="Back" id="cph_MainBody_btn_Back" title="Back" class="btn btn-danger">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+        </div>
+    </div>
+
+    <!-- /content area -->
+</div>
+
+
+<script>
+
+
+    function postmethodusingjs(id) {
+
+        document.forms[id].submit();
+        return false;
+    }
+    function btn_Add_Click() {
+
+        //    alert('ok');
+        document.forms["submitaddform"].submit();
+        return false;
+    }
+
+
+
+    $(document).ready(function () {
+
+
+        $('.form-input-styled').uniform({
+            fileButtonClass: 'action btn bg-pink-400'
+        });
+
+
+        setDatatable("gvMastBenefits");
+
+
+        $('#loadingMask').fadeOut();
+    });
+</script>
+
+@if (ViewBag.JavaScriptFunction != null)
+{
+
+    <script type="text/javascript">
+                    @Html.Raw(ViewBag.JavaScriptFunction);
+    </script>
+}
+
+@if (TempData["JavaScriptFunction"] != null)
+{
+
+    <script type="text/javascript">
+                    @Html.Raw(TempData["JavaScriptFunction"]);
+    </script>
+}
+<script>
+    function FillSub() {
+
+
+
+        $.ajax({
+            url: '/Product/GetSubCat',
+            data: "{categorykey: '" + document.getElementById("ddl_MAST_PRODUCT_CATG_KEY").value + "'}",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data.d != 0) {
+                    $("#ddl_MAST_PRODUCT_SUB_CATG_KEY").html("");
+                    $.each(data, function (index, value) {
+                        $("#ddl_MAST_PRODUCT_SUB_CATG_KEY").append(
+                            $('<option></option>').val(value.SUB_CATEGORY_KEY).html(value.SUB_CATEGORY_NAME));
+                    });
+                }
+                else {
+                    alert("Sorry!!! some error occured");
+                }
+            },
+            error: function (response) {
+                console.log(response.responseText);
+            },
+
+            failure: function (response) {
+                console.log(response.responseText);
+            }
+
+        });
+    }
+
+    function FillSubSub() {
+
+
+
+        $.ajax({
+            url: '/Product/GetSubSubCat',
+            data: "{Subcategorykey: '" + document.getElementById("ddl_MAST_PRODUCT_SUB_CATG_KEY").value + "'}",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data.d != 0) {
+                    $("#ddl_MAST_PRODUCT_SUB_SUB_CATG_KEY").html("");
+                    $.each(data, function (index, value) {
+                        $("#ddl_MAST_PRODUCT_SUB_SUB_CATG_KEY").append(
+                            $('<option></option>').val(value.SUB_SUB_CATEGORY_KEY).html(value.SUB_SUB_CATEGORY_NAME));
+                    });
+                }
+                else {
+                    alert("Sorry!!! some error occured");
+                }
+            },
+            error: function (response) {
+                console.log(response.responseText);
+            },
+
+            failure: function (response) {
+                console.log(response.responseText);
+            }
+
+        });
+    }
+
+
+    function downloadfile(id) {
+
+
+        $.ajax({
+            url: '/Product/DownloadPDF',
+            data: "{filename: '" + id + "'}",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (data.d != 0) {
+                  
+                }
+                else {
+                    alert("Sorry!!! some error occured");
+                }
+            },
+            error: function (response) {
+                console.log(response.responseText);
+            },
+
+            failure: function (response) {
+                console.log(response.responseText);
+            }
+
+        });
+
+    }
+
+
+</script>

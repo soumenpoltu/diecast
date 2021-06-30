@@ -1,0 +1,376 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section FormName{
+
+    <i class="icon-home2 mr-2"></i>Blog
+
+}
+
+@section StyleCss{
+    <style type="text/css">
+        .filename {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .preview {
+            height: 230px;
+        }
+    </style>
+}
+
+
+
+<script type="text/javascript">
+
+    function OpenTab1(strMsg, error) {
+        $("#tab1").fadeIn();
+        $("#tab3").hide();
+        $("#tab2").hide();
+    
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+    function OpenTab2(strMsg, error) {
+        $("#tab1").hide();
+        $("#tab3").hide();
+        $("#tab2").fadeIn();
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+    function OpenTab3(strMsg, error) {
+        $("#tab1").hide();
+        $("#tab3").fadeIn();
+        $("#tab2").hide();
+
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+    $(document).ready(function () {
+        setDatatable("gvBlogs");
+        $('#loadingMask').fadeOut();
+
+
+        $("#ddl_MAST_BLOG_CATEGORY_KEY").select2({
+            placeholder: 'Select Blog Category'
+        });
+
+        $('#ddl_MAST_BLOG_CATEGORY_KEY').on('change', function () {
+            $('#hf_MAST_BLOG_CATEGORY_KEY').val($(this).val());
+        });
+
+
+
+        $('.form-input-styled').uniform({
+            fileButtonClass: 'action btn bg-pink-400'
+        });
+
+        $("#txt_DESCRIPTION").summernote({
+            height: 180,
+            codemirror: { "theme": "ambiance" }
+        });
+
+
+        $("#txt_BLOG_DATE").datepicker({
+
+            dateFormat: 'dd/mm/yy',
+            showOn: "button",
+            buttonImage: "../Content/admin-assets/images/calendar.png",
+            buttonImageOnly: true,
+            changeMonth: true,
+            changeYear: true
+        });
+
+
+        $("#txt_DESCRIPTION").on('summernote.blur', function () {
+            $("#txt_DESCRIPTION").html($("#txt_DESCRIPTION").summernote('code'));
+        });
+
+        $("#fu_Blog").on("change", function (evt) {
+            var tgt = evt.target || window.event.srcElement, files = tgt.files;
+            if (files.length > 0) {
+                if (files[0].size > 20097134) {
+                    $(this).val("");
+                    $(this).next(".filename").text("No file selected");
+                    $('#img_Blog').attr("src", "~/Content/admin-assets/images/no_image.jpg");
+                    $(this).focus();
+                    openErrorPopup("Please maintain allowed document size (20MB maximum).");
+                }
+                else {
+                    readURL(this, $('#img_Blog'));
+                }
+            }
+            else {
+                $('#img_Blog').attr("src", "~/Content/admin-assets/images/no_image.jpg");
+            }
+        });
+
+       
+
+        $("#btn_Head_Save").click(function () {
+            if ($("#txt_BLOG_HEADING").val().trim() == "") {
+                $("#txt_BLOG_HEADING").focus();
+                alert("Blog heading can't left blank");
+                return false;
+            }
+
+
+            if ($("#hf_MAST_BLOG_CATEGORY_KEY").val().trim() == "0") {
+                $("#LB_MAST_BLOG_CATEGORY_KEY").focus();
+                alert("Must Select Blog Category");
+                return false;
+            }
+            if ($("#txt_BLOG_DATE").val().trim() == "") {
+                alert("please select Blog date.");
+                $("#txt_BLOG_DATE").focus();
+                return false;
+            }
+            if ($("#txt_DESCRIPTION").val().trim() == "") {
+                alert("please select Description.");
+                $("#txt_DESCRIPTION").focus();
+                return false;
+            }
+        });
+
+    });
+
+</script>
+
+
+
+<div class="content" style="min-height: 10px;">
+    <ul id="fbAdd" class="fab-menu fab-menu-fixed fab-menu-bottom-right">
+        <li>
+            @using (Html.BeginForm("Add", "Blog", FormMethod.Post, new { id = "submitaddform" }))
+            {
+                <a id="A2" href="#" class="fab-menu-btn btn bg-green btn-float rounded-round btn-icon" onclick="btn_Add_Click();">
+                    <i class="fab-icon-open icon-plus3"></i><i class="fab-icon-close icon-cross2"></i>
+                </a>
+            }
+        </li>
+    </ul>
+    <div id="tab1" class="card">
+        <div class="card-body">
+            <table cellspacing="0" rules="all" class="table table-hover table-bordered table-striped" border="1" id="gvBlogs" name="gvBlogs" style="border-collapse:collapse;">
+                <tbody>
+                    <tr>
+                        <th>Heading</th>
+                        <th>Date</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    @foreach (System.Data.DataRow dr in Model)
+                    {
+                        <tr>
+
+                            <td>@dr["BLOG_HEADING"].ToString()</td>
+                            <td>@dr["BLOG_DATE"].ToString()</td>
+                            <td>
+                                @using (Html.BeginForm("edit", "Blog", FormMethod.Post, new { id = "submitE+" + dr["MAST_BLOG_KEY"].ToString() + "" }))
+                                {
+
+                                    <input type="hidden" name="editid=" value="@dr["MAST_BLOG_KEY"].ToString()" />
+
+                                    <a id="submitE+@dr["MAST_BLOG_KEY"].ToString()" href="#" onclick="postmethodusingjs(this.id)" class="list-icons-item"><i class="icon-menu9"></i></a>
+
+                                }
+                            </td>
+                            <td>
+                                @using (Html.BeginForm("delete", "Blog", FormMethod.Post, new { id = "submitD+" + dr["MAST_BLOG_KEY"].ToString() + "" }))
+                                {
+
+                                    <input type="hidden" name="editid=" value="@dr["MAST_BLOG_KEY"].ToString()" />
+
+                                    <a id="submitD+@dr["MAST_BLOG_KEY"].ToString()" href="#" onclick="postmethodusingjs(this.id)" class="list-icons-item"><i class="icon-trash"></i></a>
+
+                                }
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <ul id="tabsmenu" class="tabsmenu" style="display: none">
+        <li class="active"><a id="atab1" href="#tab1">List</a></li>
+        <li><a id="atab2" href="#tab2">Add / Edit</a></li>
+        <li><a id="aPageName" href="#" style="margin: 0 5px 0 33%; border-radius: 6px;">&nbsp;</a></li>
+    </ul>
+    <div id="tab2" class="card" style="display:none">
+
+        @using (Html.BeginForm("btn_Blog_Save_Click", "Blog", FormMethod.Post, new { id = "submitformpage", enctype = "multipart/form-data" }))
+        {
+            <input type="hidden" id="hf_BLOG_IMAGE" name="hf_BLOG_IMAGE" value="@ViewBag.BLOG_IMAGE" />
+            <input type="hidden" id="hf_MAST_BLOG_KEY" name="hf_MAST_BLOG_KEY" value="@ViewBag.hf_MAST_BLOG_KEY" />
+            <input type="hidden" id="hf_MAST_BLOG_TAG_KEY" name="hf_MAST_BLOG_TAG_KEY" value="@ViewBag.hf_MAST_BLOG_TAG_KEY" />
+            <input type="hidden" id="hf_MAST_BLOG_CATEGORY_KEY" name="hf_MAST_BLOG_CATEGORY_KEY" value="@ViewBag.hf_MAST_BLOG_CATEGORY_KEY" />
+            <div class="card-body">
+                <div class="col-md-12">
+                    <fieldset>
+                        <legend class="font-weight-semibold">Blog Details</legend>
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>
+                                            Blog Heading
+                                        </label>
+                                        <input type="text" id="txt_BLOG_HEADING" name="txt_BLOG_HEADING" value="@ViewBag.txt_BLOG_HEADING" class="form-control" autofocus />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>
+                                            Blog Category
+                                        </label>
+
+
+                                        @Html.ListBox("ddl_MAST_BLOG_CATEGORY_KEY", ViewBag.BlogCategoryName as SelectList, new { @class = "form-control populate" })
+
+
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>
+                                            Blog Date
+                                        </label>
+                                        <input type="text" id="txt_BLOG_DATE" name="txt_BLOG_DATE" value="@ViewBag.txt_BLOG_DATE" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>
+                                            Blog Short Description
+                                        </label>
+                                        <textarea id="txt_BLOG_QUESTION" name="txt_BLOG_QUESTION" class="form-control" rows="5" maxlength="300">@ViewBag.txt_BLOG_QUESTION</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>
+                                            Meta Description
+                                        </label>
+                                        <input type="text" id="txt_META_DESC" name="txt_META_DESC" value="@ViewBag.txt_META_DESC" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>
+                                            Meta Keyword
+                                        </label>
+                                        <input type="text" id="txt_META_KEYWORD" name="txt_META_KEYWORD" value="@ViewBag.txt_META_KEYWORD" class="form-control" />
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-md-6">
+                                <fieldset>
+                                    <legend>Blog Picture</legend>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>
+                                                    Upload Blog Picture (Accepted Format .png,.svg, .jpg, .jpeg only. Max size 20 MB)
+                                                </label>
+                                                <input type="file" id="fu_Blog" name="fu_Blog" class="form-input-styled" data-fouc accept=".gif, .svg, .png, .jpg, .jpeg" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8 ml-auto mr-auto">
+                                            <img id="img_Blog" src="@ViewBag.img_Blog" class="form-control preview" />
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>
+                                        Blog Details
+                                    </label>
+                                    <textarea id="txt_DESCRIPTION" name="txt_DESCRIPTION" class="summernote" rows="2">@ViewBag.txt_DESCRIPTION</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <input type="submit" id="btn_Head_Save" value="Submit" class="mb-xs mt-xs btn btn-success" />
+                        <input type="button" id="btn_Back_Save" value="Back" class="mb-xs mt-xs mr-xs btn btn-warning" onclick="location.href = '/Blog/Index';" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+@if (ViewBag.JavaScriptFunction != null)
+{
+
+    <script type="text/javascript">
+                    @Html.Raw(ViewBag.JavaScriptFunction);
+    </script>
+}
+
+@if (TempData["JavaScriptMsg"] != null)
+{
+
+    <script type="text/javascript">
+                    @Html.Raw(TempData["JavaScriptMsg"]);
+    </script>
+}
+<script type="text/javascript">
+
+    function postmethodusingjs(id) {
+        /*alert('ok');*/
+        document.forms[id].submit();
+        return false;
+    }
+
+    function postmethodusingheadsavejs() {
+        document.forms["submitform"].submit();
+
+        return false;
+    }
+
+    function btn_Add_Click() {
+
+        //    alert('ok');
+        document.forms["submitaddform"].submit();
+        return false;
+    }
+</script>
+
+
+

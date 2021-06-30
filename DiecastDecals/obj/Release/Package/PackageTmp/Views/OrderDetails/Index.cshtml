@@ -1,0 +1,538 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section FormName{
+
+    <i class="icon-home2 mr-2"></i>Order Details
+
+}
+
+@section StyleCss{
+    <style type="text/css">
+        .filename {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .preview {
+            height: 230px;
+        }
+    </style>
+    <style>
+        body {
+            font-family: arial;
+        }
+        .img-responsive{
+            display: block;
+            height: auto;
+            max-width: unset;
+            width: 80px;
+        }
+        .table-responsive {
+            display: block;
+            width: 100%;
+            max-width: 1240px;
+            margin: auto;
+        }
+
+        table.cart-table {
+            margin-bottom: 5px;
+            width: 100%;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .mb-3, .my-3 {
+            margin-bottom: 1rem !important;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        tbody {
+            display: table-row-group;
+            vertical-align: middle;
+            border-color: inherit;
+        }
+
+        tr {
+            display: table-row;
+            vertical-align: inherit;
+            border-color: inherit;
+        }
+
+        .cart-table tbody tr td:last-child {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .cart-table tbody tr td {
+            border: 1px solid #e1e1e1;
+            font-family: arial;
+            font-size: 15px;
+            font-weight: normal;
+            padding: 15px;
+            text-align: center;
+        }
+
+        td, th {
+            padding: 0;
+        }
+
+        *, ::after, ::before {
+            box-sizing: border-box;
+        }
+
+        .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+            margin-bottom: .5rem;
+            font-family: inherit;
+            font-weight: 500;
+            line-height: 1.2;
+            color: inherit;
+        }
+
+        .pdt-thumb {
+            width: 120px;
+            height: auto;
+        }
+
+        .cart-table thead tr th {
+            border: 1px solid #e1e1e1;
+            border-collapse: collapse;
+            color: #fff;
+            background: #ff4c2e;
+            font-family: Arial;
+            font-size: 14px;
+            font-weight: bold;
+            height: 49px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .nobordertable tbody tr td {
+            border: none;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+    </style>
+}
+
+
+
+<script type="text/javascript">
+
+    function OpenTab1(strMsg, error) {
+        $("#tab1").fadeIn();
+        $("#tab3").hide();
+        $("#tab2").hide();
+
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+    function OpenTab2(strMsg, error) {
+        $("#tab1").hide();
+        $("#tab3").hide();
+        $("#tab2").fadeIn();
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+    function OpenTab3(strMsg, error) {
+        $("#tab1").hide();
+        $("#tab3").fadeIn();
+        $("#tab2").hide();
+
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+    $(document).ready(function () {
+        setDatatable("gvBlogs");
+        $('#loadingMask').fadeOut();
+
+
+        $("#ddl_MAST_BLOG_CATEGORY_KEY").select2({
+            placeholder: 'Select Blog Category'
+        });
+
+        $('#ddl_MAST_BLOG_CATEGORY_KEY').on('change', function () {
+            $('#hf_MAST_BLOG_CATEGORY_KEY').val($(this).val());
+        });
+
+
+
+        $('.form-input-styled').uniform({
+            fileButtonClass: 'action btn bg-pink-400'
+        });
+
+        $("#txt_DESCRIPTION").summernote({
+            height: 180,
+            codemirror: { "theme": "ambiance" }
+        });
+
+
+        $("#txt_BLOG_DATE").datepicker({
+
+            dateFormat: 'dd/mm/yy',
+            showOn: "button",
+            buttonImage: "../Content/admin-assets/images/calendar.png",
+            buttonImageOnly: true,
+            changeMonth: true,
+            changeYear: true
+        });
+
+
+        $("#txt_DESCRIPTION").on('summernote.blur', function () {
+            $("#txt_DESCRIPTION").html($("#txt_DESCRIPTION").summernote('code'));
+        });
+
+        $("#fu_Blog").on("change", function (evt) {
+            var tgt = evt.target || window.event.srcElement, files = tgt.files;
+            if (files.length > 0) {
+                if (files[0].size > 20097134) {
+                    $(this).val("");
+                    $(this).next(".filename").text("No file selected");
+                    $('#img_Blog').attr("src", "~/Content/admin-assets/images/no_image.jpg");
+                    $(this).focus();
+                    openErrorPopup("Please maintain allowed document size (20MB maximum).");
+                }
+                else {
+                    readURL(this, $('#img_Blog'));
+                }
+            }
+            else {
+                $('#img_Blog').attr("src", "~/Content/admin-assets/images/no_image.jpg");
+            }
+        });
+
+
+
+        $("#btn_Head_Save").click(function () {
+            if ($("#txt_BLOG_HEADING").val().trim() == "") {
+                $("#txt_BLOG_HEADING").focus();
+                alert("Blog heading can't left blank");
+                return false;
+            }
+
+
+            if ($("#hf_MAST_BLOG_CATEGORY_KEY").val().trim() == "0") {
+                $("#LB_MAST_BLOG_CATEGORY_KEY").focus();
+                alert("Must Select Blog Category");
+                return false;
+            }
+            if ($("#txt_BLOG_DATE").val().trim() == "") {
+                alert("please select Blog date.");
+                $("#txt_BLOG_DATE").focus();
+                return false;
+            }
+            if ($("#txt_DESCRIPTION").val().trim() == "") {
+                alert("please select Description.");
+                $("#txt_DESCRIPTION").focus();
+                return false;
+            }
+        });
+
+    });
+
+</script>
+
+
+
+<div class="content" style="min-height: 10px;">
+  
+    <div id="tab1" class="card">
+        <div class="card-body">
+            <table cellspacing="0" rules="all" class="table table-hover table-bordered table-striped" border="1" id="gvBlogs" name="gvBlogs" style="border-collapse:collapse;">
+                <tbody>
+                    <tr>
+                        <th>Invoice</th>
+                        <th>Order Date</th>
+                        <th>Customer Email</th>
+                        <th>Delivered Status</th>
+                        <th>Payment Status</th>
+                        <th>View</th>
+                        <th>Delivered</th>
+                    </tr>
+                    @foreach (System.Data.DataRow dr in Model)
+                    {
+                        <tr>
+
+                            <td>@dr["DTLS_INVOICE"].ToString()</td>
+                            <td>@dr["INV_DATE"].ToString()</td>
+
+                            <td>@dr["CUSTOMER_EMAIL"].ToString()</td>
+                            @if (@dr["DELIVERED_STATUS"].ToString() == "NOT DELIVERED")
+                            {
+                                <td style="color:red">@dr["DELIVERED_STATUS"].ToString()</td>
+                            }
+                            else
+                            {
+                                <td style="color:green">@dr["DELIVERED_STATUS"].ToString()</td>
+                            }
+                            @if (@dr["PAYMENT_STATUS"].ToString() == "NOT PAID")
+                            {
+                                <td style="color:red">@dr["PAYMENT_STATUS"].ToString()</td>
+                            }
+                            else
+                            {
+                                <td style="color:green">@dr["PAYMENT_STATUS"].ToString()</td>
+                            }
+
+                            <td>
+                                @using (Html.BeginForm("view", "OrderDetails", FormMethod.Post, new { id = "submitE+" + dr["DTLS_INVOICE"].ToString() + "" }))
+                                {
+
+                                    <input type="hidden" name="editid=" value="@dr["DTLS_INVOICE"].ToString()" />
+
+                                    <a id="submitE+@dr["DTLS_INVOICE"].ToString()" href="#" onclick="postmethodusingjs(this.id)" class="list-icons-item"><i class="icon-menu9"></i></a>
+
+                                }
+                            </td>
+                            <td>
+                                @using (Html.BeginForm("delivered", "OrderDetails", FormMethod.Post, new { id = "submitD+" + dr["DTLS_INVOICE"].ToString() + "" }))
+                                {
+
+                                    <input type="hidden" name="editid=" value="@dr["DTLS_INVOICE"].ToString()" />
+
+                                    <a id="submitD+@dr["DTLS_INVOICE"].ToString()" href="#" onclick="postmethodusingjs(this.id)" class="list-icons-item"><i class="icon-cart"></i></a>
+
+                                }
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <ul id="tabsmenu" class="tabsmenu" style="display: none">
+        <li class="active"><a id="atab1" href="#tab1">List</a></li>
+        <li><a id="atab2" href="#tab2">Add / Edit</a></li>
+        <li><a id="aPageName" href="#" style="margin: 0 5px 0 33%; border-radius: 6px;">&nbsp;</a></li>
+    </ul>
+    <div id="tab2" class="card" style="display:none">
+
+
+        <div class="card-body">
+            <div class="col-md-12">
+                <fieldset>
+                    <legend class="font-weight-semibold">Order Details</legend>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h4 class="cart-title">Delivered Status: @ViewBag.deliveredstatus</h4>
+                            <div class="table-responsive table-borderouter">
+                                <table class="cart-table mb-3">
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="2">
+                                                <h2>Order Details</h2>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left">
+                                                <img src="@ViewBag.img_HEADER_LOGO" alt="" width="120" height="104" />
+                                            </td>
+                                            <td class="text-right">
+                                                <p>Invoice Number:#@ViewBag.inv</p>
+                                                <p>Invoice Date:@ViewBag.invdate</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left">
+                                                <b>Billing Address:<br /></b>
+                                                @ViewBag.billaddr
+                                            </td>
+                                            <td class="text-left">
+                                                <b>Shipping Address:<br /></b>
+                                                @ViewBag.shipaddr
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table class="cart-table">
+                                    <thead>
+                                        <tr>
+                                            <th>SL No.</th>
+                                            <th>Product </th>
+                                            <th>Product name</th>
+                                            <th>Unit Price</th>
+                                            <th>Qty</th>
+                                            <th>Subtotal</th>
+                                        </tr>
+                                    </thead>
+
+
+                                    @{int i = 0; }
+
+                                    @{
+                                        System.Data.DataTable dt = (System.Data.DataTable)ViewData["dt1"];
+                                    }
+
+                                <tbody>
+                                    @foreach (System.Data.DataRow dr in dt.Rows)
+                                    {
+                                        i = i + 1;
+                                        <tr>
+                                            <td>
+                                                @i
+                                            </td>
+                                            <td>
+                                                <a href="#"><img alt="" class="img-responsive" src="~/documents/product/@dr["PRODUCT_IMAGE"]" /></a>
+                                            </td>
+                                            <td>
+                                                <h6><a href="#">@dr["PRODUCT"]</a></h6>
+                                            </td>
+                                            <td>
+                                                <div class="cart-price">$@dr["PRICE"]</div>
+                                            </td>
+                                            <td>
+                                                @dr["QUANTITY"]
+                                            </td>
+                                            <td>
+                                                <div class="cart-subtotal">$@dr["GROSS_AMOUNT"]</div>
+                                            </td>
+                                        </tr>
+                                    }
+                                    <tr>
+                                        <td colspan="4"> </td>
+                                        <td class="text-left">
+                                            Total:
+                                        </td>
+                                        <td>
+                                            <div class="cart-subtotal text-left">$@ViewBag.subtotal</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4"> </td>
+                                        <td class="text-left">
+                                            Tax:
+                                        </td>
+                                        <td>
+                                            <div class="cart-subtotal text-left">$@ViewBag.tax</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4"> </td>
+                                        <td class="text-left">
+                                            Shipping Amount:
+                                        </td>
+                                        <td colspan="2">
+                                            <div class="cart-subtotal text-left">$@ViewBag.shipping</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4"> </td>
+                                        <td class="text-left">
+                                            Sub Total:
+                                        </td>
+                                        <td>
+                                            <div class="cart-subtotal text-left">$@ViewBag.totalamnt</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4"> </td>
+                                        <td class="text-left">
+                                            <b>Grand Total:</b>
+                                        </td>
+                                        <td>
+                                            <div class="cart-subtotal text-left">$@ViewBag.totalamnt</div>
+                                        </td>
+                                    </tr>
+
+
+                                </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <input type="button" id="btn_Back_Save" value="Back" class="mb-xs mt-xs mr-xs btn btn-warning" onclick="location.href = '/Blog/Index';" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@if (ViewBag.JavaScriptFunction != null)
+{
+
+    <script type="text/javascript">
+                    @Html.Raw(ViewBag.JavaScriptFunction);
+    </script>
+}
+
+@if (TempData["JavaScriptMsg"] != null)
+{
+
+    <script type="text/javascript">
+                    @Html.Raw(TempData["JavaScriptMsg"]);
+    </script>
+}
+<script type="text/javascript">
+
+    function postmethodusingjs(id) {
+        /*alert('ok');*/
+        document.forms[id].submit();
+        return false;
+    }
+
+    function postmethodusingheadsavejs() {
+        document.forms["submitform"].submit();
+
+        return false;
+    }
+
+    function btn_Add_Click() {
+
+        //    alert('ok');
+        document.forms["submitaddform"].submit();
+        return false;
+    }
+</script>
+
+
+

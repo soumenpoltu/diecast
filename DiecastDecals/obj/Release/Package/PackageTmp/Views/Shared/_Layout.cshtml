@@ -1,0 +1,394 @@
+﻿<!DOCTYPE html>
+@*@using System.Web.Optimization*@
+<!--[if IE]><![endif]-->
+<!--[if lt IE 7 ]> <html lang="en" class="ie6">    <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="ie7">    <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="ie8">    <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="ie9">    <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>@RenderSection("title", required: true)</title>
+    @RenderSection("Meta",required: false)
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!-- Favicon
+    ============================================ -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/main-assets/img/favicon.png">
+
+    <!-- Fonts  -->
+    <link href='https://fonts.googleapis.com/css?family=Khula:400,800,700,600,300' rel='stylesheet' type='text/css'>
+
+    <!-- style CSS
+    ============================================ -->
+    <link rel="stylesheet" href="~/Content/main-assets/style.css">
+
+    @*@Styles.Render("~/bundles/css")*@
+
+
+    @RenderSection("style", required: false)
+
+    <script>
+        function logoutclick() {
+
+            document.forms["logout"].submit();
+            return false;
+        }
+    </script>
+
+    <script src="~/Content/main-assets/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+<body class="home-1">
+    <div class="main-area">
+        <!-- Start header -->
+        <header>
+            <!-- Start top call-to acction -->
+            <div class="top-bar-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="top-call-to-acction">
+                                <p>
+                                    <a href="tel:@ViewBag.txt_CONTACT_NO"><i class="fa fa-phone"></i> @ViewBag.txt_CONTACT_NO</a>
+                                    <a href="mailto:@ViewBag.txt_MAIL"><i class="fa fa-envelope-o"></i> @ViewBag.txt_MAIL</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-5 offset-md-2">
+                            <div class="top-menus">
+                                <ul>
+                                    <li><a href="~/AboutUsUI/Index">About Us</a></li>
+                                    <li><a href="~/ContactUsUI/Index">Contact Us</a></li>
+                                    <li><a href="~/TrackOrderUI/Index">Track Order</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End top call-to acction -->
+            <!-- Start logo and search area -->
+            <div class="logo-and-menu-area">
+                <div class="container">
+                    <div class="site-menu">
+                        <ul>
+                            <li class="menu-button">
+                                <a><i class="fa fa-bars" aria-hidden="true"></i><span> Categories</span></a>
+                            </li>
+                            <li>
+                                <a href="~/">Home</a>
+                            </li>
+                            <li>
+                                <a href="~/ProductListUI/Index">Product</a>
+                            </li>
+                            <li>
+                                <a href="~/BlogUI/Index">Blog</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="logo">
+                        <a href="~/IndexUI/Index"><img src="@ViewBag.img_HEADER_LOGO" alt=""></a>
+                    </div>
+                    <div class="user-info">
+                        <ul>
+                            <li class="menu-infos">
+                                <a href="~/OrderHistoryUI/Index"><i class="fa fa-user" aria-hidden="true"></i> <span class="blok">Hi, @ViewBag.customername</span> <span class="boldarea">My Account</span>  </a>
+                            </li>
+                            <li class="menu-infos">
+                                <a href="~/CartUI/Index"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="blok">Cart (@ViewBag.cartitemscount)</span> <span class="boldarea">$@ViewBag.cartitemprice</span>  </a>
+                            </li>
+
+                            <li class="menu-infos logout-btn" @Html.Raw(ViewBag.logindisplay)>
+                                @using (Html.BeginForm("Index", "LogoutUI", FormMethod.Get, new { id = "logout" }))
+                                {
+                    <a href="#" titile="Logout" onclick="logoutclick();"><i class="fa fa-power-off" aria-hidden="true"></i></a>}
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- End logo and search area -->
+            <!-- Start  menu panel-->
+            <div class="sidepanel">
+                <i class="fa fa-times closeit" aria-hidden="true"></i>
+                <ul>
+
+                    <li>
+                        <h3 class="sidepnl-ttl"> PRODUCTS</h3>
+                    </li>
+                    @Html.Raw(ViewBag.Homme_CATEGORY_LIST)
+                    @*<li><a href="">Rat Fink</a></li>*@
+                    @*<li class='hasdropdown'>
+                        <a href=''>Sports</a> <i class='fa fa-angle-right' aria-hidden='true'></i>
+                        <ul>
+                            <li class='hasdropdown'>
+                                <a href=''>Cricket</a> <i class='fa fa-angle-right' aria-hidden='true'></i>
+                                <ul>
+                                    <li class='hasdropdown'>
+                                        <a href=''>IPL</a> <i class='fa fa-angle-right' aria-hidden='true'></i>
+                                        <ul>
+                                            <li><a href=''>Kolkata Knight Riders</a></li>
+                                            <li><a href="">Mumbai Indians</a></li>
+                                            <li><a href="">Rajasthan Royals</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="hasdropdown"><a href="">One Day</a></li>
+                                    <li class="hasdropdown"><a href="">Test Match</a></li>
+                                </ul>
+                            </li>
+                            <li class="hasdropdown"><a href="">Volleyball</a></li>
+                            <li class="hasdropdown"><a href="">Football</a></li>
+                        </ul>
+                    </li>
+                    <li class="hasdropdown">
+                        <a href="">Texaco </a><i class="fa fa-angle-right" aria-hidden="true"></i>
+                        <ul>
+                            <li><a href="">Product 1</a></li>
+
+                            <li><a href="">Product 1</a></li>
+                        </ul>
+                    </li>
+                    <li class="hasdropdown">
+                        <a href="">Texaco </a><i class="fa fa-angle-right" aria-hidden="true"></i>
+                        <ul>
+                            <li><a href="">Product 1</a></li>
+
+                            <li><a href="">Product 1</a></li>
+                        </ul>
+                    </li>
+                    <li class="hasdropdown">
+                        <a href="">Texaco </a><i class="fa fa-angle-right" aria-hidden="true"></i>
+                        <ul>
+                            <li><a href="">Product 1</a></li>
+
+                            <li><a href="">Product 1</a></li>
+                        </ul>
+                    </li>*@
+
+                </ul>
+
+                @*<ul>
+                    <li>
+                        <h3 class="sidepnl-ttl"> PRODUCTS</h3>
+                    </li>
+                    <li><a href="">Rat Fink</a></li>
+                    <li class="hasdropdown">
+                        <a href="">Sports</a> <i class="fa fa-angle-down" aria-hidden="true"></i>
+                        <ul>
+                            <li class="hasdropdown">
+                                <a href="">Cricket</a> <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                <ul>
+                                    <li class="hasdropdown">
+                                        <a href="">IPL</a> <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                        <ul>
+                                            <li><a href="">Kolkata Knight Riders</a></li>
+                                            <li><a href="">Mumbai Indians</a></li>
+                                            <li><a href="">Rajasthan Royals</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="hasdropdown"><a href="">One Day</a><i class="fa fa-angle-down" aria-hidden="true"></i></li>
+                                    <li class="hasdropdown"><a href="">Test Match</a><i class="fa fa-angle-down" aria-hidden="true"></i></li>
+                                </ul>
+                            </li>
+                            <li class="hasdropdown"><a href="">Volleyball</a><i class="fa fa-angle-down" aria-hidden="true"></i></li>
+                            <li class="hasdropdown"><a href="">Football</a><i class="fa fa-angle-down" aria-hidden="true"></i></li>
+                        </ul>
+                    </li>
+                    <li class="hasdropdown"><a href="">Texaco </a><i class="fa fa-angle-down" aria-hidden="true"></i></li>
+                    <li class="hasdropdown"><a href="">NRL</a><i class="fa fa-angle-down" aria-hidden="true"></i></li>
+                    <li class="hasdropdown"><a href="">Sports</a><i class="fa fa-angle-down" aria-hidden="true"></i></li>
+                </ul>*@
+
+
+
+
+                <ul class="onlymobile">
+                    <li>
+                        <h3 class="sidepnl-ttl"> MENU</h3>
+                    </li>
+                    <li><a href="~/">Home</a></li>
+                    <li><a href="~/AboutUsUI/Index">About us</a></li>
+                    <li><a href="~/BlogUI/Index">Blog</a> </li>
+                    <li><a href="~/ContactUsUI/Index">Contact</a></li>
+                    <li><a href="#">My Account</a></li>
+                    <li><a href="~/CartUI/Index">Cart</a></li>
+                    <li @Html.Raw(ViewBag.moblogoutdisplay)><a href="~/LogoutUI/Index">Logout</a></li>
+                    <li @Html.Raw(ViewBag.logoutdisplay)><a href="~/LoginUI/Index">Log In</a></li>
+                </ul>
+            </div>
+            <!-- End menu panel-->
+        </header>
+        <!-- End header -->
+        @using (Html.BeginForm("search", "ProductListUI", FormMethod.Get))
+        {
+            <div class="container-fluid searchouter">
+                <div class="searchfrm">
+                    <form>
+                        <input type="text" name="id" placeholder="Search Product...">
+                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </form>
+                </div>
+            </div>
+        }
+
+        @RenderBody()
+        <!-- Start footer -->
+        <footer>
+            <!-- Start footer medil -->
+            <div class="footer-medil">
+                <div class="container foot-cont">
+                    <div class="row">
+                        <div class="col-md-3 col-lg-3 lft-ftr">
+                            <div class="ftrlogo">
+                                <img src="@ViewBag.img_FOOTER_LOGO" class="img-fluid">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="mb-2">
+                                        <p class="ttl">Phone Number</p>
+                                        <a class="ttl-data" href="tel:@ViewBag.txt_CONTACT_NO">@ViewBag.txt_CONTACT_NO</a>
+                                    </div>
+                                    <div>
+                                        <p class="ttl">Address</p><p class="ttl-data">@ViewBag.txt_ADDRESS</p>
+                                    </div>
+                                    <div>
+                                        <p class="ttl">E-mail</p>
+                                        <a class="ttl-data" href="mailto:@ViewBag.txt_MAIL">@ViewBag.txt_MAIL</a>
+                                    </div>
+
+                                </div>
+                                <!-- <div class="col-md-12 col-lg-6">
+                            <p class="ttl">E-mail</p>
+                            <a class="ttl-data" href="mailto:admin@diecastdecals.com.au">admin@diecastdecals.com.au</a>
+                            </div> -->
+                            </div>
+                            <!-- <ul>
+                            <li><p class="ttl">Phone Number</p><a href="tel:0434284294">0434 284 294</a></li>
+                            <li><p class="ttl">E-mail</p><a href="mailto:admin@diecastdecals.com.au">admin@diecastdecals.com.au</a></li>
+                            <li><p class="ttl">Address</p><p>Australia</p></li>
+                        </ul> -->
+                        </div>
+                        <div class="col-md-3 col-lg-3 mt-4 pl-lg-3 info-ftr">
+                            <h3>Information</h3>
+                            <ul>
+                                <li><a href="~/AboutUSUI/Index">About us</a></li>
+                                <li><a href="~/ContactUSUI/Index">Contact us</a></li>
+                                <li><a href="~/LoginUI/Index">Sign up</a></li>
+                                <li><a href="~/LoginUI/Index">Login</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 col-lg-3 mt-4 pl-lg-3 info-ftr">
+                            <h3>Customer Service</h3>
+                            <ul>
+                                <li><a href="">Sitemap</a></li>
+                                <li><a href="~/MyaccountAddressUI/Index">My Account</a></li>
+                                <li><a href="">Delivery Information </a></li>
+                                <li><a href="~/OrderHistoryUI/Index"> Order History</a></li>
+                                <li><a href="">Specials</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 col-lg-3 mt-4  info-ftr">
+                            <h3>Follow Us On Social Media</h3>
+                            <ul class="socialicon">
+                                <li><a href="@ViewBag.txt_PRINTEREST_LINK"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                                <li><a href="@ViewBag.txt_INSTAGRAM_LINK"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                <li><a href="@ViewBag.txt_FACEBOOK_LINK"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <!-- End footer medil information -->
+                </div>
+            </div>
+            <!-- End footer medil -->
+            <!-- Start footer copyright -->
+            <div class="footer-copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="copyright-text">
+                                <p>Copyright &copy;  <a href="http://bootexperts.com/">Diecast Decals</a>. All rights reserved.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="footer-card pull-right">
+                                <img src="~/content/main-assets/img/payment.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End footer copyright -->
+        </footer>
+        <!-- End footer -->
+    </div>
+
+    @RenderSection("script", required: false)
+
+    <!-- jquery-1.11.3.min js
+    ============================================ -->
+    @*<script src="~/Content/main-assets/js/vendor/jquery-1.12.4.min.js"></script>*@
+
+    @*<script src="~/Content/main-assets/js/jquery-1.8.3.min.js"></script>*@
+    <!-- popper js
+    ============================================ -->
+    <script src="~/Content/main-assets/js/popper.min.js"></script>
+
+    <!-- bootstrap js
+    ============================================ -->
+    <script src="~/Content/main-assets/js/bootstrap.min.js"></script>
+
+    <!-- owl.carousel.min js
+    ============================================ -->
+    <script src="~/Content/main-assets/js/owl.carousel.js"></script>
+
+    <!-- jquery.nivo.slider.pack js
+    ============================================ -->
+    <script src="~/Content/main-assets/js/jquery.nivo.slider.pack.js"></script>
+
+    <!-- jqueryui js
+    ============================================ -->
+    <script src="~/Content/main-assets/js/jquery.fancybox.js"></script>
+
+    <!-- jquery.scrollUp.min js
+    ============================================ -->
+    <script src="~/Content/main-assets/js/jquery.scrollUp.min.js"></script>
+
+    <!-- wow js
+    ============================================ -->
+    <script src="~/Content/main-assets/js/wow.js"></script>
+
+    <!-- jquery.meanmenu js
+    ============================================ -->
+    <script src="~/Content/main-assets/js/jquery.meanmenu.js"></script>
+
+    <!-- plugins js
+    ============================================ -->
+    <script src="~/Content/main-assets/js/plugins.js"></script>
+
+    <!-- main js
+    ============================================ -->
+    @*<script src="~/Content/main-assets/js/jquery.elevatezoom.js"></script>*@
+    <script src="~/Content/main-assets/js/main.js"></script>
+    @*<script src="~/Content/main-assets/js/jquery.zoom.min.js"></script>*@
+
+    <script>
+        $('.owl-carousel').owlCarousel({
+            items: 1,
+            loop: true,
+            dots: true,
+            autoplay: true,
+            autoplayTimeout: 7000,
+            autoplayHoverPause: false,
+            navText: ["<i class='fa fa-long-arrow-left'></i>", "<i class='fa fa-long-arrow-right'></i>"]
+        })
+    </script>
+
+</body>
+</html>

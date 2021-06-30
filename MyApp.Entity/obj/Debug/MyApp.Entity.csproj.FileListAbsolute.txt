@@ -1,0 +1,17 @@
+F:\MVC Projects\#OfficeProjects\DiecastDecals\MyApp.Entity\bin\Debug\MyApp.Entity.dll
+F:\MVC Projects\#OfficeProjects\DiecastDecals\MyApp.Entity\bin\Debug\MyApp.Entity.pdb
+F:\MVC Projects\#OfficeProjects\DiecastDecals\MyApp.Entity\obj\Debug\MyApp.Entity.csprojAssemblyReference.cache
+F:\MVC Projects\#OfficeProjects\DiecastDecals\MyApp.Entity\obj\Debug\MyApp.Entity.csproj.CoreCompileInputs.cache
+F:\MVC Projects\#OfficeProjects\DiecastDecals\MyApp.Entity\obj\Debug\MyApp.Entity.dll
+F:\MVC Projects\#OfficeProjects\DiecastDecals\MyApp.Entity\obj\Debug\MyApp.Entity.pdb
+F:\MVC Projects\#OfficeProjects\DiecastDecals_07_05_2021\DiecastDecals\MyApp.Entity\bin\Debug\MyApp.Entity.dll
+F:\MVC Projects\#OfficeProjects\DiecastDecals_07_05_2021\DiecastDecals\MyApp.Entity\bin\Debug\MyApp.Entity.pdb
+F:\MVC Projects\#OfficeProjects\DiecastDecals_07_05_2021\DiecastDecals\MyApp.Entity\obj\Debug\MyApp.Entity.csprojAssemblyReference.cache
+F:\MVC Projects\#OfficeProjects\DiecastDecals_07_05_2021\DiecastDecals\MyApp.Entity\obj\Debug\MyApp.Entity.csproj.CoreCompileInputs.cache
+F:\MVC Projects\#OfficeProjects\DiecastDecals_07_05_2021\DiecastDecals\MyApp.Entity\obj\Debug\MyApp.Entity.dll
+F:\MVC Projects\#OfficeProjects\DiecastDecals_07_05_2021\DiecastDecals\MyApp.Entity\obj\Debug\MyApp.Entity.pdb
+F:\yourflow\Dicas decast\DiecastDecals_07_05_2021\DiecastDecals\MyApp.Entity\bin\Debug\MyApp.Entity.dll
+F:\yourflow\Dicas decast\DiecastDecals_07_05_2021\DiecastDecals\MyApp.Entity\bin\Debug\MyApp.Entity.pdb
+F:\yourflow\Dicas decast\DiecastDecals_07_05_2021\DiecastDecals\MyApp.Entity\obj\Debug\MyApp.Entity.csproj.CoreCompileInputs.cache
+F:\yourflow\Dicas decast\DiecastDecals_07_05_2021\DiecastDecals\MyApp.Entity\obj\Debug\MyApp.Entity.dll
+F:\yourflow\Dicas decast\DiecastDecals_07_05_2021\DiecastDecals\MyApp.Entity\obj\Debug\MyApp.Entity.pdb

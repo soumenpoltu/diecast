@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section title{
+    Diecast Decals - No 1. Decals In Here
+}
+
+@section script{
+    <script src="~/Content/main-assets/js/vendor/jquery-1.12.4.min.js"></script>
+}
+
+<div class="container-fluid margin-top-60 padding-top-60 padding-bottom-60">
+
+    <div class="col-lg-8 col-md-12 offset-lg-2 offset-md-0">
+        <div class="row">
+            <div class="col-lg-12">
+                <h4 class="cart-title">Order History</h4>
+                <div class="row">
+                    <div class="col-md-3 col-sm-4">
+                        <ul class="myacc-nav">
+                            <li><a href="~/DashboardUI/Index">Dashboard</a></li>
+                            <li><a href="~/MyAccountAddressUI/Index">Address</a></li>
+                            <li class="active"><a href="~/OrderHistoryUI/Index">Order History</a></li>
+                            <li><a href="~/Invoice/InvoiceHistroy">Paid Invoices</a></li>
+                            <li><a href="~/TrackOrderUI/Index">Track Order</a></li>
+                            <li><a href="~/LogoutUI/Index">Logout</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-9 col-sm-8">
+                        <div class="account-rightarea">
+                            <div class="table-responsive table-borderouter">
+                                <table class="cart-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Invoice</th>
+                                            <th>Date</th>
+
+                                            <th>Payment Status</th>
+                                            <th>Delivery Status</th>
+                                            <th>Total</th>
+                                            <th>View</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (System.Data.DataRow dr in Model)
+                                        {
+
+                                            <tr>
+                                                <td>
+                                                    @dr["DTLS_INVOICE"]
+                                                </td>
+                                                <td>
+                                                    @dr["INV_DATE"]
+                                                </td>
+                                                @if (@dr["PAYMENT_STATUS"].ToString() == "PAID")
+                                                {
+                                                    <td>
+                                                        <button class="btn btn-success">Paid</button>
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    <td>
+                                                        <button class="btn btn-danger">Not Paid</button>
+                                                    </td>
+                                                }
+                                                @if (@dr["DELIVERED_STATUS"].ToString() == "DELIVERED")
+                                                {
+                                                    <td>
+                                                        <button class="btn btn-success">Delivered</button>
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    <td>
+                                                        <button class="btn btn-danger">On-transist</button>
+                                                    </td>
+                                                }
+
+                                                <td>
+                                                    <div class="cart-subtotal">$@dr["TOTAL"]</div>
+                                                </td>
+                                                <td><a href="~/OrderHistoryUI/ViewInvoice?Invoice=@dr["DTLS_INVOICE"]" target="_blank" class="btn btn-success"><i class="fa fa-download" aria-hidden="true"></i> View</a></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

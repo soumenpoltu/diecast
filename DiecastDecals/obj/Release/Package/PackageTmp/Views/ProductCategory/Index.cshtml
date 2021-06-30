@@ -1,0 +1,474 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using System.Data
+
+
+@section FormName{
+
+    <i class="icon-home2 mr-2"></i>Product Category
+
+}
+
+<script>
+
+    function OpenTab4(strMsg, error) {
+        $("#tab1").hide();
+        $("#tab3").fadeIn();
+        $("#tab2").fadeIn();
+        $("#tab4").fadeIn();
+       
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+    function OpenTab3(strMsg, error) {
+        $("#tab1").hide();
+        $("#tab3").fadeIn();
+        $("#tab2").fadeIn();
+        $("#tab4").hide();
+
+
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+    function OpenTab2(strMsg, error) {
+        $("#tab1").hide();
+        $("#tab3").hide();
+        $("#tab2").fadeIn();
+        $("#tab4").hide();
+
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+
+    function OpenTab1(strMsg, error) {
+        $("#tab1").fadeIn();
+        $("#tab3").hide();
+        $("#tab2").hide();
+        $("#tab4").hide();
+
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+</script>
+
+<div class="content">
+
+    <div class="content" style="min-height: 10px;">
+
+        <ul id="fbAdd" class="fab-menu fab-menu-fixed fab-menu-bottom-right">
+            <li>
+                @using (Html.BeginForm("Add", "ProductCategory", FormMethod.Post, new { id = "submitaddform" }))
+                {
+
+                    <a id="A2" href="#" class="fab-menu-btn btn bg-green btn-float rounded-round btn-icon" onclick="btn_Add_Click();">
+                        <i class="fab-icon-open icon-plus3"></i><i class="fab-icon-close icon-cross2"></i>
+                    </a>
+                }
+            </li>
+        </ul>
+
+        <div id="tab1" class="card">
+            <div class="card-body">
+                <div>
+                    <table cellspacing="0" rules="all" class="table table-hover table-bordered table-striped" border="1" id="gvMstCategory" style="border-collapse:collapse;">
+                        <tbody>
+                            <tr>
+
+                                <th align="center" scope="col" style="width:70%;">Category Name</th>
+                                <th align="center" scope="col">Edit</th>
+                                <th align="center" scope="col">Delete</th>
+                            </tr>
+
+                            @foreach (System.Data.DataRow dr in Model)
+                            {
+
+                                <tr>
+
+                                    <td>@dr["CATEGORY_NAME"].ToString()</td>
+
+                                    <td>
+                                        @using (Html.BeginForm("edit", "ProductCategory", FormMethod.Post, new { id = "submitE+" + dr["MAST_CATEGORY_KEY"].ToString() + "" }))
+                                        {
+
+                                            <input type="hidden" name="editid" value="@dr["MAST_CATEGORY_KEY"].ToString()" />
+
+                                            <a id="submitE+@dr["MAST_CATEGORY_KEY"].ToString()" href="#" onclick="postmethodusingjs(this.id)" class="list-icons-item"><i class="icon-menu9"></i></a>
+
+                                        }
+                                    </td>
+
+                                    <td>
+                                        @using (Html.BeginForm("delete", "ProductCategory", FormMethod.Post, new { id = "submitD+" + dr["MAST_CATEGORY_KEY"].ToString() + "" }))
+                                        {
+
+                                            <input type="hidden" name="editid" value="@dr["MAST_CATEGORY_KEY"].ToString()" />
+
+                                            <a id="submitD+@dr["MAST_CATEGORY_KEY"].ToString()" href="#" onclick="postmethodusingjs(this.id)" class="list-icons-item"><i class="icon-trash"></i></a>
+
+                                        }
+                                    </td>
+
+                                </tr>
+                            }
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div>
+
+        </div>
+        <ul id="tabsmenu" class="tabsmenu" style="display: none">
+            <li class="active"><a id="atab1" href="#tab1">List</a></li>
+            <li><a id="atab2" href="#tab2">Add / Edit</a></li>
+            <li><a href="#" id="cph_MainBody_aPageName" style="margin: 0 5px 0 33%; border-radius: 6px;">&nbsp;</a></li>
+        </ul>
+        <!-- 2 columns form -->
+        <div id="tab2" class="card" style="display: none;">
+            <div class="card-body">
+                @using (Html.BeginForm("btn_Head_Save_Click", "ProductCategory", FormMethod.Post))
+                {
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <fieldset>
+                                <legend>Category</legend>
+
+                                <input type="hidden" id="hf_MAST_PRODUCT_CATG_KEY" name="hf_MAST_PRODUCT_CATG_KEY" value="@ViewBag.hf_MAST_PRODUCT_CATG_KEY" />
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label">
+                                        Category Name
+                                    </label>
+                                    <div class="col-lg-9">
+                                        <input name="txt_PRODUCT_CATG_NAME" type="text" id="txt_PRODUCT_CATG_NAME" class="form-control" value="@ViewBag.txt_PRODUCT_CATG_NAME" placeholder="Enter Category Name">
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12 text-center">
+                                            <input type="submit" value="Submit" title="Category Save" class="btn btn-warning">
+
+                                            <input type="button" name="ctl00$cph_MainBody$btn_Back" value="Back" id="cph_MainBody_btn_Back" title="Back" class="btn btn-danger">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                        </div>
+
+                       
+                    </div>
+                }
+                    <div id="tab3" class="row" style="display: none;">
+                        <div class="col-md-12">
+                            <fieldset>
+                                <legend>Sub Category</legend>
+
+                                @{ 
+                                    DataTable dt1 = new DataTable();
+                                    dt1 = (DataTable)ViewData["dt1"];
+                                }
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <fieldset>
+                                            <legend>Sub Category</legend>
+                                            @using (Html.BeginForm("btn_Head_Sub_Save_Click", "ProductCategory", FormMethod.Post))
+                                            {
+
+                                                <div class="collapse show" id="demo2">
+                                                    <input type="hidden" id="hf_MAST_PRODUCT_SUB_CATG_KEY" name="hf_MAST_PRODUCT_SUB_CATG_KEY" value="@ViewBag.hf_MAST_PRODUCT_SUB_CATG_KEY" />
+                                                    <input type="hidden" id="hf_MAST_PRODUCT_CATG_KEY" name="hf_MAST_PRODUCT_CATG_KEY" value="@ViewBag.hf_MAST_PRODUCT_CATG_KEY" />
+                                                    <div class="form-group row">
+                                                        <label class="col-lg-3 col-form-label">
+                                                            Sub Category Name
+                                                        </label>
+                                                        <div class="col-lg-9">
+                                                            <input name="txt_PRODUCT_SUB_CATG_NAME" value="@ViewBag.txt_PRODUCT_SUB_CATG_NAME" type="text" id="txt_PRODUCT_SUB_CATG_NAME" class="form-control" placeholder="Enter Sub Category Name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-md-12 text-center">
+                                                                <input type="submit" name="ctl00$cph_MainBody$btn_Head_Save" value="Submit" id="cph_MainBody_btn_Head_Save" title="Category Save" class="btn btn-warning">
+
+                                                                <input type="submit" name="ctl00$cph_MainBody$btn_Back" value="Back" id="cph_MainBody_btn_Back" title="Back" class="btn btn-danger">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                            </fieldset>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <fieldset>
+                                            <legend>Sub Category</legend>
+                                            <div>
+
+
+
+                                                <table cellspacing="0" rules="all" class="table table-hover table-bordered table-striped" border="1" id="cph_MainBody_gvMstCategory" style="border-collapse:collapse;">
+                                                    <tbody>
+                                                        <tr>
+
+                                                            <th align="center" scope="col" style="width:70%;">Sub Category Name</th>
+                                                            <th align="center" scope="col">Edit</th>
+                                                            <th align="center" scope="col">Delete</th>
+                                                        </tr>
+                                                        @foreach (System.Data.DataRow dr in dt1.Rows)
+                                                        {
+
+                                                            <tr>
+
+                                                                <td>@dr["SUB_CATEGORY_NAME"].ToString()</td>
+
+                                                                <td>
+                                                                    @using (Html.BeginForm("subcategoryedit", "ProductCategory", FormMethod.Post, new { id = "submitESC+" + dr["SUB_CATEGORY_KEY"].ToString() + "" }))
+                                                                    {
+
+                                                                        <input type="hidden" name="editid" value="@dr["SUB_CATEGORY_KEY"].ToString()" />
+
+                                                                        <a id="submitESC+@dr["SUB_CATEGORY_KEY"].ToString()" href="#" onclick="postmethodusingjs(this.id)" class="list-icons-item"><i class="icon-menu9"></i></a>
+
+                                                                    }
+                                                                </td>
+
+                                                                <td>
+                                                                    @using (Html.BeginForm("SubCatgdelete", "ProductCategory", FormMethod.Post, new { id = "submitDSC+" + dr["SUB_CATEGORY_KEY"].ToString() + "" }))
+                                                                    {
+
+                                                                        <input type="hidden" name="editid" value="@dr["SUB_CATEGORY_KEY"].ToString()" />
+
+                                                                        <a id="submitDSC+@dr["SUB_CATEGORY_KEY"].ToString()" href="#" onclick="postmethodusingjs(this.id)" class="list-icons-item"><i class="icon-trash"></i></a>
+
+                                                                    }
+                                                                </td>
+
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </fieldset>
+
+                                    </div>
+                                </div>
+
+
+                            </fieldset>
+                        </div>
+                    </div>
+
+                    <div id="tab4" class="row" style="display: none;">
+                        <div class="col-md-12">
+                            <fieldset>
+                                <legend>Sub Sub Category</legend>
+
+                                @{
+                                    DataTable dt2 = new DataTable();
+                                    dt2 = (DataTable)ViewData["dt2"];
+                                }
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <fieldset>
+                                            <legend>Sub Sub Category</legend>
+                                            <div class="collapse show" id="demo2">
+                                                @using (Html.BeginForm("btn_Head_Sub_Sub_Save_Click", "ProductCategory", FormMethod.Post))
+                                                {
+                                                    <input type="hidden" id="hf_MAST_PRODUCT_SUB_CATG_KEY" name="hf_MAST_PRODUCT_SUB_CATG_KEY" value="@ViewBag.hf_MAST_PRODUCT_SUB_CATG_KEY" />
+                                                    <input type="hidden" id="hf_MAST_PRODUCT_CATG_KEY" name="hf_MAST_PRODUCT_CATG_KEY" value="@ViewBag.hf_MAST_PRODUCT_CATG_KEY" />
+                                                    <input type="hidden" id="hf_MAST_PRODUCT_SUB_SUB_CATG_KEY" name="hf_MAST_PRODUCT_SUB_SUB_CATG_KEY" value="@ViewBag.hf_MAST_PRODUCT_SUB_SUB_CATG_KEY" />
+
+                                                    <div class="form-group row">
+                                                        <label class="col-lg-3 col-form-label">
+                                                            Sub Sub Category Name
+                                                        </label>
+                                                        <div class="col-lg-9">
+                                                            <input name="txt_PRODUCT_SUB_SUB_CATG_NAME" type="text" value="@ViewBag.txt_PRODUCT_SUB_SUB_CATG_NAME" id="txt_PRODUCT_SUB_SUB_CATG_NAME" class="form-control" placeholder="Enter Sub Sub Category Name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-md-12 text-center">
+                                                                <input type="submit" name="ctl00$cph_MainBody$btn_Head_Save" value="Submit" id="cph_MainBody_btn_Head_Save" title="Category Save" class="btn btn-warning">
+
+                                                                <input type="submit" name="ctl00$cph_MainBody$btn_Back" value="Back" id="cph_MainBody_btn_Back" title="Back" class="btn btn-danger">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </fieldset>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <fieldset>
+                                            <legend>Sub Sub Category</legend>
+                                            <div>
+                                                <table cellspacing="0" rules="all" class="table table-hover table-bordered table-striped" border="1" id="cph_MainBody_gvMstCategory" style="border-collapse:collapse;">
+                                                    <tbody>
+                                                        <tr>
+
+                                                            <th align="center" scope="col" style="width:70%;">Sub SubCategory Name</th>
+                                                            <th align="center" scope="col">Edit</th>
+                                                            <th align="center" scope="col">Delete</th>
+                                                        </tr>
+                                                        @foreach (System.Data.DataRow dr in dt2.Rows)
+                                                        {
+
+                                                            <tr>
+
+                                                                <td>@dr["SUB_SUB_CATEGORY_NAME"].ToString()</td>
+
+                                                                <td>
+                                                                    @using (Html.BeginForm("SubSubCategoryedit", "ProductCategory", FormMethod.Post, new { id = "submitESSC+" + dr["SUB_SUB_CATEGORY_KEY"].ToString() + "" }))
+                                                                    {
+
+                                                                        <input type="hidden" name="editid" value="@dr["SUB_SUB_CATEGORY_KEY"].ToString()" />
+
+                                                                        <a id="submitESSC+@dr["SUB_SUB_CATEGORY_KEY"].ToString()" href="#" onclick="postmethodusingjs(this.id)" class="list-icons-item"><i class="icon-menu9"></i></a>
+
+                                                                    }
+                                                                </td>
+
+                                                                <td>
+                                                                    @using (Html.BeginForm("SubSubCatgdelete", "ProductCategory", FormMethod.Post, new { id = "submitDSSC+" + dr["SUB_SUB_CATEGORY_KEY"].ToString() + "" }))
+                                                                    {
+
+                                                                        <input type="hidden" name="editid" value="@dr["SUB_SUB_CATEGORY_KEY"].ToString()" />
+
+                                                                        <a id="submitDSSC+@dr["SUB_SUB_CATEGORY_KEY"].ToString()" href="#" onclick="postmethodusingjs(this.id)" class="list-icons-item"><i class="icon-trash"></i></a>
+
+                                                                    }
+                                                                </td>
+
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </fieldset>
+
+                                    </div>
+                                </div>
+
+
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+
+    </div>
+
+    <!-- /content area -->
+</div>
+
+
+
+@if (ViewBag.JavaScriptFunction != null)
+{
+
+    <script type="text/javascript">
+                    @Html.Raw(ViewBag.JavaScriptFunction);
+    </script>
+}
+
+@if (TempData["JavaScriptFunction"] != null)
+{
+
+    <script type="text/javascript">
+                    @Html.Raw(TempData["JavaScriptFunction"]);
+    </script>
+}
+
+<script type="text/javascript">
+
+
+    function postmethodusingjs(id) {
+        document.forms[id].submit();
+        return false;
+    }
+    function btn_Add_Click() {
+
+        //    alert('ok');
+        document.forms["submitaddform"].submit();
+        return false;
+    }
+
+
+    function OpenTab1(strMsg, error) {
+        $("#tab1").fadeIn();
+        $("#tab3").hide();
+        $("#tab2").hide();
+        setDatatable("<%=gvMstCategory.ClientID %>");
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+    function OpenTab2(strMsg, error) {
+        $("#tab1").hide();
+        $("#tab3").hide();
+        $("#tab2").fadeIn();
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+    function OpenTab3(strMsg, error) {
+        $("#tab1").hide();
+        $("#tab3").fadeIn();
+        $("#tab2").hide();
+
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+    $(document).ready(function () {
+
+        setDatatable("gvMstCategory");
+        $('#loadingMask').fadeOut();
+    });
+</script>

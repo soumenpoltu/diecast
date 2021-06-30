@@ -1,0 +1,291 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using System.Data;
+
+@section title{
+    Dashboard
+}
+
+
+<section class="inner-banner-part">
+    <img class="img1" src="~/Content/main-assets/images/inner-ban.png" alt="">
+    <img class="img2" src="~/Content/main-assets/images/banner-shape.png" alt="">
+    <div class="ban-tx">
+        <h2>Keep Your Passion Stay Safe and Secure: Check Out Our Dashboard and Track Your Orders</h2>
+        <p>
+            Ensure your investment in Hot Wheel cars is protected with top-grade protectors. Login to track everything about your orders and shipment process from here!
+        </p>
+    </div>
+</section>
+
+<section class="dashboard-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="nav" role="tablist">
+                    <li>
+                        <a class="active" data-toggle="tab" href="#tabs-1" role="tab">Dashboard</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#tabs-2" role="tab">Orders</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#tabs-3" role="tab">Addresses</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#tabs-4" role="tab">Account Details</a>
+                    </li>
+                    <li onclick="logoutuser()">
+                        <a data-toggle="tab" href="#tabs-5" role="tab">Log out</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-3 col-md-3 p-lg-5">
+                                <div class="wrap">
+                                    <h4>Total Orders</h4>
+                                    <h2>@ViewBag.totalinv</h2>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 p-lg-5">
+                                <div class="wrap">
+                                    <h4>In Process</h4>
+                                    <h2>@ViewBag.proinv</h2>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 p-lg-5">
+                                <div class="wrap">
+                                    <h4>Completed</h4>
+                                    <h2>@ViewBag.cominv</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tabs-2" role="tabpanel">
+                        <div class="table-wrap">
+                            <table>
+                                <tr>
+                                    <th>Orders</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+
+                                @{
+                                    DataTable dt = new DataTable();
+                                    dt = (DataTable)ViewData["dt"];
+                                }
+                                @foreach (DataRow dr in dt.Rows)
+                                {
+                                    <tr>
+                                        <td>#@dr["DTLS_INVOICE"]</td>
+                                        <td>@dr["INV_DATE"]</td>
+                                        <td>@dr["PAYMENT_STATUS"]</td>
+                                        <td>$@dr["TOTAL_AMOUNT"] for @dr["QUANTITY"] items</td>
+                                        @if (dr["PAYMENT_STATUS"].ToString() == "PAID")
+                                        {
+                                            <td><a href="~/Invoice/Index?invoice=@dr["DTLS_INVOICE"]">View</a></td>
+                                        }
+
+
+                                    </tr>
+                                }
+
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tabs-3" role="tabpanel">
+                        <p>The following addresses will be used on the checkout page by default</p>
+                        @using (Html.BeginForm("SaveAddr", "DashboardUI", FormMethod.Post, new { id = "SubmitAddr" }))
+                        {
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <h2>Billing Address</h2>
+                                    <!-- <a href="#" class="edit-but">Edit</a> -->
+                                    <!-- <textarea name="" id="" >Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam</textarea> -->
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group name-group">
+                                                <div class="palceholder" style="display: block;">
+                                                    <label for="name">Address</label>
+                                                    <em class="star1">*</em>
+                                                </div>
+                                                <input type="text" class="form-control" id="txt_Address" name="txt_Address" value="@ViewBag.billingaddress" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group name-group">
+                                                <div class="palceholder" style="display: block;">
+                                                    <label for="name">City</label>
+                                                    <em class="star1">*</em>
+                                                </div>
+                                                <input type="text" class="form-control" id="txt_City" name="txt_City" value="@ViewBag.billingcity" required="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group name-group">
+                                                <div class="palceholder" style="display: block;">
+                                                    <label for="name">Country</label>
+                                                    <em class="star1">*</em>
+                                                </div>
+                                                <input type="text" class="form-control" id="txt_Country" name="txt_Country" value="@ViewBag.billingcountry" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group name-group">
+                                                <div class="palceholder" style="display: block;">
+                                                    <label for="name">Phone Number</label>
+                                                    <em class="star1">*</em>
+                                                </div>
+                                                <input type="text" class="form-control" id="txt_Phone" name="txt_Phone" value="@ViewBag.billingphone" required="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group name-group">
+                                                <div class="palceholder" style="display: block;">
+                                                    <label for="name">PIN Code</label>
+                                                    <em class="star1">*</em>
+                                                </div>
+                                                <input type="text" class="form-control" id="txt_Pin" name="txt_Pin" value="@ViewBag.billingpin" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-6">
+                                    <h2>Shipping Address</h2>
+                                    <!-- <a href="#" class="edit-but">Edit</a> -->
+                                    <!--  <textarea name="" id="" >Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam</textarea> -->
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group name-group">
+                                                <div class="palceholder" style="display: block;">
+                                                    <label for="name">Address</label>
+                                                    <em class="star1">*</em>
+                                                </div>
+                                                <input type="text" class="form-control" id="txt_shippingAddress" name="txt_shippingAddress" value="@ViewBag.shippingaddress" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group name-group">
+                                                <div class="palceholder" style="display: block;">
+                                                    <label for="name">City</label>
+                                                    <em class="star1">*</em>
+                                                </div>
+                                                <input type="text" class="form-control" id="txt_shippingCity" name="txt_shippingCity" value="@ViewBag.shippingcity" required="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group name-group">
+                                                <div class="palceholder" style="display: block;">
+                                                    <label for="name">Country</label>
+                                                    <em class="star1">*</em>
+                                                </div>
+                                                <input type="text" class="form-control" id="txt_shippingCountry" name="txt_shippingCountry" value="@ViewBag.shippingcountry" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group name-group">
+                                                <div class="palceholder" style="display: block;">
+                                                    <label for="name">Phone Number</label>
+                                                    <em class="star1">*</em>
+                                                </div>
+                                                <input type="text" class="form-control" id="txt_shippingPhone" name="txt_shippingPhone" value="@ViewBag.shippingphone" required="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group name-group">
+                                                <div class="palceholder" style="display: block;">
+                                                    <label for="name">PIN Code</label>
+                                                    <em class="star1">*</em>
+                                                </div>
+                                                <input type="text" class="form-control" id="txt_shippingPin" name="txt_shippingPin" value="@ViewBag.shippingpin" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <a href="#" onclick="submitaddr();" class="save-change-but">Save Changes</a>
+                                </div>
+
+                            </div>
+
+                        }
+                    </div>
+
+
+                    <div class="tab-pane" id="tabs-4" role="tabpanel">
+                        @using (Html.BeginForm("SaveUser", "DashboardUI", FormMethod.Post, new { id = "SubmitAddr" }))
+                        {
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <h2>Details Change</h2>
+                                    <label for="">First Name *</label>
+                                    <input type="text" name="txt_FirstName" value="@ViewBag.FirstName" placeholder="First name here">
+                                    <label for="">Last Name *</label>
+                                    <input type="text" name="txt_LastName" value="@ViewBag.LastName" placeholder="Last name here">
+                                    <label for="">Email *</label>
+                                    <input type="text" name="txt_Email" value="@ViewBag.Email" placeholder="Email address here">
+                                </div>
+                                <div class="col-lg-6">
+                                    <h2>Password Change</h2>
+                                    <label for="">Current Password (Leave blank to keep it unchanged)</label>
+                                    <input type="text" name="txt_cPassword" placeholder="Current Password">
+                                    <label for="">New Password (Leave blank to keep it unchanged)</label>
+                                    <input type="text" name="txt_nPassword" placeholder="New Password">
+                                    <label for="">Confirm New Password</label>
+                                    <input type="text" name="txt_cnPassword" placeholder="New Password">
+                                </div>
+                                <div class="col-lg-12">
+                                    <input type="submit" value="Save Changes">
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <!-- <div class="tab-pane" id="tabs-5" role="tabpanel">
+                    hkhkh
+                </div> -->
+                </div>
+            </div>
+        </div>
+        @using (Html.BeginForm("LogoutIndex", "Common", FormMethod.Get, new { id = "SubmitLogout" }))
+        { 
+        }
+        </div>
+</section>
+
+
+<section class="common-logo-sec">
+    <ul>
+        <li><a href="#"><img src="@ViewBag.ICON_IMG_1" alt=""></a></li>
+        <li><a href="#"><img src="@ViewBag.ICON_IMG_2" alt=""></a></li>
+        <li><a href="#"><img src="@ViewBag.ICON_IMG_3" alt=""></a></li>
+    </ul>
+</section>
+<script>
+    function submitaddr() {
+        document.forms["SubmitAddr"].submit();
+
+    }
+
+    function logoutuser() {
+        document.forms["SubmitLogout"].submit();
+
+    }
+</script>

@@ -1,0 +1,545 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section FormName{
+
+    <i class="icon-home2 mr-2"></i>Home Settings
+
+}
+
+@section StyleCss{
+    <style type="text/css">
+        .filename {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .preview {
+            height: 230px;
+        }
+    </style>
+}
+
+<script type="text/javascript">
+    function OpenTab1(strMsg, error) {
+        $("#tab1").fadeIn();
+        setDatatable("gvProductdetails.ClientID");
+        $("#tab3").hide();
+        $("#tab2").hide();
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+    function OpenTab2(strMsg, error) {
+        $("#tab1").hide();
+        $("#tab3").hide();
+        $("#tab2").fadeIn();
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+    function OpenTab3(strMsg, error) {
+        $("#tab1").hide();
+        $("#tab3").fadeIn();
+        $("#tab2").hide();
+
+        if ($.trim(strMsg) != '') {
+            if (error == 1)
+                openErrorPopup(strMsg);
+            else
+                openSuccessPopup(strMsg);
+        }
+    }
+
+</script>
+
+<div id="tab1" class="card">
+    @using (Html.BeginForm("btn_Head_Save_Click", "HomeSetting", FormMethod.Post, new { id = "submitform", enctype = "multipart/form-data" }))
+    {
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <fieldset>
+                        <input type="hidden" id="hf_BANNER_KEY" name="hf_BANNER_KEY" value="@ViewBag.hf_BANNER_KEY" />
+                        <legend>Banner Section</legend>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>
+                                            Product Name
+                                        </label>
+                                        @*<select id="Phone-Number" name="Phone-Number" class="form-control">
+                                                <option value="">P1</option>
+                                                <option value="">P2</option>
+                                                <option value="">P3</option>
+                                            </select>*@
+                                        @Html.DropDownList("ddl_HEAD_PRODUCT_KEY", ViewBag.Package as SelectList, new { @class = "form-control populate" })
+                                        @*<asp:DropDownList ID="ddl_MAST_PRODUCT" CssClass="form-control populate"></asp:DropDownList>*@
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <fieldset>
+                                    <legend>Product Picture</legend>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>
+                                                    Upload Picture (Accepted Format .png,.svg, .jpg, .jpeg only. Max size 2 MB)
+                                                </label>
+                                                <input type="file" id="fu_banner_img" name="fu_banner_img" class="form-input-styled" data-fouc accept=".gif, .svg, .png, .jpg, .jpeg" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8 ml-auto mr-auto">
+                                            <img id="banner_img" src='@ViewBag.BANNER_IMG' class="form-control preview" />
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table cellspacing="0" rules="all" class="table table-bordered table-sm table-hover" border="1" id="gvQuickFact" style="border-collapse:collapse;">
+                                        <tbody>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Edit</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                            @using (Html.BeginForm())
+                                            {
+
+                                            }
+
+                                            @{
+                                                int i = 0;
+                                            }
+
+                                            @foreach (System.Data.DataRow dr in Model)
+                                            {
+                                                <tr>
+
+                                                    <td>@dr["PRODUCT_NAME"].ToString()</td>
+
+                                                    <td>
+                                                        @using (Html.BeginForm("edit", "HomeSetting", FormMethod.Post, new { id = "submitE+" + dr["DTLS_BANNER_SETTING_KEY"].ToString() + "" }))
+                                                        {
+
+                                                            <input type="hidden" name="editid" value="@dr["DTLS_BANNER_SETTING_KEY"].ToString()" />
+
+                                                            <a id="submitE+@dr["DTLS_BANNER_SETTING_KEY"].ToString()" href="#" onclick="postmethodusingjs(this.id)" class="list-icons-item"><i class="icon-menu9"></i></a>
+
+                                                        }
+                                                    </td>
+
+                                                    <td>
+                                                        @using (Html.BeginForm("delete", "HomeSetting", FormMethod.Post, new { id = "submitD+" + dr["DTLS_BANNER_SETTING_KEY"].ToString() + "" }))
+                                                        {
+
+                                                            <input type="hidden" name="editid" value="@dr["DTLS_BANNER_SETTING_KEY"].ToString()" />
+
+                                                            <a id="submitD+@dr["DTLS_BANNER_SETTING_KEY"].ToString()" href="#" onclick="postmethodusingjs(this.id)" class="list-icons-item"><i class="icon-trash"></i></a>
+
+                                                        }
+                                                    </td>
+                                                    @{i = i + 1;}
+                                                </tr>
+
+                                            }
+
+
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12  text-center my-3">
+                                <input type="submit" formaction="btn_Head_Banner_Save_Click" formmethod="post" id="btn_Head_Banner_Save" name="btn_Head_Banner_Save" class="mb-xs mt-xs btn btn-success" value="Save" />
+
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="col-md-12">
+                    <input type="hidden" name="hf_ICON_IMG_1" id="hf_ICON_IMG_1" value="@ViewBag.ICON_IMG_1" />
+                    <input type="hidden" name="hf_ICON_IMG_2" id="hf_ICON_IMG_2" value="@ViewBag.ICON_IMG_2" />
+                    <input type="hidden" name="hf_ICON_IMG_3" id="hf_ICON_IMG_3" value="@ViewBag.ICON_IMG_3" />
+                    <input type="hidden" name="hf_ICON_IMG_4" id="hf_ICON_IMG_4" value="@ViewBag.ICON_IMG_4" />
+                    <input type="hidden" name="hf_ICON_IMG_5" id="hf_ICON_IMG_5" value="@ViewBag.ICON_IMG_5" />
+
+                    <fieldset>
+                        <legend>Icon Section</legend>
+                        <div class="row">
+                            <div class="col-md-4">
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>
+                                                Icon Image1 Upload Image (Accepted Format .png, .jpg, .jpeg only. Max size 2MB)
+                                            </label>
+                                            <input type="file" id="fu_Icon_Image1" name="fu_Icon_Image1" class="form-input-styled" data-fouc accept=".gif, .png, .jpg, .jpeg , .svg" />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-md-4">
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>
+                                                Icon Image2 Upload Image (Accepted Format .png, .jpg, .jpeg only. Max size 2MB)
+                                            </label>
+                                            <input type="file" id="fu_Icon_Image2" name="fu_Icon_Image2" class="form-input-styled" data-fouc accept=".gif, .png, .jpg, .jpeg , .svg" />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-md-4">
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>
+                                                Icon Image3 Upload Image (Accepted Format .png, .jpg, .jpeg only. Max size 2MB)
+                                            </label>
+                                            <input type="file" id="fu_Icon_Image3" name="fu_Icon_Image3" class="form-input-styled" data-fouc accept=".gif, .png, .jpg, .jpeg , .svg" />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-md-4">
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>
+                                                Icon Image4 Upload Image (Accepted Format .png, .jpg, .jpeg only. Max size 2MB)
+                                            </label>
+                                            <input type="file" id="fu_Icon_Image4" name="fu_Icon_Image4" class="form-input-styled" data-fouc accept=".gif, .png, .jpg, .jpeg , .svg" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-4">
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>
+                                                Icon Image5 Upload Image (Accepted Format .png, .jpg, .jpeg only. Max size 2MB)
+                                            </label>
+                                            <input type="file" id="fu_Icon_Image5" name="fu_Icon_Image5" class="form-input-styled" data-fouc accept=".gif, .png, .jpg, .jpeg , .svg" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>
+                                        Icon Image Description 1
+                                    </label>
+                                    <input type="text" id="txt_ICON_LINK1" name="txt_ICON_LINK1" value="@ViewBag.ICON_IMG_LINK_1" class="form-control" />
+                                </div>
+
+
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>
+                                        Icon Image Description 2
+                                    </label>
+                                    <input type="text" id="txt_ICON_LINK2" name="txt_ICON_LINK2" value="@ViewBag.ICON_IMG_LINK_2" class="form-control" />
+
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>
+                                        Icon Image Description 3
+                                    </label>
+                                    <input type="text" id="txt_ICON_LINK3" name="txt_ICON_LINK3" value="@ViewBag.ICON_IMG_LINK_3" class="form-control" />
+
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>
+                                        Icon Image Description 4
+                                    </label>
+                                    <input type="text" id="txt_ICON_LINK4" name="txt_ICON_LINK4" value="@ViewBag.ICON_IMG_LINK_4" class="form-control" />
+
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
+
+                                <div class="form-group">
+                                    <label>
+                                        Icon Image Description 5
+                                    </label>
+                                    <input type="text" id="txt_ICON_LINK5" name="txt_ICON_LINK5" value="@ViewBag.ICON_IMG_LINK_5" class="form-control" />
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <asp:Button id="Button2" Text="View Image" CssClass="mb-xs mt-xs btn btn-success" ToolTip="View Image" OnClientClick="return mymodalshow1();" />
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <input type="submit" value="Submit" onclick="postmethodusingheadsavejs();" class="mb-xs mt-xs btn btn-success" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@if (TempData["JavaScriptMsg"] != null)
+{
+
+    <script type="text/javascript">
+                    @Html.Raw(TempData["JavaScriptMsg"]);
+    </script>
+}
+
+<script type="text/javascript">
+
+    function postmethodusingjs(id) {
+        document.forms[id].submit();
+        return false;
+    }
+    function btn_Quick_fact_save_js() {
+        document.forms["from_Quick_fact_save"].submit();
+        return false;
+    }
+
+    function postmethodusingheadsavejs() {
+        document.forms["submitform"].submit();
+        return false;
+    }
+</script>
+
+<script type="text/javascript">
+
+
+
+    function readURLView(input) {
+
+        if (input.files) {
+            var filesAmount = input.files.length;
+            for (i = 0; i < filesAmount; i++) {
+                var reader = new FileReader();
+                reader.onload = function (event) {
+                    $("#myModal.ClientID").append($($.parseHTML('<img>')).attr('src', event.target.result).addClass("modal-content"));
+                }
+                reader.readAsDataURL(input.files[i]);
+            }
+        }
+    }
+
+    function readURLView1(input) {
+
+        if (input.files) {
+            var filesAmount = input.files.length;
+            for (i = 0; i < filesAmount; i++) {
+                var reader = new FileReader();
+                reader.onload = function (event) {
+                    $("#myModal1.ClientID").append($($.parseHTML('<img>')).attr('src', event.target.result).addClass("modal-content"));
+                }
+                reader.readAsDataURL(input.files[i]);
+            }
+        }
+    }
+    function mymodalshow1() {
+        $("#myModal1.ClientID").css('display', 'block');
+        return false;
+    }
+    function mymodalshow() {
+        $("#myModal.ClientID").css('display', 'block');
+        return false;
+    }
+
+    $(document).ready(function () {
+        $('.form-input-styled').uniform({
+            fileButtonClass: 'action btn bg-pink-400'
+        });
+
+        $('.close').click(function () {
+            $("#myModal.ClientID").css('display', 'none');
+            $("#myModal1.ClientID").css('display', 'none');
+            return false;
+        });
+
+
+
+        $("#fu_banner_img").on("change", function (evt) {
+            var tgt = evt.target || window.event.srcElement, files = tgt.files;
+            if (files.length > 0) {
+                if (files[0].size > 20097134) {
+                    $(this).val("");
+                    $(this).next(".filename").text("No file selected");
+                    $('#banner_img').attr("src", "~/Content/admin-assets/images/no_image.jpg");
+                    $(this).focus();
+                    openErrorPopup("Please maintain allowed document size (20MB maximum).");
+                }
+                else {
+                    readURL(this, $('#banner_img'));
+                }
+            }
+            else {
+                $('#banner_img').attr("src", "~/Content/admin-assets/images/no_image.jpg");
+            }
+        });
+
+
+        $("#fu_Icon_Image1.ClientID").on("change", function (evt) {
+            var tgt = evt.target || window.event.srcElement, files = tgt.files;
+            if (files.length > 0) {
+                if (files[0].size > 20097134) {
+                    $(this).val("");
+                    $(this).next(".filename").text("No file selected");
+
+                    $(this).focus();
+                    openErrorPopup("Please maintain allowed document size (20MB maximum).");
+                }
+                else {
+                    readURLView1(this);
+
+                }
+            }
+            else {
+
+            }
+        });
+        $("#fu_Icon_Image2.ClientID").on("change", function (evt) {
+            var tgt = evt.target || window.event.srcElement, files = tgt.files;
+            if (files.length > 0) {
+                if (files[0].size > 20097134) {
+                    $(this).val("");
+                    $(this).next(".filename").text("No file selected");
+
+                    $(this).focus();
+                    openErrorPopup("Please maintain allowed document size (20MB maximum).");
+                }
+                else {
+                    readURLView1(this);
+
+                }
+            }
+            else {
+
+            }
+        });
+        $("#fu_Icon_Image3.ClientID").on("change", function (evt) {
+            var tgt = evt.target || window.event.srcElement, files = tgt.files;
+            if (files.length > 0) {
+                if (files[0].size > 20097134) {
+                    $(this).val("");
+                    $(this).next(".filename").text("No file selected");
+
+                    $(this).focus();
+                    openErrorPopup("Please maintain allowed document size (20MB maximum).");
+                }
+                else {
+                    readURLView1(this);
+
+                }
+            }
+            else {
+
+            }
+        });
+        $("#fu_Icon_Image4.ClientID").on("change", function (evt) {
+            var tgt = evt.target || window.event.srcElement, files = tgt.files;
+            if (files.length > 0) {
+                if (files[0].size > 20097134) {
+                    $(this).val("");
+                    $(this).next(".filename").text("No file selected");
+
+                    $(this).focus();
+                    openErrorPopup("Please maintain allowed document size (20MB maximum).");
+                }
+                else {
+                    readURLView1(this);
+
+                }
+            }
+            else {
+
+            }
+        });
+        $("#fu_Icon_Image5.ClientID").on("change", function (evt) {
+            var tgt = evt.target || window.event.srcElement, files = tgt.files;
+            if (files.length > 0) {
+                if (files[0].size > 20097134) {
+                    $(this).val("");
+                    $(this).next(".filename").text("No file selected");
+
+                    $(this).focus();
+                    openErrorPopup("Please maintain allowed document size (20MB maximum).");
+                }
+                else {
+                    readURLView1(this);
+
+                }
+            }
+            else {
+
+            }
+        });
+
+        $('#loadingMask').fadeOut();
+    });
+</script>

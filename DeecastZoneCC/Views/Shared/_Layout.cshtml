@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+@using System.Web.Optimization
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@RenderSection("title", required: false)</title>
+
+
+    @*<link rel="stylesheet" href="~/Content/main-assets/css/bootstrap.min.css" type="text/css">
+        <link href="~/Content/main-assets/css/style.css?v={random number/string}" rel="stylesheet" type="text/css">
+        <link href="~/Content/main-assets/css/responsive.css?v={random number/string}" rel="stylesheet" type="text/css">
+        <link href="~/Content/main-assets/css/slimNav_sk78.css" rel="stylesheet" type="text/css">*@
+    @Styles.Render("~/bundles/css")
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+    @RenderSection("style", required: false)
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        function popup() {
+            swal({
+                title: "Successful!",
+                text: "Thank you for contacting us!",
+                icon: "success",
+                button: "Ok",
+            });
+        }
+        function popuperror() {
+            swal("Oops", "Please provide proper Email Address !", "error")
+        }
+        function popupservererror() {
+            swal({
+                title: "Server Error!",
+                text: "Server error ! Try again later.",
+                icon: "error",
+                button: "Ok",
+            });
+
+        }
+        
+    </script>
+</head>
+
+<body>
+    <div>
+        <header>
+
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-4 logo-sec">
+                        <a href="index.html"><img src="@ViewBag.img_WEBSITE_LOGO" alt=""></a>
+                    </div>
+                    <div class="col-lg-7 col-2 menu-sec">
+                        <div id="navigation">
+                            <nav>
+                                <ul>
+                                    <li class="current-menu-item"><a href="~/">Home</a></li>
+                                    <li><a href="~/ProductUI/Index">Our Products </a></li>
+                                    <li><a href="~/AboutUsUI/Index">About Us </a></li>
+                                    <li><a href="~/BlogUI/Index"> Blog </a></li>
+                                    <li><a href="~/ContactUI/Index"> Contact Us </a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-6 cart-sec">
+                        <ul>
+                            @*<li><a href="#"><i class="fas fa-heart"></i></a></li>*@
+                            <li><a href="~/DashboardUI/Index"><i class="far fa-user"></i></a></li>
+                            <li><a href="~/CartUI/Index"><i class="fas fa-shopping-cart"></i></a></li>
+                            <li @Html.Raw(ViewBag.logindisplay)><a href="~/Common/LogoutIndex"><i class="fas fa-sign-out-alt"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+
+        @RenderBody()
+
+
+        <section class="body-cont6">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-5">
+                        <a href="#" class="get-button">Get in touch</a>
+                        <h3>
+                            HAVE A QUESTION?
+                            <span>GIVE US A CALL OR FILL OUT </span>
+                            <span>THE CONTACT FORM – WE’D LOVE</span>
+                            TO HEAR FROM YOU
+                        </h3>
+                        <p><i class="fas fa-home"></i> Office: @ViewBag.ADDRESS</p>
+                        <p><i class="fas fa-phone"></i> Phone: @ViewBag.CONTACT_NO</p>
+                        <p><i class="fas fa-envelope"></i> Email: @ViewBag.MAIL</p>
+                    </div>
+                    <div class="offset-lg-3 col-lg-5 col-md-7">
+                        @using (Html.BeginForm("btn_Submit_click", "Common", FormMethod.Post, new { id = "submitform", enctype = "multipart/form-data" }))
+                        {
+                            <input type="text" id="txt_name" name="txt_name" placeholder="Your Name" required="required">
+                            <input type="tel" maxlength="10" id="txt_phn" name="txt_phn" placeholder="Your Phone" required="required">
+                            <input type="email" id="txt_email" name="txt_email" placeholder="Your Email" required="required">
+                            <textarea name="txt_msg" id="txt_msg" placeholder="Your Message" required="required"></textarea>
+
+                            <input type="submit" id="btn_Submit" value="Send Message">
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <a href="#" class="footer-logo"><img src="@ViewBag.img_WEBSITE_LOGO" alt=""></a>
+                        <ul class="footer-social">
+                            <li><a href="@ViewBag.FACEBOOK_LINK"><i class="fab fa-facebook-square"></i></a></li>
+                            <li><a href="@ViewBag.TWITTER_LINK"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="@ViewBag.INSTAGRAM_LINK"><i class="fab fa-instagram"></i></a></li>
+                        </ul>
+                        <p>COPYRIGHT 2021. All Rights Reserved</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+    </div>
+
+    @RenderSection("script", required: false)
+
+    <script src="~/Content/main-assets/js/jquery.min.js"></script>
+    <script src="~/Content/main-assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/main-assets/js/jquery.slimNav_sk78.min.js"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#navigation nav').slimNav_sk78();
+        });
+    </script>
+
+    @if (TempData["JavaScriptMsg"] != null)
+    {
+
+        <script type="text/javascript">
+                    @Html.Raw(TempData["JavaScriptMsg"]);
+        </script>
+    }
+
+
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+            $(document).ready(function () {
+                $('input[type="radio"]').click(function () {
+                    if ($(this).attr('id') == 'radiono') {
+                        $('.address-extra').show();
+                    }
+                    else {
+                        $('.address-extra').hide();
+                    }
+                });
+            });
+        });</script>
+
+
+</body>
+</html>
